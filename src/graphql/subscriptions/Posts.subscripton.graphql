@@ -1,0 +1,6 @@
+subscription getPosts {
+  posts {
+    id
+    content
+  }
+}

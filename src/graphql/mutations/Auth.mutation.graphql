@@ -1,0 +1,19 @@
+mutation register($payload: RegisterInput!) {
+  register(payload: $payload) {
+    token
+    statusIsOk
+    statusCode
+    statusMessage
+    statusPath
+  }
+}
+
+mutation login($payload: LoginInput!) {
+  login(payload: $payload) {
+    token
+    statusIsOk
+    statusCode
+    statusMessage
+    statusPath
+  }
+}

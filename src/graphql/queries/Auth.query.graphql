@@ -1,0 +1,5 @@
+query getUserById($id: uuid!) {
+  users(where: { id: { _eq: $id } }) {
+    ...User
+  }
+}

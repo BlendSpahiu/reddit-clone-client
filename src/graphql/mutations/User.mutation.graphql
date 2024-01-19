@@ -1,0 +1,5 @@
+mutation insertUser($payload: users_insert_input!) {
+  insert_users_one(object: $payload) {
+    id
+  }
+}

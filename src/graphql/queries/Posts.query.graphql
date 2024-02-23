@@ -1,0 +1,25 @@
+query getAllPosts {
+  posts {
+    id
+    comments_aggregate {
+      aggregate {
+        count
+      }
+    }
+  }
+  posts {
+   ...Post
+  }
+  users {
+    ...User
+  }
+  communities {
+    ...Community
+  }
+}
+
+query getUpvotedPosts($userId: uuid!) {
+  upvoted_posts(where: {user_id: {_eq: $userId}}) {
+    user_id
+  }
+}

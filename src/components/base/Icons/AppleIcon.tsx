@@ -1,13 +1,15 @@
 import { HTMLAttributes, ReactElement } from "react";
 
-export const AppleIcon = ({
-  ...rest
-}: HTMLAttributes<HTMLOrSVGElement>): ReactElement => {
+interface AppleIconProps extends HTMLAttributes<HTMLOrSVGElement> {
+  fill?: string;
+}
+
+export const AppleIcon = ({ fill, ...rest }: AppleIconProps): ReactElement => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
-      fill="#000000"
+      fill={fill || "#000000"}
       height="20px"
       width="20px"
       version="1.1"

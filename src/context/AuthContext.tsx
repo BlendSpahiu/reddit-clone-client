@@ -7,12 +7,9 @@ import {
 } from "react";
 import { AuthContextProps } from "./Context.props";
 import { Nullable } from "../interfaces/Nullable";
-import {
-  UserFragment,
-  useGetUserByIdLazyQuery,
-} from "../renderer/graphql/gen/graphql";
+import { UserFragment, useGetUserByIdLazyQuery } from "../graphql/gen/graphql";
 import { client } from "../graphql/client/client";
-import { getHasuraUserId } from "../utils/auth/jwt/getHasureUserId";
+import { getHasuraUserId } from "../utils/auth/jwt/getHasuraUserId";
 import { wsClient } from "../graphql/client/links/wsLink";
 
 export const AuthContext = createContext<AuthContextProps>({
@@ -52,6 +49,7 @@ export const AuthProvider = ({
     setLoading(true);
     localStorage.setItem("access_token", token);
     setIsAuthenticated(true);
+    localStorage.setItem("isAuthenticated", "true");
   };
 
   const [getAuthUser] = useGetUserByIdLazyQuery({
@@ -66,10 +64,13 @@ export const AuthProvider = ({
         logout();
       }
     },
+    onError: () => {
+      logout();
+    },
   });
 
   useEffect(() => {
-    if (token) {
+    if (token || localStorage.getItem("isAuthenticated")) {
       setIsAuthenticated(true);
     }
   }, [token]);
@@ -78,6 +79,11 @@ export const AuthProvider = ({
     if (isAuthenticated) {
       if (token) {
         const userId = getHasuraUserId(token);
+
+        if (!userId) {
+          logout();
+          return;
+        }
 
         if (!isAuthenticated) {
           client.clearStore();

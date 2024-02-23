@@ -1,6 +1,13 @@
 subscription getPosts {
   posts {
-    id
-    content
+    ...Post
+    community {
+     ...Community
+    }
+    comments_aggregate {
+      aggregate {
+        count
+      }
+    }
   }
 }

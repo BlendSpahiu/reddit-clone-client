@@ -11,7 +11,7 @@ module.exports = {
   documents: "src/**/*.graphql",
   overwrite: true,
   generates: {
-    "./src/renderer/graphql/gen/graphql.tsx": {
+    "./src/graphql/gen/graphql.tsx": {
       plugins: [
         "typescript",
         "typescript-operations",
@@ -21,7 +21,7 @@ module.exports = {
         afterOneFileWrite: "prettier --write",
       },
     },
-    "./src/renderer/graphql/gen/graphql.schema.json": {
+    "./src/graphql/gen/graphql.schema.json": {
       plugins: ["introspection"],
       config: { minify: true },
     },

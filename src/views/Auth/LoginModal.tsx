@@ -1,30 +1,28 @@
-import { ReactElement, useEffect, useRef, useState } from "react";
-import { Button } from "../../components/base/Button";
-import { Container } from "../../components/base/Container";
-import { Heading, Paragraph } from "../../components/base/Typography";
-import { GoogleIcon } from "../../components/base/Icons/GoogleIcon";
-import { AppleIcon } from "../../components/base/Icons/AppleIcon";
-import { Divider } from "../../components/base/Divider";
-import { Form } from "../../components/base/Form";
-import { useForm } from "react-hook-form";
-import { LoginInputs } from "../../interfaces/Auth.props";
+import { ReactElement, useState } from "react";
+import {
+  AppleIcon,
+  Button,
+  Container,
+  Divider,
+  FieldError,
+  Form,
+  GoogleIcon,
+  Input,
+  Link,
+  Modal,
+  Paragraph,
+} from "@components";
+import { ToastrTypes } from "@enums";
+import { useLoginMutation } from "@graphql/gen/graphql";
 import { joiResolver } from "@hookform/resolvers/joi";
-import { LoginValidatorSchema } from "../../validators/Auth/LoginValidator";
-import { Input } from "../../components/base/Input";
-import { Link } from "../../components/base/Link";
-import { Modal } from "../../components/base/Modal";
-import { FieldError } from "../../components/base/FieldError";
-import { useLoginMutation } from "../../renderer/graphql/gen/graphql";
-import fourhead from "../../assets/images/4Head.jpg";
-import { useToast } from "../../hooks/useToast";
-import { getGraphQLErrorMessage } from "../../utils/getGraphQLErrorMessage";
-import { ToastrTypes } from "../../enums/Toastr.enums";
-import { LoginModalProps } from "./Auth.props";
+import { useToast, useAuth } from "@hooks";
+import { getGraphQLErrorMessage } from "@utils";
 import { AnimatePresence } from "framer-motion";
-import { useAuth } from "../../hooks/Auth/useAuth";
-import { time } from "console";
-import { Loader } from "../../components/base/Loader";
-import { If } from "../../components/base/Conditions";
+import { LoginInputs } from "interfaces/Auth.props";
+import { useForm } from "react-hook-form";
+import { LoginValidatorSchema } from "@validators";
+import { LoginModalProps } from "./Auth.props";
+import fourhead from "../../assets/images/4Head.jpg";
 
 export const LoginModal = ({
   isLogin,
@@ -32,6 +30,8 @@ export const LoginModal = ({
   setIsLoading,
   setIsRegister,
 }: LoginModalProps): ReactElement => {
+  const [isHovering, setIsHovering] = useState<boolean>(false);
+
   const {
     register,
     handleSubmit,
@@ -42,7 +42,7 @@ export const LoginModal = ({
 
   const { addToast } = useToast();
   const { setIsAuthenticated, login } = useAuth();
-  const [loginMutation] = useLoginMutation({});
+  const [loginMutation, { loading }] = useLoginMutation({});
 
   const onSubmit = async (payload: LoginInputs) => {
     console.log(payload);
@@ -82,31 +82,51 @@ export const LoginModal = ({
       <AnimatePresence>
         {isLogin && (
           <Modal
-            key="modal"
+            headerTitle="Log In"
+            headerDescription="By continuing, you agree to our User Agreement and acknowledge
+            that you understand the Privacy Policy."
+            headerAction={() => setIsLogin(false)}
             onClick={() => setIsLogin(false)}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="absolute left-0 right-0 z-50 mx-auto flex w-[600px] flex-col rounded-lg bg-[#0f1a1c] p-24"
+            className="absolute left-0 right-0 top-20 z-50 mx-auto w-[600px] rounded-lg bg-[#0f1a1c]"
           >
-            <Heading heading="h1" className="text-3xl font-bold text-white">
-              Log In
-            </Heading>
-            <Paragraph className="mt-2 text-sm text-gray-200">
-              By continuing, you agree to our User Agreement and acknowledge
-              that you understand the Privacy Policy.
-            </Paragraph>
-            <Container className="mt-6 flex flex-col">
-              <Container className="flex flex-col space-y-2">
-                <Button className="flex w-full items-center justify-between rounded-3xl !bg-white px-4 py-3 text-black">
+            <Container className="mt-6">
+              <Container className="space-y-2">
+                <Button
+                  layout
+                  buttonVariant="secondary"
+                  whileTap={{
+                    scale: 0.95,
+                  }}
+                  whileHover={{
+                    backgroundColor: "#000",
+                    color: "#fff",
+                  }}
+                  className="flex w-full items-center justify-between rounded-3xl bg-white px-4 py-3 text-black"
+                >
                   <GoogleIcon />
                   <Paragraph className="text-sm font-semibold">
                     Continue with Google
                   </Paragraph>
                   <div />
                 </Button>
-                <Button className="flex w-full items-center justify-between rounded-3xl !bg-white px-4 py-3 text-black">
-                  <AppleIcon />
+                <Button
+                  layout
+                  buttonVariant="secondary"
+                  whileTap={{
+                    scale: 0.95,
+                  }}
+                  whileHover={{
+                    backgroundColor: "#000",
+                    color: "#fff",
+                  }}
+                  onMouseOver={() => setIsHovering(true)}
+                  onMouseLeave={() => setIsHovering(false)}
+                  className="flex w-full items-center justify-between rounded-3xl bg-white px-4 py-3 text-black"
+                >
+                  <AppleIcon fill={isHovering ? "#ffffff" : "#000000"} />
                   <Paragraph className="text-sm font-semibold">
                     Continue with Apple
                   </Paragraph>
@@ -121,7 +141,7 @@ export const LoginModal = ({
                   <Container className="flex flex-col">
                     <Input
                       name="username"
-                      placeholder="Username *"
+                      placeholder={"Username *"}
                       register={register}
                     />
                     {errors.username && (
@@ -178,6 +198,7 @@ export const LoginModal = ({
                     whileTap={{
                       scale: 0.95,
                     }}
+                    isLoading={loading}
                   >
                     Log In
                   </Button>

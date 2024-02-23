@@ -1,9 +1,9 @@
-import { ReactElement, ReactNode } from "react";
-import { Navigate, Outlet, Route, RouteProps } from "react-router-dom";
+import { ReactElement } from "react";
+import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../hooks/Auth/useAuth";
 
 export const AuthRoute = (): ReactElement => {
-  const isAuthenticated = useAuth();
+  const isAuthenticated = localStorage.getItem("isAuthenticated");
 
-  return isAuthenticated ? <Outlet /> : <Navigate to="/auth/login" />;
+  return isAuthenticated ? <Outlet /> : <Navigate to="/r/home" />;
 };

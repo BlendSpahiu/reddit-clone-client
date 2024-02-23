@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction } from "react";
 import { ToastrTypes } from "../enums/Toastr.enums";
 import { Nullable } from "../interfaces/Nullable";
 import { ToastrModel } from "../interfaces/Toastr.props";
-import { UserFragment } from "../renderer/graphql/gen/graphql";
+import { UserFragment } from "../graphql/gen/graphql";
 
 export interface AuthContextProps {
   user: Nullable<UserFragment>;
@@ -18,7 +18,7 @@ export interface AuthContextProps {
 }
 
 export interface ToastrProps {
-  toastId: number;
+  toastId?: number;
   type: ToastrTypes;
   title: string;
   content: string;

@@ -23,7 +23,7 @@ export const ToastrProvider = ({
   const [toasts, setToasts] = useState<Nullable<ToastrProps[]>>([]);
 
   const addToast = (toast: ToastrProps) => {
-    setToasts([...(toasts || []), toast]);
+    setToasts([...(toasts || []), { ...toast, toastId: Math.random() * 100 }]);
   };
 
   const onClose = (toastId: number) => {
@@ -48,9 +48,10 @@ export const ToastrProvider = ({
     <ToastrContext.Provider value={{ toasts, addToast, onClose }}>
       {toasts?.map((toast) => (
         <Toastr
+          key={toast.toastId}
           content={toast.content}
           title={toast.title}
-          toastId={toast.toastId}
+          toastId={toast.toastId || 0}
           type={toast.type}
           onClose={onClose}
         />

@@ -3,15 +3,13 @@ import { setContext } from "@apollo/client/link/context";
 import {
   getHasuraUserId,
   getHasuraUserRole,
-} from "../../../utils/auth/jwt/getHasureUserId";
+} from "../../../utils/auth/jwt/getHasuraUserId";
 
 // utils
 
 export const authLink = setContext((_, { headers }) => {
   // fetch token from storage here
   const token = localStorage.getItem("access_token");
-
-  console.log(getHasuraUserRole(token || ""));
 
   // validate token here
   if (token) {

@@ -11,4 +11,5 @@ export interface RegisterModalProps {
   isRegister: boolean;
   setIsLogin: Dispatch<SetStateAction<boolean>>;
   setIsRegister: Dispatch<SetStateAction<boolean>>;
+  setIsLoading: Dispatch<SetStateAction<boolean>>;
 }

@@ -9,7 +9,10 @@ export const Link = ({
   ...rest
 }: BaseComponentProps<"a"> & LinkProps): ReactElement => {
   return (
-    <motion.a {...rest}>
+    <motion.a
+      whileHover={{ opacity: 0.7, transition: { duration: 0.1 } }}
+      {...rest}
+    >
       <NavLink to={to}>{children}</NavLink>
     </motion.a>
   );

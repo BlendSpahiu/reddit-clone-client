@@ -2,7 +2,7 @@ import { WebSocketLink } from "@apollo/client/link/ws";
 import {
   getHasuraUserId,
   getHasuraUserRole,
-} from "../../../utils/auth/jwt/getHasureUserId";
+} from "../../../utils/auth/jwt/getHasuraUserId";
 import { SubscriptionClient } from "subscriptions-transport-ws";
 
 // config
@@ -30,7 +30,7 @@ export const wsClient = new SubscriptionClient(
         headers,
       };
     },
-  }
+  },
 );
 
 export const wsLink = new WebSocketLink(wsClient);

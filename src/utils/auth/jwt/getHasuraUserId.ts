@@ -17,9 +17,6 @@ interface HasuraClaims {
 
 export const getHasuraUserId = (token: string) => {
   const decoded = jwtDecode(token);
-
-  console.log(decoded);
-
   return (decoded as HasuraClaims)["https://hasura.io/jwt/claims"][
     "x-hasura-user-id"
   ];
@@ -47,6 +44,6 @@ export const getSingleJWTField = (token: string): JWTHasuraClaims | null => {
  * @param {string} token
  */
 export const getHasuraUserRole = (
-  token: string
+  token: string,
 ): JWTHasuraClaims["x-hasura-role"] | string =>
   getSingleJWTField(token)?.["x-hasura-role"] || "user";

@@ -1,0 +1,7 @@
+query getCommunities($userId: uuid!) {
+  communities(where: {users: {
+    id: {_eq: $userId}
+  }}) {
+    ...Community
+  }
+}

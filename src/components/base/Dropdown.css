@@ -1,0 +1,115 @@
+
+  
+
+  
+
+  
+  :is(.dark .button) {
+    background-color: hsl(204 20% 100% / 0.05);
+    color: hsl(204 20% 100%);
+    --shadow: rgba(0, 0, 0, 0.25);
+    --border: rgba(255, 255, 255, 0.1);
+    --highlight: rgba(255, 255, 255, 0.05);
+    box-shadow:
+      inset 0 0 0 1px var(--border),
+      inset 0 -1px 0 1px var(--shadow),
+      inset 0 1px 0 var(--highlight);
+  }
+  
+  :is(.dark .button:hover) {
+    background-color: hsl(204 20% 100% / 0.1);
+  }
+  
+  :is(.dark .button)[aria-expanded="true"] {
+    background-color: hsl(204 20% 100% / 0.1);
+  }
+  
+  :is(.dark .button:active),
+  :is(.dark .button[data-active]) {
+    box-shadow:
+      inset 0 0 0 1px var(--border),
+      inset 0 1px 1px 1px var(--shadow);
+  }
+  
+  @media (min-width: 640px) {
+    .button {
+      gap: 0.5rem;
+    }
+  }
+  
+  .menu {
+    position: relative;
+    z-index: 50;
+    display: flex;
+    min-width: 180px;
+    flex-direction: column;
+    overscroll-behavior: contain;
+    border-radius: 0.5rem;
+    border-width: 1px;
+    border-style: solid;
+    padding: 0.5rem;
+    box-shadow:
+      0 10px 15px -3px rgb(0 0 0 / 0.1),
+      0 4px 6px -4px rgb(0 0 0 / 0.1);
+    outline: none !important;
+    max-height: max-content;
+    overflow: visible;
+    --menu-origin-inline: calc(var(--popover-anchor-width) / 2);
+  }
+  
+  :is(.dark .menu) {
+    border-color: hsl(204 3% 26%);
+    background-color: hsl(204 3% 18%);
+    color: hsl(204 20% 100%);
+    box-shadow:
+      0 10px 15px -3px rgb(0 0 0 / 0.25),
+      0 4px 6px -4px rgb(0 0 0 / 0.1);
+  }
+  
+  .menu-item {
+    display: flex;
+    cursor: default;
+    scroll-margin: 0.5rem;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 0.25rem;
+    padding: 0.5rem;
+    outline: none !important;
+  }
+  
+  .menu-item[aria-disabled="true"] {
+    opacity: 0.25;
+    color: hsl(204 10% 10% / 0.3);
+  }
+  
+  .menu-item[data-active-item] {
+    color: hsl(204 20% 100%);
+  }
+  
+  .menu-item:active,
+  .menu-item[data-active] {
+    padding-top: 9px;
+    padding-bottom: 7px;
+  }
+  
+  .menu[data-placement^="bottom"] {
+    transform-origin: var(--menu-origin-inline) -11px;
+  }
+  
+  .menu[data-placement^="top"] {
+    transform-origin: var(--menu-origin-inline) calc(100% + 11px);
+  }
+  
+  .menu-arrow > svg {
+    fill: hsl(204 20% 100%);
+    stroke: hsl(204 20% 88%);
+  }
+  
+  :is(.dark .menu-arrow) > svg {
+    fill: hsl(204 3% 18%);
+    stroke: hsl(204 3% 26%);
+  }
+  
+  :is(.dark .menu-item[aria-disabled="true"]) {
+    color: hsl(204 20% 100% / 0.3);
+  }

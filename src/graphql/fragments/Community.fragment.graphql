@@ -1,0 +1,8 @@
+fragment Community on communities {
+  id
+  category
+  name
+  post_id
+  updated_at
+  created_at
+}

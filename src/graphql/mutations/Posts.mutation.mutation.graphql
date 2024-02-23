@@ -1,0 +1,28 @@
+mutation upvotePost($postId: uuid!, $userId: uuid!) {
+  insert_upvoted_posts_one(object: {post_id: $postId, user_id: $userId}) {
+    id
+    post_id
+    user_id
+	}
+}
+
+mutation downvotePost($postId: uuid!) {
+  update_posts_by_pk(pk_columns: {id: $postId}, _inc: {upvotes: -1}) {
+    id
+  }
+}
+
+mutation deleteUpvotedPost($postId: uuid!) {
+  delete_upvoted_posts(where: {post_id: {_eq: $postId}}) {
+    affected_rows
+    returning {
+      id
+    }
+  }
+}
+
+mutation createPost($object: posts_insert_input!) {
+  insert_posts_one(object: $object) {
+    ...Post
+  }
+}

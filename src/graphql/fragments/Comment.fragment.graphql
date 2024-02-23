@@ -1,0 +1,6 @@
+fragment Comment on comments {
+  id
+  content
+  created_at
+  updated_at
+}

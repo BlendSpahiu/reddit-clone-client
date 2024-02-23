@@ -1,0 +1,11 @@
+fragment Post on posts {
+  id
+  content
+  downvotes
+  upvotes
+  title
+  link
+  image
+  created_at
+  updated_at
+}

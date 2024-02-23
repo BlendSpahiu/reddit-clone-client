@@ -2,8 +2,14 @@ fragment User on users {
   id
   username
   email
-  role
   date_of_birth
+  role
+  communities {
+    ...Community
+  }
+  comments {
+    ...Comment
+  }
   created_at
   updated_at
 }

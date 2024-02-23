@@ -1,0 +1,25 @@
+{
+    "compilerOptions": {
+      "baseUrl": "./src/",
+      "paths": {
+        "@components": ["components/index"],
+        "@api": ["api/index"],
+        "@config": ["config/index"],
+        "@containers": ["containers/index"],
+        "@context": ["context/index"],
+        "@enums": ["enums/index"],
+        "@hooks": ["hooks/index"],
+        "@interfaces": ["interfaces/index"],
+        "@graphql/*": ["graphql/*"],
+        "@routes": ["routes/index"],
+        "@services": ["services/index"],
+        "@static": ["static/index"],
+        "@styles": ["styles/index"],
+        "@utils": ["utils/index"],
+        "@validators": ["validators/index"],
+        "@views": ["views/index"],
+        "react": ["../node_modules/@types/react"]
+      }
+    }
+  }
+  

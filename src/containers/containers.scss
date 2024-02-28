@@ -1,3 +1,10 @@
 .header {
   @apply flex items-center justify-between bg-[#1a1a1b] px-4;
+
+  &-trigger {
+    span {
+      @apply hidden;
+    }
+  }
 }
+

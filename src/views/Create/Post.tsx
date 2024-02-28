@@ -35,10 +35,11 @@ import {
 } from "@graphql/gen/graphql";
 import { useAuth, useToast } from "@hooks";
 import { ToastrTypes } from "@enums";
-import { getGraphQLErrorMessage } from "@utils";
+import { compressImageUrl, getGraphQLErrorMessage } from "@utils";
 import { useNavigate } from "react-router-dom";
 import { PostProps } from "./Communities.props";
 import { PostInputs } from "@interfaces";
+import axios, { AxiosError } from "axios";
 
 export const Post = ({
   communityId,
@@ -86,13 +87,28 @@ export const Post = ({
   };
 
   const [insertPostMutation, { loading }] = useCreatePostMutation({
-    onCompleted: () => {
-      addToast({
-        type: ToastrTypes.SUCCESS,
-        title: "Create post",
-        content: "Post created successfully.",
-      });
-      navigate("/r/home");
+    onCompleted: async (data) => {
+      try {
+        await axios.post(
+          "https://65dfae79ff5e305f32a2f6b1.mockapi.io/api/v1/images",
+          {
+            base64Image: base64Image as string,
+            post_id: data.insert_posts_one?.id || "",
+          },
+        );
+        addToast({
+          type: ToastrTypes.SUCCESS,
+          title: "Create post",
+          content: "Post created successfully.",
+        });
+        navigate("/r/home");
+      } catch (error) {
+        addToast({
+          type: ToastrTypes.ERROR,
+          title: "Image File",
+          content: "Image is too large, please select a smaller image.",
+        });
+      }
     },
     onError: (err) => {
       addToast({
@@ -169,25 +185,23 @@ export const Post = ({
           isNSFW: data.isNSFW,
           isSpoiler: data.isSpoiler,
           isOriginalContent: data.isOC,
-          user_id: user?.id,
+          creator_id: user?.id,
           community_id: communityId,
         },
       },
     });
   };
 
-  // useEffect(() => {
-  //   const test = async () => {
-  //     console.log(await unsplash.photos.getRandom({}));
-  //   };
-  //   if (image) {
-  //     const reader = new FileReader();
-  //     reader.readAsDataURL(image[0]);
-  //     reader.onload = () => {
-  //       setBase64Image(reader.result);
-  //     };
-  //   }
-  // }, [image]);
+  useEffect(() => {
+    if (image) {
+      const reader = new FileReader();
+      reader.readAsDataURL(image[0]);
+      reader.onload = () => {
+        const b64 = compressImageUrl(reader.result as string);
+        setBase64Image(b64);
+      };
+    }
+  }, [image]);
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)} className="px-3 py-4">
@@ -295,7 +309,7 @@ export const Post = ({
                   id="file"
                   type="file"
                   className="hidden"
-                  onChange={(e) => {
+                  onChange={async (e) => {
                     setImage(e.target.files);
                   }}
                 />

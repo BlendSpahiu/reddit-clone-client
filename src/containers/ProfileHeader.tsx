@@ -1,11 +1,12 @@
 import { ReactElement, useRef, useState } from "react";
-import { Container } from "@components";
+import { Container, Menu, MenuItem } from "@components";
 import {
   ArrowLeftEndOnRectangleIcon,
   BellIcon,
   ChatBubbleOvalLeftEllipsisIcon,
   Cog8ToothIcon,
   PlusIcon,
+  TagIcon,
 } from "@heroicons/react/24/outline";
 import { Paragraph } from "../components/base/Typography";
 import { Avatar } from "../components/base/Avatar";
@@ -76,28 +77,27 @@ export const ProfileHeader = (): ReactElement => {
           />
         )}
       </div>
-      <Container>
-        <Dropdown
-          className="z-50 divide-y divide-gray-700"
-          ref={ref}
-          icon={<Avatar />}
-          open={isDropdownVisible}
-          setOpen={setIsDropdownVisible}
-        >
-          {profileSettings.map((item) => (
-            <DropdownItem
-              key={item.label}
-              className="flex items-center space-x-2 px-2 py-3"
-              onClick={item.onClick}
-            >
-              <Icon icon={item.icon} />
-              <Paragraph className="m-0 text-sm text-white">
-                {item.label}
-              </Paragraph>
-            </DropdownItem>
-          ))}
-        </Dropdown>
-      </Container>
+      <Menu
+        className="header-trigger flex items-center rounded-full bg-base px-3 py-1 hover:ring-gray-300"
+        menuClassName="bg-base text-white right-4 border-gray-400 w-[250px]"
+        label={<Avatar />}
+        open={isDropdownVisible}
+        setOpen={setIsDropdownVisible}
+        ref={ref}
+      >
+        {profileSettings.map((item) => (
+          <MenuItem
+            key={item.label}
+            className="flex items-center space-x-2 px-2 py-5"
+            onClick={item.onClick}
+          >
+            <Icon icon={item.icon} />
+            <Paragraph className="m-0 text-sm text-white">
+              {item.label}
+            </Paragraph>
+          </MenuItem>
+        ))}
+      </Menu>
     </Container>
   );
 };

@@ -34,6 +34,7 @@ import {
 import { useAuth, useOnClickOutside, useToast } from "@hooks";
 import {
   customDateFormat,
+  decompressImageUrl,
   getGraphQLErrorMessage,
   getPostDateCreated,
   getShortPostContent,
@@ -41,14 +42,22 @@ import {
 import classNames from "classnames";
 import { ToastrTypes } from "@enums";
 import moment from "moment";
-import { ReactElement, useRef, useState } from "react";
+import { ReactElement, useEffect, useRef, useState } from "react";
 import { EmptyState } from "@containers";
 import { Dropdown } from "./Dropdown";
+import axios from "axios";
 
 export const Home = (): ReactElement => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isUpvoted, setIsUpvoted] = useState<boolean>(false);
   const [isDownvoted, setIsDownvoted] = useState<boolean>(false);
+  const [images, setImages] = useState<
+    {
+      id: number;
+      base64Image: string;
+      post_id: string;
+    }[]
+  >([]);
 
   const ref = useRef<HTMLDivElement | null>(null);
 
@@ -105,7 +114,15 @@ export const Home = (): ReactElement => {
     },
   });
 
-  console.log(upvotedPosts?.upvoted_posts);
+  useEffect(() => {
+    const getImages = async () => {
+      const response = await axios.get(
+        "https://65dfae79ff5e305f32a2f6b1.mockapi.io/api/v1/images",
+      );
+      setImages(response.data);
+    };
+    getImages();
+  }, [data]);
 
   return (
     <Container className="h-full w-full">
@@ -114,6 +131,9 @@ export const Home = (): ReactElement => {
         const upvotedPost = upvotedPosts?.upvoted_posts.find(
           (p) => p.user_id === user?.id,
         );
+
+        const image = images.find((img) => img.post_id === post.id);
+
         return (
           <Container
             key={post.id}
@@ -159,6 +179,9 @@ export const Home = (): ReactElement => {
               <Paragraph className="text-sm text-[#bac5c4]">
                 {getShortPostContent(post.content || "")}
               </Paragraph>
+              <Container>
+                <img src={image?.base64Image || ""} />
+              </Container>
             </Container>
             <Container className="mt-3 flex items-center space-x-4">
               <Badge

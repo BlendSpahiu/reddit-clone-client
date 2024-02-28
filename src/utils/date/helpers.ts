@@ -4,8 +4,6 @@ export const getPostDateCreated = (date: string | Date | Moment): string => {
   const today = moment();
   const diff = moment(today).diff(date);
 
-  console.log(diff);
-
   if (diff.toString().length <= 6) {
     return `${moment(today).diff(date, "seconds")} s. ago`;
   }

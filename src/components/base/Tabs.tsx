@@ -42,7 +42,7 @@ export const TabContent = ({
   activeTab,
   ...rest
 }: TabContentProps): ReactElement => {
-  const [parentWidth, setParentWidth] = useState<number>(0);
+  const [parentWidth, setParentWidth] = useState<number>(1320);
   const tabContentContainer = document.getElementById("tab-content-container");
 
   useEffect(() => {
@@ -60,11 +60,7 @@ export const TabContent = ({
             "absolute z-0 rounded-b-md bg-[#1a1a1b] text-white",
             className,
           )}
-          style={{
-            ...(parentWidth && {
-              width: `${parentWidth}px`,
-            }),
-          }}
+          style={{ width: parentWidth }}
           {...rest}
         >
           {children}
@@ -118,7 +114,7 @@ export const TabHeader = ({
         whileTap={{ background: "#5e5e5f" }}
         className={classNames(
           "flex w-full items-center justify-center space-x-1 bg-[#1a1a1b] p-2 text-sm  first:rounded-tl-md last:rounded-tr-md",
-          activeTab ? "shadow-active-tab text-[#cccfd1] " : "text-[#7e8081]",
+          activeTab ? "text-[#cccfd1] shadow-active-tab " : "text-[#7e8081]",
           className,
         )}
         {...rest}

@@ -65,6 +65,7 @@ export const CreateCommunity = ({
         content: `Successfully created ${data.insert_communities_one?.name}!`,
         title: "Community",
       });
+      onClose();
     },
     onError: (data) => {
       addToast({
@@ -134,11 +135,11 @@ export const CreateCommunity = ({
                     prefix="r/"
                     register={register}
                   />
-                  <Paragraph className="text-description mt-4 text-xs">
+                  <Paragraph className="mt-4 text-xs text-description">
                     {21 - (name?.length || 0)} Characters remaining
                   </Paragraph>
                   {errors.name && (
-                    <Paragraph className="text-error text-xs">
+                    <Paragraph className="text-xs text-error">
                       {errors.name.message}
                     </Paragraph>
                   )}
@@ -179,7 +180,7 @@ export const CreateCommunity = ({
                   <Container className="ml-2 flex items-center space-x-2">
                     <UserIcon className="h-5 w-5 text-[#818384]" />
                     <Paragraph className="text-sm">Public</Paragraph>
-                    <Span className="text-description text-xs">
+                    <Span className="text-xs text-description">
                       Anyone can view, post, and comment to this community
                     </Span>
                   </Container>
@@ -211,7 +212,7 @@ export const CreateCommunity = ({
                   <Container className="ml-2 flex items-center space-x-2">
                     <EyeIcon className="h-5 w-5 text-[#818384]" />
                     <Paragraph className="text-sm">Restricted</Paragraph>
-                    <Span className="text-description text-xs">
+                    <Span className="text-xs text-description">
                       Anyone can view this community, but only approved users
                       can post
                     </Span>
@@ -244,7 +245,7 @@ export const CreateCommunity = ({
                   <Container className="ml-2 flex items-center space-x-2">
                     <LockClosedIcon className="h-5 w-5 text-[#818384]" />
                     <Paragraph className="text-sm">Private</Paragraph>
-                    <Span className="text-description text-xs">
+                    <Span className="text-xs text-description">
                       Only approved users can view and submit to this community
                     </Span>
                   </Container>

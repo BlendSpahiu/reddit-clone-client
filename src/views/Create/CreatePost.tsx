@@ -24,6 +24,10 @@ import {
 import { ReactElement, useState } from "react";
 import { Post } from "./Post";
 import { CommunityFragment } from "@graphql/gen/graphql";
+import { PostValidatorSchema } from "@validators";
+import { joiResolver } from "@hookform/resolvers/joi";
+import { useForm } from "react-hook-form";
+import { PostInputs } from "@interfaces";
 
 export const CreatePost = ({
   selectedCommunity,
@@ -31,6 +35,10 @@ export const CreatePost = ({
   selectedCommunity: CommunityFragment;
 }): ReactElement => {
   const [activeTab, setActiveTab] = useState<number>(0);
+
+  const formProps = useForm<PostInputs>({
+    resolver: joiResolver(PostValidatorSchema()),
+  });
 
   return (
     <Tabs>
@@ -69,36 +77,26 @@ export const CreatePost = ({
         </TabHeader>
       </TabHeaderContaier>
       <TabContentContaier>
-        <TabContent tabId={0} activeTab={activeTab}>
-          {activeTab === 0 && (
-            <>
-              <Post communityId={selectedCommunity.id} />
-              <Container className="flex flex-col space-y-2 rounded-b-md bg-[#272729] p-3">
-                <Container className="flex items-center space-x-2">
-                  <input type="checkbox" />
-                  <Paragraph className="text-sm">
-                    Send me post reply notifications
-                  </Paragraph>
-                </Container>
-                <Container className="flex items-center space-x-2">
-                  <Link to="#" className="text-sm text-sky-500">
-                    Connect accounts to share your post
-                  </Link>
-                  <InformationCircleIcon className="text-description h-7 w-7" />
-                </Container>
-              </Container>
-            </>
-          )}
-        </TabContent>
-        <TabContent tabId={1} activeTab={activeTab}>
-          {activeTab === 1 && (
-            <Container className="text-sm text-white">test</Container>
-          )}
-        </TabContent>
-        <TabContent tabId={2} activeTab={activeTab}>
-          {activeTab === 2 && (
-            <Container className="text-sm text-white">test</Container>
-          )}
+        <TabContent tabId={activeTab} activeTab={activeTab}>
+          <Post
+            formProps={formProps}
+            activeTab={activeTab}
+            communityId={selectedCommunity.id}
+          />
+          <Container className="flex flex-col space-y-2 rounded-b-md bg-[#272729] p-3">
+            <Container className="flex items-center space-x-2">
+              <input type="checkbox" />
+              <Paragraph className="text-sm">
+                Send me post reply notifications
+              </Paragraph>
+            </Container>
+            <Container className="flex items-center space-x-2">
+              <Link to="#" className="text-sm text-sky-500">
+                Connect accounts to share your post
+              </Link>
+              <InformationCircleIcon className="h-7 w-7 text-description" />
+            </Container>
+          </Container>
         </TabContent>
       </TabContentContaier>
     </Tabs>

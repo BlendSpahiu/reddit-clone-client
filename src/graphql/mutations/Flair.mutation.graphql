@@ -1,0 +1,8 @@
+mutation insertFlair($obj: [flares_insert_input!]!) {
+	insert_flares(objects: $obj) {
+    affected_rows
+    returning {
+      ...Flair
+    }
+  }
+}

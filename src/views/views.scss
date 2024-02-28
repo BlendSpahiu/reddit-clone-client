@@ -73,3 +73,9 @@
 
 .inline-code {
 }
+
+.test {
+  span {
+    @apply hidden;
+  }
+}

@@ -23,3 +23,14 @@ query getUpvotedPosts($userId: uuid!) {
     user_id
   }
 }
+
+query getDraftPosts {
+  draft_posts{
+    ...DraftPost
+  }
+  draft_posts_aggregate{
+    aggregate {
+      count
+    }
+  }
+}

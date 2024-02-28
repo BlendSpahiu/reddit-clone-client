@@ -1,0 +1,5 @@
+mutation saveDraft($obj: draft_posts_insert_input!) {
+	insert_draft_posts_one(object: $obj) {
+    ...DraftPost
+  }
+}

@@ -16,21 +16,20 @@ export const Sidebar = (): ReactElement => {
   console.log(depthLevel);
 
   return (
-    <Container className="bg-base sticky flex h-screen w-[350px] justify-end border-r border-gray-700 pr-3 pt-6 text-white">
+    <Container className="sticky flex h-screen w-[350px] justify-end border-r border-gray-700 bg-base pr-3 pt-6 text-white">
       <motion.div className="space-y-2 pl-14">
         <motion.div className="space-y-2">
           {homeButtons.map((item) => (
             <motion.div
               className={classNames(
                 "flex w-[250px] cursor-pointer items-center justify-start space-x-4 rounded-xl px-4 py-2",
-                pathname === item.link ? "bg-[#1c282d]" : "",
+                pathname === item.link ? "bg-[#000]" : "",
               )}
               initial={{
-                background:
-                  pathname === item.link ? "#1c282d" : "rgb(10, 20 ,22)",
+                background: pathname === item.link ? "#000" : "#000",
               }}
               whileHover={{
-                background: "#1c282d",
+                background: "#545454",
               }}
               whileTap={{
                 scale: 0.95,
@@ -50,10 +49,10 @@ export const Sidebar = (): ReactElement => {
                   "flex w-[250px] cursor-pointer items-center justify-between space-x-4 rounded-xl px-4 py-2",
                 )}
                 initial={{
-                  background: "rgb(10, 20 ,22)",
+                  background: "#000",
                 }}
                 whileHover={{
-                  background: "#1c282d",
+                  background: "#545454",
                 }}
                 whileTap={{
                   scale: 0.95,
@@ -86,7 +85,7 @@ export const Sidebar = (): ReactElement => {
                 {depthLevel === index + 1 && topic.items.length !== 0 && (
                   <Container
                     layout
-                    className="ml-7 overflow-hidden border-l border-gray-700 text-sm"
+                    className="ml-7 overflow-hidden border-l border-[#747474] text-sm"
                     key={`${topic.label}-submenu`}
                     initial={{ opacity: 0, height: 0 }}
                     animate={{
@@ -99,10 +98,10 @@ export const Sidebar = (): ReactElement => {
                       <Container
                         className="rounded-r-xl py-3"
                         initial={{
-                          background: "rgb(10, 20 ,22)",
+                          background: "#1a1a1b",
                         }}
                         whileHover={{
-                          background: "#1c282d",
+                          background: "#545454",
                         }}
                       >
                         <Paragraph className="ml-4">{item.label}</Paragraph>

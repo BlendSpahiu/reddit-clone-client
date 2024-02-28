@@ -35,7 +35,7 @@ export const Toastr = ({
           animate={{ x: [300, -24] }}
           exit={{ x: [-24, 350] }}
           className={classNames(
-            "absolute right-6 top-6 z-[999] w-[300px] rounded-lg border bg-transparent text-sm text-white",
+            "fixed right-6 top-6 z-[999] w-[300px] rounded-lg border bg-transparent text-sm text-white",
             type === ToastrTypes.ERROR ? "border-red-600" : "border-green-500",
           )}
         >

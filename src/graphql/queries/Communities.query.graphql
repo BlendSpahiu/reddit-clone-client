@@ -1,7 +1,6 @@
-query getCommunities($userId: uuid!) {
-  communities(where: {users: {
-    id: {_eq: $userId}
-  }}) {
+query getCommunityByUserId($userId: uuid!) {
+  communities(where: {user_id: {_eq: $userId}}){
     ...Community
   }
+  	
 }

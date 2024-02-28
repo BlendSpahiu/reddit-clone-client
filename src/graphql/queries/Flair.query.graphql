@@ -1,0 +1,5 @@
+query getFlaresByCommunityId($communityId: uuid!, $userId: uuid!) {
+  flares(where: {user_id: {_eq: $userId}, _and: {community_id: {_eq: $communityId}}}) {
+    ...Flair
+  }
+}

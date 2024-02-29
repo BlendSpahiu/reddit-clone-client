@@ -22,7 +22,10 @@ import { joiResolver } from "@hookform/resolvers/joi";
 import { CreateCommunityValidator } from "@validators";
 import { CreateCommunityProps } from "./Communities.props";
 import classNames from "classnames";
-import { useCreateCommunityMutation } from "@graphql/gen/graphql";
+import {
+  useCreateCommunityMutation,
+  useInsertCommunitiesUsersMutation,
+} from "@graphql/gen/graphql";
 import { useAuth, useToast } from "@hooks";
 import { getGraphQLErrorMessage } from "@utils";
 
@@ -58,12 +61,22 @@ export const CreateCommunity = ({
   const { user } = useAuth();
   const { name, type, isNSFW } = useWatch({ control });
 
+  const [insertCommunitiesUsersMutation] = useInsertCommunitiesUsersMutation();
+
   const [insertCommunityMutation, { loading }] = useCreateCommunityMutation({
     onCompleted: (data) => {
       addToast({
         type: ToastrTypes.SUCCESS,
         content: `Successfully created ${data.insert_communities_one?.name}!`,
         title: "Community",
+      });
+      insertCommunitiesUsersMutation({
+        variables: {
+          object: {
+            user_id: data.insert_communities_one?.user_id || "",
+            community_id: data.insert_communities_one?.id || "",
+          },
+        },
       });
       onClose();
     },

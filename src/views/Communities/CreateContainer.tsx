@@ -14,13 +14,12 @@ import {
 } from "@components";
 import {
   CommunityFragment,
-  useGetCommunitiesQuery,
+  useGetCommunityByUserIdQuery,
 } from "@graphql/gen/graphql";
 import { useAuth, useOnClickOutside } from "@hooks";
 import { ReactElement, useRef, useState } from "react";
-import { CreateCommunity } from "./CreateCommunity";
+import { CreateCommunity, CreatePost } from "@views";
 import { gqlVar } from "@utils";
-import { CreatePost } from "./CreatePost";
 
 export const CreateContainer = (): ReactElement => {
   const [selectedCommunity, setSelectedCommunity] = useState<CommunityFragment>(
@@ -35,7 +34,12 @@ export const CreateContainer = (): ReactElement => {
 
   useOnClickOutside(ref, () => setIsOpen(false));
 
-  const options = user ? user?.communities.map((community) => community) : [];
+  const { data } = useGetCommunityByUserIdQuery({
+    variables: { userId: user?.id },
+  });
+  const options = data?.communities.map((community) => community) || [];
+
+  console.log(options);
 
   return (
     <>
@@ -75,7 +79,8 @@ export const CreateContainer = (): ReactElement => {
                 <Container className="flex flex-col">
                   <Paragraph className="text-sm ">{option.name}</Paragraph>
                   <Paragraph className="text-xs text-description">
-                    {options.length} members
+                    {option.communities_users_aggregate.aggregate?.count || 0}{" "}
+                    members
                   </Paragraph>
                 </Container>
               </SelectItem>

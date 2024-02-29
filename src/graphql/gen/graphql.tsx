@@ -361,6 +361,10 @@ export type Comments_Updates = {
 export type Communities = {
   __typename?: "communities";
   category?: Maybe<Scalars["String"]["output"]>;
+  /** An array relationship */
+  communities_users: Array<Communities_Users>;
+  /** An aggregate relationship */
+  communities_users_aggregate: Communities_Users_Aggregate;
   created_at: Scalars["timestamptz"]["output"];
   /** An array relationship */
   draft_posts: Array<Draft_Posts>;
@@ -378,10 +382,6 @@ export type Communities = {
   posts: Array<Posts>;
   /** An aggregate relationship */
   posts_aggregate: Posts_Aggregate;
-  /** An array relationship */
-  test_many_to_manies: Array<Test_Many_To_Many>;
-  /** An aggregate relationship */
-  test_many_to_manies_aggregate: Test_Many_To_Many_Aggregate;
   type: Scalars["Int"]["output"];
   updated_at: Scalars["timestamptz"]["output"];
   /** An object relationship */
@@ -391,6 +391,24 @@ export type Communities = {
   users: Array<Users>;
   /** An aggregate relationship */
   users_aggregate: Users_Aggregate;
+};
+
+/** columns and relationships of "communities" */
+export type CommunitiesCommunities_UsersArgs = {
+  distinct_on?: InputMaybe<Array<Communities_Users_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  offset?: InputMaybe<Scalars["Int"]["input"]>;
+  order_by?: InputMaybe<Array<Communities_Users_Order_By>>;
+  where?: InputMaybe<Communities_Users_Bool_Exp>;
+};
+
+/** columns and relationships of "communities" */
+export type CommunitiesCommunities_Users_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Communities_Users_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  offset?: InputMaybe<Scalars["Int"]["input"]>;
+  order_by?: InputMaybe<Array<Communities_Users_Order_By>>;
+  where?: InputMaybe<Communities_Users_Bool_Exp>;
 };
 
 /** columns and relationships of "communities" */
@@ -445,24 +463,6 @@ export type CommunitiesPosts_AggregateArgs = {
   offset?: InputMaybe<Scalars["Int"]["input"]>;
   order_by?: InputMaybe<Array<Posts_Order_By>>;
   where?: InputMaybe<Posts_Bool_Exp>;
-};
-
-/** columns and relationships of "communities" */
-export type CommunitiesTest_Many_To_ManiesArgs = {
-  distinct_on?: InputMaybe<Array<Test_Many_To_Many_Select_Column>>;
-  limit?: InputMaybe<Scalars["Int"]["input"]>;
-  offset?: InputMaybe<Scalars["Int"]["input"]>;
-  order_by?: InputMaybe<Array<Test_Many_To_Many_Order_By>>;
-  where?: InputMaybe<Test_Many_To_Many_Bool_Exp>;
-};
-
-/** columns and relationships of "communities" */
-export type CommunitiesTest_Many_To_Manies_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Test_Many_To_Many_Select_Column>>;
-  limit?: InputMaybe<Scalars["Int"]["input"]>;
-  offset?: InputMaybe<Scalars["Int"]["input"]>;
-  order_by?: InputMaybe<Array<Test_Many_To_Many_Order_By>>;
-  where?: InputMaybe<Test_Many_To_Many_Bool_Exp>;
 };
 
 /** columns and relationships of "communities" */
@@ -578,6 +578,8 @@ export type Communities_Bool_Exp = {
   _not?: InputMaybe<Communities_Bool_Exp>;
   _or?: InputMaybe<Array<Communities_Bool_Exp>>;
   category?: InputMaybe<String_Comparison_Exp>;
+  communities_users?: InputMaybe<Communities_Users_Bool_Exp>;
+  communities_users_aggregate?: InputMaybe<Communities_Users_Aggregate_Bool_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   draft_posts?: InputMaybe<Draft_Posts_Bool_Exp>;
   draft_posts_aggregate?: InputMaybe<Draft_Posts_Aggregate_Bool_Exp>;
@@ -589,8 +591,6 @@ export type Communities_Bool_Exp = {
   owner_id?: InputMaybe<Uuid_Comparison_Exp>;
   posts?: InputMaybe<Posts_Bool_Exp>;
   posts_aggregate?: InputMaybe<Posts_Aggregate_Bool_Exp>;
-  test_many_to_manies?: InputMaybe<Test_Many_To_Many_Bool_Exp>;
-  test_many_to_manies_aggregate?: InputMaybe<Test_Many_To_Many_Aggregate_Bool_Exp>;
   type?: InputMaybe<Int_Comparison_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   user?: InputMaybe<Users_Bool_Exp>;
@@ -613,6 +613,7 @@ export type Communities_Inc_Input = {
 /** input type for inserting data into table "communities" */
 export type Communities_Insert_Input = {
   category?: InputMaybe<Scalars["String"]["input"]>;
+  communities_users?: InputMaybe<Communities_Users_Arr_Rel_Insert_Input>;
   created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
   draft_posts?: InputMaybe<Draft_Posts_Arr_Rel_Insert_Input>;
   flares?: InputMaybe<Flares_Arr_Rel_Insert_Input>;
@@ -621,7 +622,6 @@ export type Communities_Insert_Input = {
   name?: InputMaybe<Scalars["String"]["input"]>;
   owner_id?: InputMaybe<Scalars["uuid"]["input"]>;
   posts?: InputMaybe<Posts_Arr_Rel_Insert_Input>;
-  test_many_to_manies?: InputMaybe<Test_Many_To_Many_Arr_Rel_Insert_Input>;
   type?: InputMaybe<Scalars["Int"]["input"]>;
   updated_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
   user?: InputMaybe<Users_Obj_Rel_Insert_Input>;
@@ -705,6 +705,7 @@ export type Communities_On_Conflict = {
 /** Ordering options when selecting data from "communities". */
 export type Communities_Order_By = {
   category?: InputMaybe<Order_By>;
+  communities_users_aggregate?: InputMaybe<Communities_Users_Aggregate_Order_By>;
   created_at?: InputMaybe<Order_By>;
   draft_posts_aggregate?: InputMaybe<Draft_Posts_Aggregate_Order_By>;
   flares_aggregate?: InputMaybe<Flares_Aggregate_Order_By>;
@@ -713,7 +714,6 @@ export type Communities_Order_By = {
   name?: InputMaybe<Order_By>;
   owner_id?: InputMaybe<Order_By>;
   posts_aggregate?: InputMaybe<Posts_Aggregate_Order_By>;
-  test_many_to_manies_aggregate?: InputMaybe<Test_Many_To_Many_Aggregate_Order_By>;
   type?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
   user?: InputMaybe<Users_Order_By>;
@@ -866,6 +866,227 @@ export type Communities_Updates = {
   /** sets the columns of the filtered rows to the given values */
   _set?: InputMaybe<Communities_Set_Input>;
   where: Communities_Bool_Exp;
+};
+
+/** columns and relationships of "communities_users" */
+export type Communities_Users = {
+  __typename?: "communities_users";
+  /** An object relationship */
+  community: Communities;
+  community_id: Scalars["uuid"]["output"];
+  created_at: Scalars["timestamptz"]["output"];
+  id: Scalars["uuid"]["output"];
+  updated_at: Scalars["timestamptz"]["output"];
+  /** An object relationship */
+  user: Users;
+  user_id: Scalars["uuid"]["output"];
+};
+
+/** aggregated selection of "communities_users" */
+export type Communities_Users_Aggregate = {
+  __typename?: "communities_users_aggregate";
+  aggregate?: Maybe<Communities_Users_Aggregate_Fields>;
+  nodes: Array<Communities_Users>;
+};
+
+export type Communities_Users_Aggregate_Bool_Exp = {
+  count?: InputMaybe<Communities_Users_Aggregate_Bool_Exp_Count>;
+};
+
+export type Communities_Users_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Communities_Users_Select_Column>>;
+  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
+  filter?: InputMaybe<Communities_Users_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
+/** aggregate fields of "communities_users" */
+export type Communities_Users_Aggregate_Fields = {
+  __typename?: "communities_users_aggregate_fields";
+  count: Scalars["Int"]["output"];
+  max?: Maybe<Communities_Users_Max_Fields>;
+  min?: Maybe<Communities_Users_Min_Fields>;
+};
+
+/** aggregate fields of "communities_users" */
+export type Communities_Users_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Communities_Users_Select_Column>>;
+  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
+};
+
+/** order by aggregate values of table "communities_users" */
+export type Communities_Users_Aggregate_Order_By = {
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Communities_Users_Max_Order_By>;
+  min?: InputMaybe<Communities_Users_Min_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "communities_users" */
+export type Communities_Users_Arr_Rel_Insert_Input = {
+  data: Array<Communities_Users_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Communities_Users_On_Conflict>;
+};
+
+/** Boolean expression to filter rows from the table "communities_users". All fields are combined with a logical 'AND'. */
+export type Communities_Users_Bool_Exp = {
+  _and?: InputMaybe<Array<Communities_Users_Bool_Exp>>;
+  _not?: InputMaybe<Communities_Users_Bool_Exp>;
+  _or?: InputMaybe<Array<Communities_Users_Bool_Exp>>;
+  community?: InputMaybe<Communities_Bool_Exp>;
+  community_id?: InputMaybe<Uuid_Comparison_Exp>;
+  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  id?: InputMaybe<Uuid_Comparison_Exp>;
+  updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  user?: InputMaybe<Users_Bool_Exp>;
+  user_id?: InputMaybe<Uuid_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "communities_users" */
+export enum Communities_Users_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  CommunitiesUsersPkey = "communities_users_pkey",
+}
+
+/** input type for inserting data into table "communities_users" */
+export type Communities_Users_Insert_Input = {
+  community?: InputMaybe<Communities_Obj_Rel_Insert_Input>;
+  community_id?: InputMaybe<Scalars["uuid"]["input"]>;
+  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+  id?: InputMaybe<Scalars["uuid"]["input"]>;
+  updated_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+  user?: InputMaybe<Users_Obj_Rel_Insert_Input>;
+  user_id?: InputMaybe<Scalars["uuid"]["input"]>;
+};
+
+/** aggregate max on columns */
+export type Communities_Users_Max_Fields = {
+  __typename?: "communities_users_max_fields";
+  community_id?: Maybe<Scalars["uuid"]["output"]>;
+  created_at?: Maybe<Scalars["timestamptz"]["output"]>;
+  id?: Maybe<Scalars["uuid"]["output"]>;
+  updated_at?: Maybe<Scalars["timestamptz"]["output"]>;
+  user_id?: Maybe<Scalars["uuid"]["output"]>;
+};
+
+/** order by max() on columns of table "communities_users" */
+export type Communities_Users_Max_Order_By = {
+  community_id?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+  user_id?: InputMaybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Communities_Users_Min_Fields = {
+  __typename?: "communities_users_min_fields";
+  community_id?: Maybe<Scalars["uuid"]["output"]>;
+  created_at?: Maybe<Scalars["timestamptz"]["output"]>;
+  id?: Maybe<Scalars["uuid"]["output"]>;
+  updated_at?: Maybe<Scalars["timestamptz"]["output"]>;
+  user_id?: Maybe<Scalars["uuid"]["output"]>;
+};
+
+/** order by min() on columns of table "communities_users" */
+export type Communities_Users_Min_Order_By = {
+  community_id?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+  user_id?: InputMaybe<Order_By>;
+};
+
+/** response of any mutation on the table "communities_users" */
+export type Communities_Users_Mutation_Response = {
+  __typename?: "communities_users_mutation_response";
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars["Int"]["output"];
+  /** data from the rows affected by the mutation */
+  returning: Array<Communities_Users>;
+};
+
+/** on_conflict condition type for table "communities_users" */
+export type Communities_Users_On_Conflict = {
+  constraint: Communities_Users_Constraint;
+  update_columns?: Array<Communities_Users_Update_Column>;
+  where?: InputMaybe<Communities_Users_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "communities_users". */
+export type Communities_Users_Order_By = {
+  community?: InputMaybe<Communities_Order_By>;
+  community_id?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+  user?: InputMaybe<Users_Order_By>;
+  user_id?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: communities_users */
+export type Communities_Users_Pk_Columns_Input = {
+  id: Scalars["uuid"]["input"];
+};
+
+/** select columns of table "communities_users" */
+export enum Communities_Users_Select_Column {
+  /** column name */
+  CommunityId = "community_id",
+  /** column name */
+  CreatedAt = "created_at",
+  /** column name */
+  Id = "id",
+  /** column name */
+  UpdatedAt = "updated_at",
+  /** column name */
+  UserId = "user_id",
+}
+
+/** input type for updating data in table "communities_users" */
+export type Communities_Users_Set_Input = {
+  community_id?: InputMaybe<Scalars["uuid"]["input"]>;
+  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+  id?: InputMaybe<Scalars["uuid"]["input"]>;
+  updated_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+  user_id?: InputMaybe<Scalars["uuid"]["input"]>;
+};
+
+/** Streaming cursor of the table "communities_users" */
+export type Communities_Users_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Communities_Users_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Communities_Users_Stream_Cursor_Value_Input = {
+  community_id?: InputMaybe<Scalars["uuid"]["input"]>;
+  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+  id?: InputMaybe<Scalars["uuid"]["input"]>;
+  updated_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+  user_id?: InputMaybe<Scalars["uuid"]["input"]>;
+};
+
+/** update columns of table "communities_users" */
+export enum Communities_Users_Update_Column {
+  /** column name */
+  CommunityId = "community_id",
+  /** column name */
+  CreatedAt = "created_at",
+  /** column name */
+  Id = "id",
+  /** column name */
+  UpdatedAt = "updated_at",
+  /** column name */
+  UserId = "user_id",
+}
+
+export type Communities_Users_Updates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Communities_Users_Set_Input>;
+  where: Communities_Users_Bool_Exp;
 };
 
 /** aggregate var_pop on columns */
@@ -1902,6 +2123,10 @@ export type Mutation_Root = {
   delete_communities?: Maybe<Communities_Mutation_Response>;
   /** delete single row from the table: "communities" */
   delete_communities_by_pk?: Maybe<Communities>;
+  /** delete data from the table: "communities_users" */
+  delete_communities_users?: Maybe<Communities_Users_Mutation_Response>;
+  /** delete single row from the table: "communities_users" */
+  delete_communities_users_by_pk?: Maybe<Communities_Users>;
   /** delete data from the table: "donwvoted_posts" */
   delete_donwvoted_posts?: Maybe<Donwvoted_Posts_Mutation_Response>;
   /** delete single row from the table: "donwvoted_posts" */
@@ -1918,10 +2143,6 @@ export type Mutation_Root = {
   delete_posts?: Maybe<Posts_Mutation_Response>;
   /** delete single row from the table: "posts" */
   delete_posts_by_pk?: Maybe<Posts>;
-  /** delete data from the table: "test_many_to_many" */
-  delete_test_many_to_many?: Maybe<Test_Many_To_Many_Mutation_Response>;
-  /** delete single row from the table: "test_many_to_many" */
-  delete_test_many_to_many_by_pk?: Maybe<Test_Many_To_Many>;
   /** delete data from the table: "upvoted_posts" */
   delete_upvoted_posts?: Maybe<Upvoted_Posts_Mutation_Response>;
   /** delete single row from the table: "upvoted_posts" */
@@ -1942,6 +2163,10 @@ export type Mutation_Root = {
   insert_communities?: Maybe<Communities_Mutation_Response>;
   /** insert a single row into the table: "communities" */
   insert_communities_one?: Maybe<Communities>;
+  /** insert data into the table: "communities_users" */
+  insert_communities_users?: Maybe<Communities_Users_Mutation_Response>;
+  /** insert a single row into the table: "communities_users" */
+  insert_communities_users_one?: Maybe<Communities_Users>;
   /** insert data into the table: "donwvoted_posts" */
   insert_donwvoted_posts?: Maybe<Donwvoted_Posts_Mutation_Response>;
   /** insert a single row into the table: "donwvoted_posts" */
@@ -1958,10 +2183,6 @@ export type Mutation_Root = {
   insert_posts?: Maybe<Posts_Mutation_Response>;
   /** insert a single row into the table: "posts" */
   insert_posts_one?: Maybe<Posts>;
-  /** insert data into the table: "test_many_to_many" */
-  insert_test_many_to_many?: Maybe<Test_Many_To_Many_Mutation_Response>;
-  /** insert a single row into the table: "test_many_to_many" */
-  insert_test_many_to_many_one?: Maybe<Test_Many_To_Many>;
   /** insert data into the table: "upvoted_posts" */
   insert_upvoted_posts?: Maybe<Upvoted_Posts_Mutation_Response>;
   /** insert a single row into the table: "upvoted_posts" */
@@ -1988,6 +2209,14 @@ export type Mutation_Root = {
   update_communities_by_pk?: Maybe<Communities>;
   /** update multiples rows of table: "communities" */
   update_communities_many?: Maybe<Array<Maybe<Communities_Mutation_Response>>>;
+  /** update data of the table: "communities_users" */
+  update_communities_users?: Maybe<Communities_Users_Mutation_Response>;
+  /** update single row of the table: "communities_users" */
+  update_communities_users_by_pk?: Maybe<Communities_Users>;
+  /** update multiples rows of table: "communities_users" */
+  update_communities_users_many?: Maybe<
+    Array<Maybe<Communities_Users_Mutation_Response>>
+  >;
   /** update data of the table: "donwvoted_posts" */
   update_donwvoted_posts?: Maybe<Donwvoted_Posts_Mutation_Response>;
   /** update single row of the table: "donwvoted_posts" */
@@ -2014,14 +2243,6 @@ export type Mutation_Root = {
   update_posts_by_pk?: Maybe<Posts>;
   /** update multiples rows of table: "posts" */
   update_posts_many?: Maybe<Array<Maybe<Posts_Mutation_Response>>>;
-  /** update data of the table: "test_many_to_many" */
-  update_test_many_to_many?: Maybe<Test_Many_To_Many_Mutation_Response>;
-  /** update single row of the table: "test_many_to_many" */
-  update_test_many_to_many_by_pk?: Maybe<Test_Many_To_Many>;
-  /** update multiples rows of table: "test_many_to_many" */
-  update_test_many_to_many_many?: Maybe<
-    Array<Maybe<Test_Many_To_Many_Mutation_Response>>
-  >;
   /** update data of the table: "upvoted_posts" */
   update_upvoted_posts?: Maybe<Upvoted_Posts_Mutation_Response>;
   /** update single row of the table: "upvoted_posts" */
@@ -2065,6 +2286,16 @@ export type Mutation_RootDelete_Communities_By_PkArgs = {
 };
 
 /** mutation root */
+export type Mutation_RootDelete_Communities_UsersArgs = {
+  where: Communities_Users_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Communities_Users_By_PkArgs = {
+  id: Scalars["uuid"]["input"];
+};
+
+/** mutation root */
 export type Mutation_RootDelete_Donwvoted_PostsArgs = {
   where: Donwvoted_Posts_Bool_Exp;
 };
@@ -2101,16 +2332,6 @@ export type Mutation_RootDelete_PostsArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_Posts_By_PkArgs = {
-  id: Scalars["uuid"]["input"];
-};
-
-/** mutation root */
-export type Mutation_RootDelete_Test_Many_To_ManyArgs = {
-  where: Test_Many_To_Many_Bool_Exp;
-};
-
-/** mutation root */
-export type Mutation_RootDelete_Test_Many_To_Many_By_PkArgs = {
   id: Scalars["uuid"]["input"];
 };
 
@@ -2169,6 +2390,18 @@ export type Mutation_RootInsert_Communities_OneArgs = {
 };
 
 /** mutation root */
+export type Mutation_RootInsert_Communities_UsersArgs = {
+  objects: Array<Communities_Users_Insert_Input>;
+  on_conflict?: InputMaybe<Communities_Users_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_Communities_Users_OneArgs = {
+  object: Communities_Users_Insert_Input;
+  on_conflict?: InputMaybe<Communities_Users_On_Conflict>;
+};
+
+/** mutation root */
 export type Mutation_RootInsert_Donwvoted_PostsArgs = {
   objects: Array<Donwvoted_Posts_Insert_Input>;
   on_conflict?: InputMaybe<Donwvoted_Posts_On_Conflict>;
@@ -2214,18 +2447,6 @@ export type Mutation_RootInsert_PostsArgs = {
 export type Mutation_RootInsert_Posts_OneArgs = {
   object: Posts_Insert_Input;
   on_conflict?: InputMaybe<Posts_On_Conflict>;
-};
-
-/** mutation root */
-export type Mutation_RootInsert_Test_Many_To_ManyArgs = {
-  objects: Array<Test_Many_To_Many_Insert_Input>;
-  on_conflict?: InputMaybe<Test_Many_To_Many_On_Conflict>;
-};
-
-/** mutation root */
-export type Mutation_RootInsert_Test_Many_To_Many_OneArgs = {
-  object: Test_Many_To_Many_Insert_Input;
-  on_conflict?: InputMaybe<Test_Many_To_Many_On_Conflict>;
 };
 
 /** mutation root */
@@ -2311,6 +2532,23 @@ export type Mutation_RootUpdate_Communities_ManyArgs = {
 };
 
 /** mutation root */
+export type Mutation_RootUpdate_Communities_UsersArgs = {
+  _set?: InputMaybe<Communities_Users_Set_Input>;
+  where: Communities_Users_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Communities_Users_By_PkArgs = {
+  _set?: InputMaybe<Communities_Users_Set_Input>;
+  pk_columns: Communities_Users_Pk_Columns_Input;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Communities_Users_ManyArgs = {
+  updates: Array<Communities_Users_Updates>;
+};
+
+/** mutation root */
 export type Mutation_RootUpdate_Donwvoted_PostsArgs = {
   _set?: InputMaybe<Donwvoted_Posts_Set_Input>;
   where: Donwvoted_Posts_Bool_Exp;
@@ -2380,23 +2618,6 @@ export type Mutation_RootUpdate_Posts_By_PkArgs = {
 /** mutation root */
 export type Mutation_RootUpdate_Posts_ManyArgs = {
   updates: Array<Posts_Updates>;
-};
-
-/** mutation root */
-export type Mutation_RootUpdate_Test_Many_To_ManyArgs = {
-  _set?: InputMaybe<Test_Many_To_Many_Set_Input>;
-  where: Test_Many_To_Many_Bool_Exp;
-};
-
-/** mutation root */
-export type Mutation_RootUpdate_Test_Many_To_Many_By_PkArgs = {
-  _set?: InputMaybe<Test_Many_To_Many_Set_Input>;
-  pk_columns: Test_Many_To_Many_Pk_Columns_Input;
-};
-
-/** mutation root */
-export type Mutation_RootUpdate_Test_Many_To_Many_ManyArgs = {
-  updates: Array<Test_Many_To_Many_Updates>;
 };
 
 /** mutation root */
@@ -3105,6 +3326,12 @@ export type Query_Root = {
   /** fetch data from the table: "communities" using primary key columns */
   communities_by_pk?: Maybe<Communities>;
   /** An array relationship */
+  communities_users: Array<Communities_Users>;
+  /** An aggregate relationship */
+  communities_users_aggregate: Communities_Users_Aggregate;
+  /** fetch data from the table: "communities_users" using primary key columns */
+  communities_users_by_pk?: Maybe<Communities_Users>;
+  /** An array relationship */
   donwvoted_posts: Array<Donwvoted_Posts>;
   /** An aggregate relationship */
   donwvoted_posts_aggregate: Donwvoted_Posts_Aggregate;
@@ -3128,12 +3355,6 @@ export type Query_Root = {
   posts_aggregate: Posts_Aggregate;
   /** fetch data from the table: "posts" using primary key columns */
   posts_by_pk?: Maybe<Posts>;
-  /** fetch data from the table: "test_many_to_many" */
-  test_many_to_many: Array<Test_Many_To_Many>;
-  /** fetch aggregated fields from the table: "test_many_to_many" */
-  test_many_to_many_aggregate: Test_Many_To_Many_Aggregate;
-  /** fetch data from the table: "test_many_to_many" using primary key columns */
-  test_many_to_many_by_pk?: Maybe<Test_Many_To_Many>;
   /** An array relationship */
   upvoted_posts: Array<Upvoted_Posts>;
   /** An aggregate relationship */
@@ -3191,6 +3412,26 @@ export type Query_RootCommunities_AggregateArgs = {
 };
 
 export type Query_RootCommunities_By_PkArgs = {
+  id: Scalars["uuid"]["input"];
+};
+
+export type Query_RootCommunities_UsersArgs = {
+  distinct_on?: InputMaybe<Array<Communities_Users_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  offset?: InputMaybe<Scalars["Int"]["input"]>;
+  order_by?: InputMaybe<Array<Communities_Users_Order_By>>;
+  where?: InputMaybe<Communities_Users_Bool_Exp>;
+};
+
+export type Query_RootCommunities_Users_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Communities_Users_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  offset?: InputMaybe<Scalars["Int"]["input"]>;
+  order_by?: InputMaybe<Array<Communities_Users_Order_By>>;
+  where?: InputMaybe<Communities_Users_Bool_Exp>;
+};
+
+export type Query_RootCommunities_Users_By_PkArgs = {
   id: Scalars["uuid"]["input"];
 };
 
@@ -3274,26 +3515,6 @@ export type Query_RootPosts_By_PkArgs = {
   id: Scalars["uuid"]["input"];
 };
 
-export type Query_RootTest_Many_To_ManyArgs = {
-  distinct_on?: InputMaybe<Array<Test_Many_To_Many_Select_Column>>;
-  limit?: InputMaybe<Scalars["Int"]["input"]>;
-  offset?: InputMaybe<Scalars["Int"]["input"]>;
-  order_by?: InputMaybe<Array<Test_Many_To_Many_Order_By>>;
-  where?: InputMaybe<Test_Many_To_Many_Bool_Exp>;
-};
-
-export type Query_RootTest_Many_To_Many_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Test_Many_To_Many_Select_Column>>;
-  limit?: InputMaybe<Scalars["Int"]["input"]>;
-  offset?: InputMaybe<Scalars["Int"]["input"]>;
-  order_by?: InputMaybe<Array<Test_Many_To_Many_Order_By>>;
-  where?: InputMaybe<Test_Many_To_Many_Bool_Exp>;
-};
-
-export type Query_RootTest_Many_To_Many_By_PkArgs = {
-  id: Scalars["uuid"]["input"];
-};
-
 export type Query_RootUpvoted_PostsArgs = {
   distinct_on?: InputMaybe<Array<Upvoted_Posts_Select_Column>>;
   limit?: InputMaybe<Scalars["Int"]["input"]>;
@@ -3373,6 +3594,14 @@ export type Subscription_Root = {
   /** fetch data from the table in a streaming manner: "communities" */
   communities_stream: Array<Communities>;
   /** An array relationship */
+  communities_users: Array<Communities_Users>;
+  /** An aggregate relationship */
+  communities_users_aggregate: Communities_Users_Aggregate;
+  /** fetch data from the table: "communities_users" using primary key columns */
+  communities_users_by_pk?: Maybe<Communities_Users>;
+  /** fetch data from the table in a streaming manner: "communities_users" */
+  communities_users_stream: Array<Communities_Users>;
+  /** An array relationship */
   donwvoted_posts: Array<Donwvoted_Posts>;
   /** An aggregate relationship */
   donwvoted_posts_aggregate: Donwvoted_Posts_Aggregate;
@@ -3404,14 +3633,6 @@ export type Subscription_Root = {
   posts_by_pk?: Maybe<Posts>;
   /** fetch data from the table in a streaming manner: "posts" */
   posts_stream: Array<Posts>;
-  /** fetch data from the table: "test_many_to_many" */
-  test_many_to_many: Array<Test_Many_To_Many>;
-  /** fetch aggregated fields from the table: "test_many_to_many" */
-  test_many_to_many_aggregate: Test_Many_To_Many_Aggregate;
-  /** fetch data from the table: "test_many_to_many" using primary key columns */
-  test_many_to_many_by_pk?: Maybe<Test_Many_To_Many>;
-  /** fetch data from the table in a streaming manner: "test_many_to_many" */
-  test_many_to_many_stream: Array<Test_Many_To_Many>;
   /** An array relationship */
   upvoted_posts: Array<Upvoted_Posts>;
   /** An aggregate relationship */
@@ -3488,6 +3709,32 @@ export type Subscription_RootCommunities_StreamArgs = {
   batch_size: Scalars["Int"]["input"];
   cursor: Array<InputMaybe<Communities_Stream_Cursor_Input>>;
   where?: InputMaybe<Communities_Bool_Exp>;
+};
+
+export type Subscription_RootCommunities_UsersArgs = {
+  distinct_on?: InputMaybe<Array<Communities_Users_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  offset?: InputMaybe<Scalars["Int"]["input"]>;
+  order_by?: InputMaybe<Array<Communities_Users_Order_By>>;
+  where?: InputMaybe<Communities_Users_Bool_Exp>;
+};
+
+export type Subscription_RootCommunities_Users_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Communities_Users_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  offset?: InputMaybe<Scalars["Int"]["input"]>;
+  order_by?: InputMaybe<Array<Communities_Users_Order_By>>;
+  where?: InputMaybe<Communities_Users_Bool_Exp>;
+};
+
+export type Subscription_RootCommunities_Users_By_PkArgs = {
+  id: Scalars["uuid"]["input"];
+};
+
+export type Subscription_RootCommunities_Users_StreamArgs = {
+  batch_size: Scalars["Int"]["input"];
+  cursor: Array<InputMaybe<Communities_Users_Stream_Cursor_Input>>;
+  where?: InputMaybe<Communities_Users_Bool_Exp>;
 };
 
 export type Subscription_RootDonwvoted_PostsArgs = {
@@ -3594,32 +3841,6 @@ export type Subscription_RootPosts_StreamArgs = {
   where?: InputMaybe<Posts_Bool_Exp>;
 };
 
-export type Subscription_RootTest_Many_To_ManyArgs = {
-  distinct_on?: InputMaybe<Array<Test_Many_To_Many_Select_Column>>;
-  limit?: InputMaybe<Scalars["Int"]["input"]>;
-  offset?: InputMaybe<Scalars["Int"]["input"]>;
-  order_by?: InputMaybe<Array<Test_Many_To_Many_Order_By>>;
-  where?: InputMaybe<Test_Many_To_Many_Bool_Exp>;
-};
-
-export type Subscription_RootTest_Many_To_Many_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Test_Many_To_Many_Select_Column>>;
-  limit?: InputMaybe<Scalars["Int"]["input"]>;
-  offset?: InputMaybe<Scalars["Int"]["input"]>;
-  order_by?: InputMaybe<Array<Test_Many_To_Many_Order_By>>;
-  where?: InputMaybe<Test_Many_To_Many_Bool_Exp>;
-};
-
-export type Subscription_RootTest_Many_To_Many_By_PkArgs = {
-  id: Scalars["uuid"]["input"];
-};
-
-export type Subscription_RootTest_Many_To_Many_StreamArgs = {
-  batch_size: Scalars["Int"]["input"];
-  cursor: Array<InputMaybe<Test_Many_To_Many_Stream_Cursor_Input>>;
-  where?: InputMaybe<Test_Many_To_Many_Bool_Exp>;
-};
-
 export type Subscription_RootUpvoted_PostsArgs = {
   distinct_on?: InputMaybe<Array<Upvoted_Posts_Select_Column>>;
   limit?: InputMaybe<Scalars["Int"]["input"]>;
@@ -3696,227 +3917,6 @@ export type Subscription_RootVoted_Posts_StreamArgs = {
   batch_size: Scalars["Int"]["input"];
   cursor: Array<InputMaybe<Voted_Posts_Stream_Cursor_Input>>;
   where?: InputMaybe<Voted_Posts_Bool_Exp>;
-};
-
-/** columns and relationships of "test_many_to_many" */
-export type Test_Many_To_Many = {
-  __typename?: "test_many_to_many";
-  /** An object relationship */
-  community: Communities;
-  community_id: Scalars["uuid"]["output"];
-  created_at: Scalars["timestamptz"]["output"];
-  id: Scalars["uuid"]["output"];
-  updated_at: Scalars["timestamptz"]["output"];
-  /** An object relationship */
-  user: Users;
-  user_id: Scalars["uuid"]["output"];
-};
-
-/** aggregated selection of "test_many_to_many" */
-export type Test_Many_To_Many_Aggregate = {
-  __typename?: "test_many_to_many_aggregate";
-  aggregate?: Maybe<Test_Many_To_Many_Aggregate_Fields>;
-  nodes: Array<Test_Many_To_Many>;
-};
-
-export type Test_Many_To_Many_Aggregate_Bool_Exp = {
-  count?: InputMaybe<Test_Many_To_Many_Aggregate_Bool_Exp_Count>;
-};
-
-export type Test_Many_To_Many_Aggregate_Bool_Exp_Count = {
-  arguments?: InputMaybe<Array<Test_Many_To_Many_Select_Column>>;
-  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
-  filter?: InputMaybe<Test_Many_To_Many_Bool_Exp>;
-  predicate: Int_Comparison_Exp;
-};
-
-/** aggregate fields of "test_many_to_many" */
-export type Test_Many_To_Many_Aggregate_Fields = {
-  __typename?: "test_many_to_many_aggregate_fields";
-  count: Scalars["Int"]["output"];
-  max?: Maybe<Test_Many_To_Many_Max_Fields>;
-  min?: Maybe<Test_Many_To_Many_Min_Fields>;
-};
-
-/** aggregate fields of "test_many_to_many" */
-export type Test_Many_To_Many_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<Test_Many_To_Many_Select_Column>>;
-  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
-};
-
-/** order by aggregate values of table "test_many_to_many" */
-export type Test_Many_To_Many_Aggregate_Order_By = {
-  count?: InputMaybe<Order_By>;
-  max?: InputMaybe<Test_Many_To_Many_Max_Order_By>;
-  min?: InputMaybe<Test_Many_To_Many_Min_Order_By>;
-};
-
-/** input type for inserting array relation for remote table "test_many_to_many" */
-export type Test_Many_To_Many_Arr_Rel_Insert_Input = {
-  data: Array<Test_Many_To_Many_Insert_Input>;
-  /** upsert condition */
-  on_conflict?: InputMaybe<Test_Many_To_Many_On_Conflict>;
-};
-
-/** Boolean expression to filter rows from the table "test_many_to_many". All fields are combined with a logical 'AND'. */
-export type Test_Many_To_Many_Bool_Exp = {
-  _and?: InputMaybe<Array<Test_Many_To_Many_Bool_Exp>>;
-  _not?: InputMaybe<Test_Many_To_Many_Bool_Exp>;
-  _or?: InputMaybe<Array<Test_Many_To_Many_Bool_Exp>>;
-  community?: InputMaybe<Communities_Bool_Exp>;
-  community_id?: InputMaybe<Uuid_Comparison_Exp>;
-  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
-  id?: InputMaybe<Uuid_Comparison_Exp>;
-  updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
-  user?: InputMaybe<Users_Bool_Exp>;
-  user_id?: InputMaybe<Uuid_Comparison_Exp>;
-};
-
-/** unique or primary key constraints on table "test_many_to_many" */
-export enum Test_Many_To_Many_Constraint {
-  /** unique or primary key constraint on columns "id" */
-  TestManyToManyPkey = "test_many_to_many_pkey",
-}
-
-/** input type for inserting data into table "test_many_to_many" */
-export type Test_Many_To_Many_Insert_Input = {
-  community?: InputMaybe<Communities_Obj_Rel_Insert_Input>;
-  community_id?: InputMaybe<Scalars["uuid"]["input"]>;
-  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  id?: InputMaybe<Scalars["uuid"]["input"]>;
-  updated_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  user?: InputMaybe<Users_Obj_Rel_Insert_Input>;
-  user_id?: InputMaybe<Scalars["uuid"]["input"]>;
-};
-
-/** aggregate max on columns */
-export type Test_Many_To_Many_Max_Fields = {
-  __typename?: "test_many_to_many_max_fields";
-  community_id?: Maybe<Scalars["uuid"]["output"]>;
-  created_at?: Maybe<Scalars["timestamptz"]["output"]>;
-  id?: Maybe<Scalars["uuid"]["output"]>;
-  updated_at?: Maybe<Scalars["timestamptz"]["output"]>;
-  user_id?: Maybe<Scalars["uuid"]["output"]>;
-};
-
-/** order by max() on columns of table "test_many_to_many" */
-export type Test_Many_To_Many_Max_Order_By = {
-  community_id?: InputMaybe<Order_By>;
-  created_at?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  updated_at?: InputMaybe<Order_By>;
-  user_id?: InputMaybe<Order_By>;
-};
-
-/** aggregate min on columns */
-export type Test_Many_To_Many_Min_Fields = {
-  __typename?: "test_many_to_many_min_fields";
-  community_id?: Maybe<Scalars["uuid"]["output"]>;
-  created_at?: Maybe<Scalars["timestamptz"]["output"]>;
-  id?: Maybe<Scalars["uuid"]["output"]>;
-  updated_at?: Maybe<Scalars["timestamptz"]["output"]>;
-  user_id?: Maybe<Scalars["uuid"]["output"]>;
-};
-
-/** order by min() on columns of table "test_many_to_many" */
-export type Test_Many_To_Many_Min_Order_By = {
-  community_id?: InputMaybe<Order_By>;
-  created_at?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  updated_at?: InputMaybe<Order_By>;
-  user_id?: InputMaybe<Order_By>;
-};
-
-/** response of any mutation on the table "test_many_to_many" */
-export type Test_Many_To_Many_Mutation_Response = {
-  __typename?: "test_many_to_many_mutation_response";
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars["Int"]["output"];
-  /** data from the rows affected by the mutation */
-  returning: Array<Test_Many_To_Many>;
-};
-
-/** on_conflict condition type for table "test_many_to_many" */
-export type Test_Many_To_Many_On_Conflict = {
-  constraint: Test_Many_To_Many_Constraint;
-  update_columns?: Array<Test_Many_To_Many_Update_Column>;
-  where?: InputMaybe<Test_Many_To_Many_Bool_Exp>;
-};
-
-/** Ordering options when selecting data from "test_many_to_many". */
-export type Test_Many_To_Many_Order_By = {
-  community?: InputMaybe<Communities_Order_By>;
-  community_id?: InputMaybe<Order_By>;
-  created_at?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  updated_at?: InputMaybe<Order_By>;
-  user?: InputMaybe<Users_Order_By>;
-  user_id?: InputMaybe<Order_By>;
-};
-
-/** primary key columns input for table: test_many_to_many */
-export type Test_Many_To_Many_Pk_Columns_Input = {
-  id: Scalars["uuid"]["input"];
-};
-
-/** select columns of table "test_many_to_many" */
-export enum Test_Many_To_Many_Select_Column {
-  /** column name */
-  CommunityId = "community_id",
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  Id = "id",
-  /** column name */
-  UpdatedAt = "updated_at",
-  /** column name */
-  UserId = "user_id",
-}
-
-/** input type for updating data in table "test_many_to_many" */
-export type Test_Many_To_Many_Set_Input = {
-  community_id?: InputMaybe<Scalars["uuid"]["input"]>;
-  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  id?: InputMaybe<Scalars["uuid"]["input"]>;
-  updated_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  user_id?: InputMaybe<Scalars["uuid"]["input"]>;
-};
-
-/** Streaming cursor of the table "test_many_to_many" */
-export type Test_Many_To_Many_Stream_Cursor_Input = {
-  /** Stream column input with initial value */
-  initial_value: Test_Many_To_Many_Stream_Cursor_Value_Input;
-  /** cursor ordering */
-  ordering?: InputMaybe<Cursor_Ordering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type Test_Many_To_Many_Stream_Cursor_Value_Input = {
-  community_id?: InputMaybe<Scalars["uuid"]["input"]>;
-  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  id?: InputMaybe<Scalars["uuid"]["input"]>;
-  updated_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  user_id?: InputMaybe<Scalars["uuid"]["input"]>;
-};
-
-/** update columns of table "test_many_to_many" */
-export enum Test_Many_To_Many_Update_Column {
-  /** column name */
-  CommunityId = "community_id",
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  Id = "id",
-  /** column name */
-  UpdatedAt = "updated_at",
-  /** column name */
-  UserId = "user_id",
-}
-
-export type Test_Many_To_Many_Updates = {
-  /** sets the columns of the filtered rows to the given values */
-  _set?: InputMaybe<Test_Many_To_Many_Set_Input>;
-  where: Test_Many_To_Many_Bool_Exp;
 };
 
 /** Boolean expression to compare columns of type "timestamptz". All fields are combined with logical 'AND'. */
@@ -4164,6 +4164,10 @@ export type Users = {
   communities: Array<Communities>;
   /** An aggregate relationship */
   communities_aggregate: Communities_Aggregate;
+  /** An array relationship */
+  communities_users: Array<Communities_Users>;
+  /** An aggregate relationship */
+  communities_users_aggregate: Communities_Users_Aggregate;
   /** An object relationship */
   community?: Maybe<Communities>;
   community_id?: Maybe<Scalars["uuid"]["output"]>;
@@ -4189,10 +4193,6 @@ export type Users = {
   /** An aggregate relationship */
   posts_aggregate: Posts_Aggregate;
   role: Scalars["String"]["output"];
-  /** An array relationship */
-  test_many_to_manies: Array<Test_Many_To_Many>;
-  /** An aggregate relationship */
-  test_many_to_manies_aggregate: Test_Many_To_Many_Aggregate;
   updated_at: Scalars["timestamptz"]["output"];
   /** An array relationship */
   upvoted_posts: Array<Upvoted_Posts>;
@@ -4239,6 +4239,24 @@ export type UsersCommunities_AggregateArgs = {
   offset?: InputMaybe<Scalars["Int"]["input"]>;
   order_by?: InputMaybe<Array<Communities_Order_By>>;
   where?: InputMaybe<Communities_Bool_Exp>;
+};
+
+/** columns and relationships of "users" */
+export type UsersCommunities_UsersArgs = {
+  distinct_on?: InputMaybe<Array<Communities_Users_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  offset?: InputMaybe<Scalars["Int"]["input"]>;
+  order_by?: InputMaybe<Array<Communities_Users_Order_By>>;
+  where?: InputMaybe<Communities_Users_Bool_Exp>;
+};
+
+/** columns and relationships of "users" */
+export type UsersCommunities_Users_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Communities_Users_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  offset?: InputMaybe<Scalars["Int"]["input"]>;
+  order_by?: InputMaybe<Array<Communities_Users_Order_By>>;
+  where?: InputMaybe<Communities_Users_Bool_Exp>;
 };
 
 /** columns and relationships of "users" */
@@ -4311,24 +4329,6 @@ export type UsersPosts_AggregateArgs = {
   offset?: InputMaybe<Scalars["Int"]["input"]>;
   order_by?: InputMaybe<Array<Posts_Order_By>>;
   where?: InputMaybe<Posts_Bool_Exp>;
-};
-
-/** columns and relationships of "users" */
-export type UsersTest_Many_To_ManiesArgs = {
-  distinct_on?: InputMaybe<Array<Test_Many_To_Many_Select_Column>>;
-  limit?: InputMaybe<Scalars["Int"]["input"]>;
-  offset?: InputMaybe<Scalars["Int"]["input"]>;
-  order_by?: InputMaybe<Array<Test_Many_To_Many_Order_By>>;
-  where?: InputMaybe<Test_Many_To_Many_Bool_Exp>;
-};
-
-/** columns and relationships of "users" */
-export type UsersTest_Many_To_Manies_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Test_Many_To_Many_Select_Column>>;
-  limit?: InputMaybe<Scalars["Int"]["input"]>;
-  offset?: InputMaybe<Scalars["Int"]["input"]>;
-  order_by?: InputMaybe<Array<Test_Many_To_Many_Order_By>>;
-  where?: InputMaybe<Test_Many_To_Many_Bool_Exp>;
 };
 
 /** columns and relationships of "users" */
@@ -4422,6 +4422,8 @@ export type Users_Bool_Exp = {
   comments_aggregate?: InputMaybe<Comments_Aggregate_Bool_Exp>;
   communities?: InputMaybe<Communities_Bool_Exp>;
   communities_aggregate?: InputMaybe<Communities_Aggregate_Bool_Exp>;
+  communities_users?: InputMaybe<Communities_Users_Bool_Exp>;
+  communities_users_aggregate?: InputMaybe<Communities_Users_Aggregate_Bool_Exp>;
   community?: InputMaybe<Communities_Bool_Exp>;
   community_id?: InputMaybe<Uuid_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
@@ -4438,8 +4440,6 @@ export type Users_Bool_Exp = {
   posts?: InputMaybe<Posts_Bool_Exp>;
   posts_aggregate?: InputMaybe<Posts_Aggregate_Bool_Exp>;
   role?: InputMaybe<String_Comparison_Exp>;
-  test_many_to_manies?: InputMaybe<Test_Many_To_Many_Bool_Exp>;
-  test_many_to_manies_aggregate?: InputMaybe<Test_Many_To_Many_Aggregate_Bool_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   upvoted_posts?: InputMaybe<Upvoted_Posts_Bool_Exp>;
   upvoted_posts_aggregate?: InputMaybe<Upvoted_Posts_Aggregate_Bool_Exp>;
@@ -4458,6 +4458,7 @@ export enum Users_Constraint {
 export type Users_Insert_Input = {
   comments?: InputMaybe<Comments_Arr_Rel_Insert_Input>;
   communities?: InputMaybe<Communities_Arr_Rel_Insert_Input>;
+  communities_users?: InputMaybe<Communities_Users_Arr_Rel_Insert_Input>;
   community?: InputMaybe<Communities_Obj_Rel_Insert_Input>;
   community_id?: InputMaybe<Scalars["uuid"]["input"]>;
   created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
@@ -4470,7 +4471,6 @@ export type Users_Insert_Input = {
   password?: InputMaybe<Scalars["String"]["input"]>;
   posts?: InputMaybe<Posts_Arr_Rel_Insert_Input>;
   role?: InputMaybe<Scalars["String"]["input"]>;
-  test_many_to_manies?: InputMaybe<Test_Many_To_Many_Arr_Rel_Insert_Input>;
   updated_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
   upvoted_posts?: InputMaybe<Upvoted_Posts_Arr_Rel_Insert_Input>;
   username?: InputMaybe<Scalars["String"]["input"]>;
@@ -4558,6 +4558,7 @@ export type Users_On_Conflict = {
 export type Users_Order_By = {
   comments_aggregate?: InputMaybe<Comments_Aggregate_Order_By>;
   communities_aggregate?: InputMaybe<Communities_Aggregate_Order_By>;
+  communities_users_aggregate?: InputMaybe<Communities_Users_Aggregate_Order_By>;
   community?: InputMaybe<Communities_Order_By>;
   community_id?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
@@ -4570,7 +4571,6 @@ export type Users_Order_By = {
   password?: InputMaybe<Order_By>;
   posts_aggregate?: InputMaybe<Posts_Aggregate_Order_By>;
   role?: InputMaybe<Order_By>;
-  test_many_to_manies_aggregate?: InputMaybe<Test_Many_To_Many_Aggregate_Order_By>;
   updated_at?: InputMaybe<Order_By>;
   upvoted_posts_aggregate?: InputMaybe<Upvoted_Posts_Aggregate_Order_By>;
   username?: InputMaybe<Order_By>;
@@ -4913,8 +4913,34 @@ export type CommunityFragment = {
   id: any;
   category?: string | null;
   name: string;
-  updated_at: any;
+  user_id?: any | null;
+  type: number;
+  isNSFW: boolean;
   created_at: any;
+  updated_at: any;
+  flares: Array<{
+    __typename?: "flares";
+    id: any;
+    name: string;
+    created_at: any;
+    updated_at: any;
+  }>;
+  communities_users_aggregate: {
+    __typename?: "communities_users_aggregate";
+    aggregate?: {
+      __typename?: "communities_users_aggregate_fields";
+      count: number;
+    } | null;
+  };
+};
+
+export type CommunityUserFragment = {
+  __typename?: "communities_users";
+  id: any;
+  community_id: any;
+  user_id: any;
+  created_at: any;
+  updated_at: any;
 };
 
 export type DraftPostFragment = {
@@ -4975,8 +5001,25 @@ export type UserFragment = {
     id: any;
     category?: string | null;
     name: string;
-    updated_at: any;
+    user_id?: any | null;
+    type: number;
+    isNSFW: boolean;
     created_at: any;
+    updated_at: any;
+    flares: Array<{
+      __typename?: "flares";
+      id: any;
+      name: string;
+      created_at: any;
+      updated_at: any;
+    }>;
+    communities_users_aggregate: {
+      __typename?: "communities_users_aggregate";
+      aggregate?: {
+        __typename?: "communities_users_aggregate_fields";
+        count: number;
+      } | null;
+    };
   }>;
   comments: Array<{
     __typename?: "comments";
@@ -5030,8 +5073,41 @@ export type CreateCommunityMutation = {
     id: any;
     category?: string | null;
     name: string;
-    updated_at: any;
+    user_id?: any | null;
+    type: number;
+    isNSFW: boolean;
     created_at: any;
+    updated_at: any;
+    flares: Array<{
+      __typename?: "flares";
+      id: any;
+      name: string;
+      created_at: any;
+      updated_at: any;
+    }>;
+    communities_users_aggregate: {
+      __typename?: "communities_users_aggregate";
+      aggregate?: {
+        __typename?: "communities_users_aggregate_fields";
+        count: number;
+      } | null;
+    };
+  } | null;
+};
+
+export type InsertCommunitiesUsersMutationVariables = Exact<{
+  object: Communities_Users_Insert_Input;
+}>;
+
+export type InsertCommunitiesUsersMutation = {
+  __typename?: "mutation_root";
+  insert_communities_users_one?: {
+    __typename?: "communities_users";
+    id: any;
+    community_id: any;
+    user_id: any;
+    created_at: any;
+    updated_at: any;
   } | null;
 };
 
@@ -5170,8 +5246,25 @@ export type GetUserByIdQuery = {
       id: any;
       category?: string | null;
       name: string;
-      updated_at: any;
+      user_id?: any | null;
+      type: number;
+      isNSFW: boolean;
       created_at: any;
+      updated_at: any;
+      flares: Array<{
+        __typename?: "flares";
+        id: any;
+        name: string;
+        created_at: any;
+        updated_at: any;
+      }>;
+      communities_users_aggregate: {
+        __typename?: "communities_users_aggregate";
+        aggregate?: {
+          __typename?: "communities_users_aggregate_fields";
+          count: number;
+        } | null;
+      };
     }>;
     comments: Array<{
       __typename?: "comments";
@@ -5194,9 +5287,56 @@ export type GetCommunityByUserIdQuery = {
     id: any;
     category?: string | null;
     name: string;
-    updated_at: any;
+    user_id?: any | null;
+    type: number;
+    isNSFW: boolean;
     created_at: any;
+    updated_at: any;
+    flares: Array<{
+      __typename?: "flares";
+      id: any;
+      name: string;
+      created_at: any;
+      updated_at: any;
+    }>;
+    communities_users_aggregate: {
+      __typename?: "communities_users_aggregate";
+      aggregate?: {
+        __typename?: "communities_users_aggregate_fields";
+        count: number;
+      } | null;
+    };
   }>;
+};
+
+export type GetCommunitiesUsersQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetCommunitiesUsersQuery = {
+  __typename?: "query_root";
+  communities_users: Array<{
+    __typename?: "communities_users";
+    id: any;
+    community_id: any;
+    user_id: any;
+    created_at: any;
+    updated_at: any;
+  }>;
+};
+
+export type GetCommunitiesUsersByIdQueryVariables = Exact<{
+  userId: Scalars["uuid"]["input"];
+  communityId: Scalars["uuid"]["input"];
+}>;
+
+export type GetCommunitiesUsersByIdQuery = {
+  __typename?: "query_root";
+  communities_users_aggregate: {
+    __typename?: "communities_users_aggregate";
+    aggregate?: {
+      __typename?: "communities_users_aggregate_fields";
+      count: number;
+    } | null;
+  };
 };
 
 export type GetFlaresByCommunityIdQueryVariables = Exact<{
@@ -5258,8 +5398,25 @@ export type GetAllPostsQuery = {
       id: any;
       category?: string | null;
       name: string;
-      updated_at: any;
+      user_id?: any | null;
+      type: number;
+      isNSFW: boolean;
       created_at: any;
+      updated_at: any;
+      flares: Array<{
+        __typename?: "flares";
+        id: any;
+        name: string;
+        created_at: any;
+        updated_at: any;
+      }>;
+      communities_users_aggregate: {
+        __typename?: "communities_users_aggregate";
+        aggregate?: {
+          __typename?: "communities_users_aggregate_fields";
+          count: number;
+        } | null;
+      };
     }>;
     comments: Array<{
       __typename?: "comments";
@@ -5274,8 +5431,25 @@ export type GetAllPostsQuery = {
     id: any;
     category?: string | null;
     name: string;
-    updated_at: any;
+    user_id?: any | null;
+    type: number;
+    isNSFW: boolean;
     created_at: any;
+    updated_at: any;
+    flares: Array<{
+      __typename?: "flares";
+      id: any;
+      name: string;
+      created_at: any;
+      updated_at: any;
+    }>;
+    communities_users_aggregate: {
+      __typename?: "communities_users_aggregate";
+      aggregate?: {
+        __typename?: "communities_users_aggregate_fields";
+        count: number;
+      } | null;
+    };
   }>;
 };
 
@@ -5341,8 +5515,25 @@ export type GetPostsSubscription = {
       id: any;
       category?: string | null;
       name: string;
-      updated_at: any;
+      user_id?: any | null;
+      type: number;
+      isNSFW: boolean;
       created_at: any;
+      updated_at: any;
+      flares: Array<{
+        __typename?: "flares";
+        id: any;
+        name: string;
+        created_at: any;
+        updated_at: any;
+      }>;
+      communities_users_aggregate: {
+        __typename?: "communities_users_aggregate";
+        aggregate?: {
+          __typename?: "communities_users_aggregate_fields";
+          count: number;
+        } | null;
+      };
     };
     comments_aggregate: {
       __typename?: "comments_aggregate";
@@ -5354,6 +5545,15 @@ export type GetPostsSubscription = {
   }>;
 };
 
+export const CommunityUserFragmentDoc = gql`
+  fragment CommunityUser on communities_users {
+    id
+    community_id
+    user_id
+    created_at
+    updated_at
+  }
+`;
 export const DraftPostFragmentDoc = gql`
   fragment DraftPost on draft_posts {
     id
@@ -5403,8 +5603,22 @@ export const CommunityFragmentDoc = gql`
     id
     category
     name
-    updated_at
+    flares {
+      id
+      name
+      created_at
+      updated_at
+    }
+    communities_users_aggregate {
+      aggregate {
+        count
+      }
+    }
+    user_id
+    type
+    isNSFW
     created_at
+    updated_at
   }
 `;
 export const CommentFragmentDoc = gql`
@@ -5586,6 +5800,57 @@ export type CreateCommunityMutationResult =
 export type CreateCommunityMutationOptions = Apollo.BaseMutationOptions<
   CreateCommunityMutation,
   CreateCommunityMutationVariables
+>;
+export const InsertCommunitiesUsersDocument = gql`
+  mutation insertCommunitiesUsers($object: communities_users_insert_input!) {
+    insert_communities_users_one(object: $object) {
+      ...CommunityUser
+    }
+  }
+  ${CommunityUserFragmentDoc}
+`;
+export type InsertCommunitiesUsersMutationFn = Apollo.MutationFunction<
+  InsertCommunitiesUsersMutation,
+  InsertCommunitiesUsersMutationVariables
+>;
+
+/**
+ * __useInsertCommunitiesUsersMutation__
+ *
+ * To run a mutation, you first call `useInsertCommunitiesUsersMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useInsertCommunitiesUsersMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [insertCommunitiesUsersMutation, { data, loading, error }] = useInsertCommunitiesUsersMutation({
+ *   variables: {
+ *      object: // value for 'object'
+ *   },
+ * });
+ */
+export function useInsertCommunitiesUsersMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    InsertCommunitiesUsersMutation,
+    InsertCommunitiesUsersMutationVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    InsertCommunitiesUsersMutation,
+    InsertCommunitiesUsersMutationVariables
+  >(InsertCommunitiesUsersDocument, options);
+}
+export type InsertCommunitiesUsersMutationHookResult = ReturnType<
+  typeof useInsertCommunitiesUsersMutation
+>;
+export type InsertCommunitiesUsersMutationResult =
+  Apollo.MutationResult<InsertCommunitiesUsersMutation>;
+export type InsertCommunitiesUsersMutationOptions = Apollo.BaseMutationOptions<
+  InsertCommunitiesUsersMutation,
+  InsertCommunitiesUsersMutationVariables
 >;
 export const SaveDraftDocument = gql`
   mutation saveDraft($obj: draft_posts_insert_input!) {
@@ -6063,6 +6328,130 @@ export type GetCommunityByUserIdLazyQueryHookResult = ReturnType<
 export type GetCommunityByUserIdQueryResult = Apollo.QueryResult<
   GetCommunityByUserIdQuery,
   GetCommunityByUserIdQueryVariables
+>;
+export const GetCommunitiesUsersDocument = gql`
+  query getCommunitiesUsers {
+    communities_users {
+      ...CommunityUser
+    }
+  }
+  ${CommunityUserFragmentDoc}
+`;
+
+/**
+ * __useGetCommunitiesUsersQuery__
+ *
+ * To run a query within a React component, call `useGetCommunitiesUsersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetCommunitiesUsersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetCommunitiesUsersQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetCommunitiesUsersQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    GetCommunitiesUsersQuery,
+    GetCommunitiesUsersQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    GetCommunitiesUsersQuery,
+    GetCommunitiesUsersQueryVariables
+  >(GetCommunitiesUsersDocument, options);
+}
+export function useGetCommunitiesUsersLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetCommunitiesUsersQuery,
+    GetCommunitiesUsersQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    GetCommunitiesUsersQuery,
+    GetCommunitiesUsersQueryVariables
+  >(GetCommunitiesUsersDocument, options);
+}
+export type GetCommunitiesUsersQueryHookResult = ReturnType<
+  typeof useGetCommunitiesUsersQuery
+>;
+export type GetCommunitiesUsersLazyQueryHookResult = ReturnType<
+  typeof useGetCommunitiesUsersLazyQuery
+>;
+export type GetCommunitiesUsersQueryResult = Apollo.QueryResult<
+  GetCommunitiesUsersQuery,
+  GetCommunitiesUsersQueryVariables
+>;
+export const GetCommunitiesUsersByIdDocument = gql`
+  query getCommunitiesUsersById($userId: uuid!, $communityId: uuid!) {
+    communities_users_aggregate(
+      where: {
+        user_id: { _eq: $userId }
+        _and: { community_id: { _eq: $communityId } }
+      }
+    ) {
+      aggregate {
+        count
+      }
+    }
+  }
+`;
+
+/**
+ * __useGetCommunitiesUsersByIdQuery__
+ *
+ * To run a query within a React component, call `useGetCommunitiesUsersByIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetCommunitiesUsersByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetCommunitiesUsersByIdQuery({
+ *   variables: {
+ *      userId: // value for 'userId'
+ *      communityId: // value for 'communityId'
+ *   },
+ * });
+ */
+export function useGetCommunitiesUsersByIdQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    GetCommunitiesUsersByIdQuery,
+    GetCommunitiesUsersByIdQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    GetCommunitiesUsersByIdQuery,
+    GetCommunitiesUsersByIdQueryVariables
+  >(GetCommunitiesUsersByIdDocument, options);
+}
+export function useGetCommunitiesUsersByIdLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetCommunitiesUsersByIdQuery,
+    GetCommunitiesUsersByIdQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    GetCommunitiesUsersByIdQuery,
+    GetCommunitiesUsersByIdQueryVariables
+  >(GetCommunitiesUsersByIdDocument, options);
+}
+export type GetCommunitiesUsersByIdQueryHookResult = ReturnType<
+  typeof useGetCommunitiesUsersByIdQuery
+>;
+export type GetCommunitiesUsersByIdLazyQueryHookResult = ReturnType<
+  typeof useGetCommunitiesUsersByIdLazyQuery
+>;
+export type GetCommunitiesUsersByIdQueryResult = Apollo.QueryResult<
+  GetCommunitiesUsersByIdQuery,
+  GetCommunitiesUsersByIdQueryVariables
 >;
 export const GetFlaresByCommunityIdDocument = gql`
   query getFlaresByCommunityId($communityId: uuid!, $userId: uuid!) {

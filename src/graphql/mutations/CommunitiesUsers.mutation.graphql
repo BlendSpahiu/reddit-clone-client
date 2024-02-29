@@ -1,0 +1,5 @@
+mutation insertCommunitiesUsers($object: communities_users_insert_input!) {
+  insert_communities_users_one(object: $object) {
+    ...CommunityUser
+  }
+}

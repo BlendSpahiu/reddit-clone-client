@@ -6,4 +6,6 @@ export * from "./Posts/Sidebar";
 export * from "./Posts/PopularCommunities";
 export * from "./Home/Home";
 export * from "./Create/Create";
+export * from "./Create/CreateCommunity";
+export * from "./Create/CreatePost";
 export * from "./Create/Communities.props";

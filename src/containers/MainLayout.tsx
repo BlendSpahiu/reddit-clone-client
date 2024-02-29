@@ -43,7 +43,7 @@ export const MainLayout = ({
 
   return (
     <AnimatePresence>
-      <Container>
+      <Container className="overflow-hidden">
         {!isLoading && <Header />}
 
         {!isCreate ? (

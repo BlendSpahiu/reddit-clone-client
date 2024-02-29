@@ -2,6 +2,20 @@ fragment Community on communities {
   id
   category
   name
-  updated_at
+  flares {
+    id
+    name
+    created_at
+    updated_at
+  }
+  communities_users_aggregate {
+    aggregate {
+      count
+    }
+  }
+  user_id
+  type
+  isNSFW
   created_at
+  updated_at
 }

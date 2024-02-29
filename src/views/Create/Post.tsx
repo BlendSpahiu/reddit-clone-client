@@ -195,10 +195,9 @@ export const Post = ({
   useEffect(() => {
     if (image) {
       const reader = new FileReader();
-      reader.readAsDataURL(image[0]);
+      reader.readAsText(image[0]);
       reader.onload = () => {
-        const b64 = compressImageUrl(reader.result as string);
-        setBase64Image(b64);
+        setBase64Image(reader.result);
       };
     }
   }, [image]);

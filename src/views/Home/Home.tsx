@@ -124,6 +124,8 @@ export const Home = (): ReactElement => {
     getImages();
   }, [data]);
 
+  console.log(data);
+
   return (
     <Container className="h-full w-full">
       {data?.posts.length === 0 && <EmptyState className="mt-40" />}

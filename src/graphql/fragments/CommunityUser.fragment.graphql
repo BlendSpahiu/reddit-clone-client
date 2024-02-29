@@ -1,0 +1,7 @@
+fragment CommunityUser on communities_users {
+  id
+  community_id
+  user_id
+  created_at
+  updated_at
+}

@@ -1,0 +1,13 @@
+query getCommunitiesUsers {
+  communities_users {
+			...CommunityUser
+  	}
+}
+
+query getCommunitiesUsersById($userId: uuid!, $communityId: uuid!) {
+  communities_users_aggregate(where: {user_id: {_eq: $userId}, _and: {community_id: {_eq: $communityId}}}) {
+    aggregate {
+      count
+    }
+  }
+}

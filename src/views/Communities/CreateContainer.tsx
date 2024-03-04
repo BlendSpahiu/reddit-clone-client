@@ -1,25 +1,21 @@
+import { ReactElement, useRef, useState } from "react";
 import {
+  CommunityAvatar,
   Container,
   Divider,
-  Dropdown,
-  DropdownItem,
-  Option,
-  Select,
   Paragraph,
-  SelectMenu,
-  Span,
-  SelectTrigger,
+  Select,
   SelectItem,
-  CommunityAvatar,
+  SelectMenu,
+  SelectTrigger,
+  Span,
 } from "@components";
 import {
   CommunityFragment,
   useGetCommunityByUserIdQuery,
 } from "@graphql/gen/graphql";
 import { useAuth, useOnClickOutside } from "@hooks";
-import { ReactElement, useRef, useState } from "react";
 import { CreateCommunity, CreatePost } from "@views";
-import { gqlVar } from "@utils";
 
 export const CreateContainer = (): ReactElement => {
   const [selectedCommunity, setSelectedCommunity] = useState<CommunityFragment>(
@@ -38,8 +34,6 @@ export const CreateContainer = (): ReactElement => {
     variables: { userId: user?.id },
   });
   const options = data?.communities.map((community) => community) || [];
-
-  console.log(options);
 
   return (
     <>

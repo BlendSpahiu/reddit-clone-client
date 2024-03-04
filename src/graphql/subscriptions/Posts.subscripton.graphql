@@ -1,5 +1,5 @@
-subscription getPosts {
-  posts {
+subscription getPosts($orderBy: [posts_order_by!]) {
+  posts(order_by: $orderBy) {
     ...Post
     community {
      ...Community

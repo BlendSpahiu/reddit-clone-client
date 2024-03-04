@@ -44,6 +44,8 @@ export const Create = (): ReactElement => {
 
   const options = data?.communities.map((community) => community) || [];
 
+  console.log(options);
+
   useEffect(() => {
     if (isOpen) {
       refetch({ userId: user?.id });
@@ -98,7 +100,8 @@ export const Create = (): ReactElement => {
                 <Container className="flex flex-col">
                   <Paragraph className="text-sm ">{option.name}</Paragraph>
                   <Paragraph className="text-xs text-description">
-                    {options.length} members
+                    {option.communities_users_aggregate.aggregate?.count || 0}{" "}
+                    members
                   </Paragraph>
                 </Container>
               </SelectItem>

@@ -1,0 +1,9 @@
+mutation votePost($postId: uuid!, $userId: uuid!, $vote: Int!) {
+  insert_voted_posts_one(object: {post_id: $postId, user_id: $userId, vote: $vote}) {
+    id
+    post_id
+    user_id
+    created_at
+    updated_at
+  }
+}

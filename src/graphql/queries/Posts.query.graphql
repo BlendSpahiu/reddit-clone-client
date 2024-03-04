@@ -18,11 +18,6 @@ query getAllPosts {
   }
 }
 
-query getUpvotedPosts($userId: uuid!) {
-  upvoted_posts(where: {user_id: {_eq: $userId}}) {
-    user_id
-  }
-}
 
 query getDraftPosts {
   draft_posts{

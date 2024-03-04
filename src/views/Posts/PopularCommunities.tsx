@@ -37,7 +37,7 @@ export const PopularCommunities = (): ReactElement => {
   ];
 
   return (
-    <Container className="sticky mr-40 mt-10 h-full w-[350px] rounded-xl border border-[#747474] bg-[#05090a] p-4">
+    <Container className=" mr-40 mt-10 h-full w-[350px] rounded-xl border border-[#747474] bg-[#05090a] p-4">
       <Heading className="mb-4 text-sm text-[#bac5c9]" heading="h4">
         POPULAR COMMUNITIES
       </Heading>

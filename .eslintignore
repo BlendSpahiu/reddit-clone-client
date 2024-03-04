@@ -10,3 +10,8 @@ yarn-error.log
 .vscode
 # test coverage
 coverage
+
+vite.config.ts
+tailwind.config.js
+codegen.js
+.prettierrc

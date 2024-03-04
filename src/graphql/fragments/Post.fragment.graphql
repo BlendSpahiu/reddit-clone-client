@@ -1,15 +1,24 @@
 fragment Post on posts {
-  id 
+  id
   content
   title
   downvotes
   upvotes
-	link
+  link
   image
   isNSFW
   isOriginalContent
   isSpoiler
   flair
+  user {
+    ...User
+  }
+  voted_posts {
+		id
+    user_id
+    post_id
+    vote
+  }
   created_at
   updated_at
 }

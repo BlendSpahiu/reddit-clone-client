@@ -1,16 +1,16 @@
 import {
+  createContext,
   ReactElement,
   ReactNode,
-  createContext,
   useEffect,
   useState,
 } from "react";
-import { AuthContextProps } from "./Context.props";
-import { Nullable } from "../interfaces/Nullable";
-import { UserFragment, useGetUserByIdLazyQuery } from "../graphql/gen/graphql";
 import { client } from "../graphql/client/client";
-import { getHasuraUserId } from "../utils/auth/jwt/getHasuraUserId";
 import { wsClient } from "../graphql/client/links/wsLink";
+import { useGetUserByIdLazyQuery, UserFragment } from "../graphql/gen/graphql";
+import { Nullable } from "../interfaces/Nullable";
+import { getHasuraUserId } from "../utils/auth/jwt/getHasuraUserId";
+import { AuthContextProps } from "./Context.props";
 
 export const AuthContext = createContext<AuthContextProps>({
   user: null,
@@ -45,9 +45,9 @@ export const AuthProvider = ({
     client.clearStore();
   };
 
-  const login = (token: string) => {
+  const login = (accessToken: string) => {
     setLoading(true);
-    localStorage.setItem("access_token", token);
+    localStorage.setItem("access_token", accessToken);
     setIsAuthenticated(true);
     localStorage.setItem("isAuthenticated", "true");
   };

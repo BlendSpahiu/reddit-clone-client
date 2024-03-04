@@ -1,13 +1,13 @@
 import { ReactElement } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import { NotFound, AuthRedirect, Home, Create } from "@views";
 import { MainLayout } from "@containers";
+import { AuthRedirect, Create, Home, NotFound } from "@views";
 import { AuthRoute } from "./AuthRoute";
 
 export const DefaultRoutes = (): ReactElement => {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/main" />} />
+      <Route path="/" element={<Navigate to="/r/home" />} />
       <Route
         path="/r/home"
         element={

@@ -1,26 +1,26 @@
 import { ReactElement, useState } from "react";
-import { Button } from "../../components/base/Button";
-import { Container } from "../../components/base/Container";
-import { Heading, Paragraph } from "../../components/base/Typography";
-import { GoogleIcon } from "../../components/base/Icons/GoogleIcon";
-import { AppleIcon } from "../../components/base/Icons/AppleIcon";
-import { Divider } from "../../components/base/Divider";
-import { Form } from "../../components/base/Form";
 import { useForm } from "react-hook-form";
-import { RegisterInputs } from "../../interfaces/Auth.props";
+import {
+  Form,
+  AppleIcon,
+  Button,
+  Container,
+  Divider,
+  FieldError,
+  GoogleIcon,
+  Input,
+  Modal,
+  Paragraph,
+} from "@components";
+import { ToastrTypes } from "@enums";
+import { useRegisterMutation } from "@graphql/gen/graphql";
 import { joiResolver } from "@hookform/resolvers/joi";
-import { Input } from "../../components/base/Input";
-import { Link } from "../../components/base/Link";
-import { Modal } from "../../components/base/Modal";
-import { FieldError } from "../../components/base/FieldError";
-import { useRegisterMutation } from "../../graphql/gen/graphql";
-import { RegisterModalProps } from "./Auth.props";
+import { useAuth, useToast } from "@hooks";
+import { RegisterInputs } from "@interfaces";
+import { getGraphQLErrorMessage } from "@utils";
+import { RegisterValidatorSchema } from "@validators";
 import { AnimatePresence } from "framer-motion";
-import { useToast } from "../../hooks/useToast";
-import { getGraphQLErrorMessage } from "../../utils/getGraphQLErrorMessage";
-import { ToastrTypes } from "../../enums/Toastr.enums";
-import { RegisterValidatorSchema } from "../../validators/Auth/RegisterValidator";
-import { useAuth } from "../../hooks/Auth/useAuth";
+import { RegisterModalProps } from "./Auth.props";
 
 export const RegisterModal = ({
   isRegister,
@@ -43,7 +43,6 @@ export const RegisterModal = ({
   const { addToast } = useToast();
 
   const onSubmit = async (payload: RegisterInputs) => {
-    console.log(payload);
     registerMutation({
       variables: {
         payload,
@@ -79,7 +78,7 @@ export const RegisterModal = ({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="absolute left-0 right-0 top-20 z-50 mx-auto w-[600px] rounded-lg bg-[#0f1a1c]"
+          className="absolute left-0 right-0 top-20 z-50 mx-auto w-[600px] rounded-lg bg-base"
         >
           <Container className="mt-6">
             <Container className="space-y-2">
@@ -172,16 +171,16 @@ export const RegisterModal = ({
                 <Container className="mt-6 flex flex-col space-y-4">
                   <Paragraph className="text-sm text-white">
                     Already a fat loser?{" "}
-                    <Link
+                    <Button
+                      buttonVariant="none"
                       className="text-[#4b7ac1]"
-                      to={""}
                       onClick={() => {
                         setIsRegister(false);
                         setIsLogin(true);
                       }}
                     >
                       Log In
-                    </Link>
+                    </Button>
                   </Paragraph>
                 </Container>
 

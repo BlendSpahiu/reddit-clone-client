@@ -601,6 +601,8 @@ export type Communities_Bool_Exp = {
 
 /** unique or primary key constraints on table "communities" */
 export enum Communities_Constraint {
+  /** unique or primary key constraint on columns "name" */
+  CommunitiesNameKey = "communities_name_key",
   /** unique or primary key constraint on columns "id" */
   CommunitiesPkey = "communities_pkey",
 }
@@ -1141,227 +1143,6 @@ export type Date_Comparison_Exp = {
   _lte?: InputMaybe<Scalars["date"]["input"]>;
   _neq?: InputMaybe<Scalars["date"]["input"]>;
   _nin?: InputMaybe<Array<Scalars["date"]["input"]>>;
-};
-
-/** columns and relationships of "donwvoted_posts" */
-export type Donwvoted_Posts = {
-  __typename?: "donwvoted_posts";
-  created_at: Scalars["timestamptz"]["output"];
-  id: Scalars["uuid"]["output"];
-  /** An object relationship */
-  post: Posts;
-  post_id: Scalars["uuid"]["output"];
-  updated_at: Scalars["timestamptz"]["output"];
-  /** An object relationship */
-  user: Users;
-  user_id: Scalars["uuid"]["output"];
-};
-
-/** aggregated selection of "donwvoted_posts" */
-export type Donwvoted_Posts_Aggregate = {
-  __typename?: "donwvoted_posts_aggregate";
-  aggregate?: Maybe<Donwvoted_Posts_Aggregate_Fields>;
-  nodes: Array<Donwvoted_Posts>;
-};
-
-export type Donwvoted_Posts_Aggregate_Bool_Exp = {
-  count?: InputMaybe<Donwvoted_Posts_Aggregate_Bool_Exp_Count>;
-};
-
-export type Donwvoted_Posts_Aggregate_Bool_Exp_Count = {
-  arguments?: InputMaybe<Array<Donwvoted_Posts_Select_Column>>;
-  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
-  filter?: InputMaybe<Donwvoted_Posts_Bool_Exp>;
-  predicate: Int_Comparison_Exp;
-};
-
-/** aggregate fields of "donwvoted_posts" */
-export type Donwvoted_Posts_Aggregate_Fields = {
-  __typename?: "donwvoted_posts_aggregate_fields";
-  count: Scalars["Int"]["output"];
-  max?: Maybe<Donwvoted_Posts_Max_Fields>;
-  min?: Maybe<Donwvoted_Posts_Min_Fields>;
-};
-
-/** aggregate fields of "donwvoted_posts" */
-export type Donwvoted_Posts_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<Donwvoted_Posts_Select_Column>>;
-  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
-};
-
-/** order by aggregate values of table "donwvoted_posts" */
-export type Donwvoted_Posts_Aggregate_Order_By = {
-  count?: InputMaybe<Order_By>;
-  max?: InputMaybe<Donwvoted_Posts_Max_Order_By>;
-  min?: InputMaybe<Donwvoted_Posts_Min_Order_By>;
-};
-
-/** input type for inserting array relation for remote table "donwvoted_posts" */
-export type Donwvoted_Posts_Arr_Rel_Insert_Input = {
-  data: Array<Donwvoted_Posts_Insert_Input>;
-  /** upsert condition */
-  on_conflict?: InputMaybe<Donwvoted_Posts_On_Conflict>;
-};
-
-/** Boolean expression to filter rows from the table "donwvoted_posts". All fields are combined with a logical 'AND'. */
-export type Donwvoted_Posts_Bool_Exp = {
-  _and?: InputMaybe<Array<Donwvoted_Posts_Bool_Exp>>;
-  _not?: InputMaybe<Donwvoted_Posts_Bool_Exp>;
-  _or?: InputMaybe<Array<Donwvoted_Posts_Bool_Exp>>;
-  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
-  id?: InputMaybe<Uuid_Comparison_Exp>;
-  post?: InputMaybe<Posts_Bool_Exp>;
-  post_id?: InputMaybe<Uuid_Comparison_Exp>;
-  updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
-  user?: InputMaybe<Users_Bool_Exp>;
-  user_id?: InputMaybe<Uuid_Comparison_Exp>;
-};
-
-/** unique or primary key constraints on table "donwvoted_posts" */
-export enum Donwvoted_Posts_Constraint {
-  /** unique or primary key constraint on columns "id" */
-  DonwvotedPostsPkey = "donwvoted_posts_pkey",
-}
-
-/** input type for inserting data into table "donwvoted_posts" */
-export type Donwvoted_Posts_Insert_Input = {
-  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  id?: InputMaybe<Scalars["uuid"]["input"]>;
-  post?: InputMaybe<Posts_Obj_Rel_Insert_Input>;
-  post_id?: InputMaybe<Scalars["uuid"]["input"]>;
-  updated_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  user?: InputMaybe<Users_Obj_Rel_Insert_Input>;
-  user_id?: InputMaybe<Scalars["uuid"]["input"]>;
-};
-
-/** aggregate max on columns */
-export type Donwvoted_Posts_Max_Fields = {
-  __typename?: "donwvoted_posts_max_fields";
-  created_at?: Maybe<Scalars["timestamptz"]["output"]>;
-  id?: Maybe<Scalars["uuid"]["output"]>;
-  post_id?: Maybe<Scalars["uuid"]["output"]>;
-  updated_at?: Maybe<Scalars["timestamptz"]["output"]>;
-  user_id?: Maybe<Scalars["uuid"]["output"]>;
-};
-
-/** order by max() on columns of table "donwvoted_posts" */
-export type Donwvoted_Posts_Max_Order_By = {
-  created_at?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  post_id?: InputMaybe<Order_By>;
-  updated_at?: InputMaybe<Order_By>;
-  user_id?: InputMaybe<Order_By>;
-};
-
-/** aggregate min on columns */
-export type Donwvoted_Posts_Min_Fields = {
-  __typename?: "donwvoted_posts_min_fields";
-  created_at?: Maybe<Scalars["timestamptz"]["output"]>;
-  id?: Maybe<Scalars["uuid"]["output"]>;
-  post_id?: Maybe<Scalars["uuid"]["output"]>;
-  updated_at?: Maybe<Scalars["timestamptz"]["output"]>;
-  user_id?: Maybe<Scalars["uuid"]["output"]>;
-};
-
-/** order by min() on columns of table "donwvoted_posts" */
-export type Donwvoted_Posts_Min_Order_By = {
-  created_at?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  post_id?: InputMaybe<Order_By>;
-  updated_at?: InputMaybe<Order_By>;
-  user_id?: InputMaybe<Order_By>;
-};
-
-/** response of any mutation on the table "donwvoted_posts" */
-export type Donwvoted_Posts_Mutation_Response = {
-  __typename?: "donwvoted_posts_mutation_response";
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars["Int"]["output"];
-  /** data from the rows affected by the mutation */
-  returning: Array<Donwvoted_Posts>;
-};
-
-/** on_conflict condition type for table "donwvoted_posts" */
-export type Donwvoted_Posts_On_Conflict = {
-  constraint: Donwvoted_Posts_Constraint;
-  update_columns?: Array<Donwvoted_Posts_Update_Column>;
-  where?: InputMaybe<Donwvoted_Posts_Bool_Exp>;
-};
-
-/** Ordering options when selecting data from "donwvoted_posts". */
-export type Donwvoted_Posts_Order_By = {
-  created_at?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  post?: InputMaybe<Posts_Order_By>;
-  post_id?: InputMaybe<Order_By>;
-  updated_at?: InputMaybe<Order_By>;
-  user?: InputMaybe<Users_Order_By>;
-  user_id?: InputMaybe<Order_By>;
-};
-
-/** primary key columns input for table: donwvoted_posts */
-export type Donwvoted_Posts_Pk_Columns_Input = {
-  id: Scalars["uuid"]["input"];
-};
-
-/** select columns of table "donwvoted_posts" */
-export enum Donwvoted_Posts_Select_Column {
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  Id = "id",
-  /** column name */
-  PostId = "post_id",
-  /** column name */
-  UpdatedAt = "updated_at",
-  /** column name */
-  UserId = "user_id",
-}
-
-/** input type for updating data in table "donwvoted_posts" */
-export type Donwvoted_Posts_Set_Input = {
-  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  id?: InputMaybe<Scalars["uuid"]["input"]>;
-  post_id?: InputMaybe<Scalars["uuid"]["input"]>;
-  updated_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  user_id?: InputMaybe<Scalars["uuid"]["input"]>;
-};
-
-/** Streaming cursor of the table "donwvoted_posts" */
-export type Donwvoted_Posts_Stream_Cursor_Input = {
-  /** Stream column input with initial value */
-  initial_value: Donwvoted_Posts_Stream_Cursor_Value_Input;
-  /** cursor ordering */
-  ordering?: InputMaybe<Cursor_Ordering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type Donwvoted_Posts_Stream_Cursor_Value_Input = {
-  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  id?: InputMaybe<Scalars["uuid"]["input"]>;
-  post_id?: InputMaybe<Scalars["uuid"]["input"]>;
-  updated_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  user_id?: InputMaybe<Scalars["uuid"]["input"]>;
-};
-
-/** update columns of table "donwvoted_posts" */
-export enum Donwvoted_Posts_Update_Column {
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  Id = "id",
-  /** column name */
-  PostId = "post_id",
-  /** column name */
-  UpdatedAt = "updated_at",
-  /** column name */
-  UserId = "user_id",
-}
-
-export type Donwvoted_Posts_Updates = {
-  /** sets the columns of the filtered rows to the given values */
-  _set?: InputMaybe<Donwvoted_Posts_Set_Input>;
-  where: Donwvoted_Posts_Bool_Exp;
 };
 
 /** columns and relationships of "draft_posts" */
@@ -2127,10 +1908,6 @@ export type Mutation_Root = {
   delete_communities_users?: Maybe<Communities_Users_Mutation_Response>;
   /** delete single row from the table: "communities_users" */
   delete_communities_users_by_pk?: Maybe<Communities_Users>;
-  /** delete data from the table: "donwvoted_posts" */
-  delete_donwvoted_posts?: Maybe<Donwvoted_Posts_Mutation_Response>;
-  /** delete single row from the table: "donwvoted_posts" */
-  delete_donwvoted_posts_by_pk?: Maybe<Donwvoted_Posts>;
   /** delete data from the table: "draft_posts" */
   delete_draft_posts?: Maybe<Draft_Posts_Mutation_Response>;
   /** delete single row from the table: "draft_posts" */
@@ -2143,10 +1920,6 @@ export type Mutation_Root = {
   delete_posts?: Maybe<Posts_Mutation_Response>;
   /** delete single row from the table: "posts" */
   delete_posts_by_pk?: Maybe<Posts>;
-  /** delete data from the table: "upvoted_posts" */
-  delete_upvoted_posts?: Maybe<Upvoted_Posts_Mutation_Response>;
-  /** delete single row from the table: "upvoted_posts" */
-  delete_upvoted_posts_by_pk?: Maybe<Upvoted_Posts>;
   /** delete data from the table: "users" */
   delete_users?: Maybe<Users_Mutation_Response>;
   /** delete single row from the table: "users" */
@@ -2167,10 +1940,6 @@ export type Mutation_Root = {
   insert_communities_users?: Maybe<Communities_Users_Mutation_Response>;
   /** insert a single row into the table: "communities_users" */
   insert_communities_users_one?: Maybe<Communities_Users>;
-  /** insert data into the table: "donwvoted_posts" */
-  insert_donwvoted_posts?: Maybe<Donwvoted_Posts_Mutation_Response>;
-  /** insert a single row into the table: "donwvoted_posts" */
-  insert_donwvoted_posts_one?: Maybe<Donwvoted_Posts>;
   /** insert data into the table: "draft_posts" */
   insert_draft_posts?: Maybe<Draft_Posts_Mutation_Response>;
   /** insert a single row into the table: "draft_posts" */
@@ -2183,10 +1952,6 @@ export type Mutation_Root = {
   insert_posts?: Maybe<Posts_Mutation_Response>;
   /** insert a single row into the table: "posts" */
   insert_posts_one?: Maybe<Posts>;
-  /** insert data into the table: "upvoted_posts" */
-  insert_upvoted_posts?: Maybe<Upvoted_Posts_Mutation_Response>;
-  /** insert a single row into the table: "upvoted_posts" */
-  insert_upvoted_posts_one?: Maybe<Upvoted_Posts>;
   /** insert data into the table: "users" */
   insert_users?: Maybe<Users_Mutation_Response>;
   /** insert a single row into the table: "users" */
@@ -2217,14 +1982,6 @@ export type Mutation_Root = {
   update_communities_users_many?: Maybe<
     Array<Maybe<Communities_Users_Mutation_Response>>
   >;
-  /** update data of the table: "donwvoted_posts" */
-  update_donwvoted_posts?: Maybe<Donwvoted_Posts_Mutation_Response>;
-  /** update single row of the table: "donwvoted_posts" */
-  update_donwvoted_posts_by_pk?: Maybe<Donwvoted_Posts>;
-  /** update multiples rows of table: "donwvoted_posts" */
-  update_donwvoted_posts_many?: Maybe<
-    Array<Maybe<Donwvoted_Posts_Mutation_Response>>
-  >;
   /** update data of the table: "draft_posts" */
   update_draft_posts?: Maybe<Draft_Posts_Mutation_Response>;
   /** update single row of the table: "draft_posts" */
@@ -2243,14 +2000,6 @@ export type Mutation_Root = {
   update_posts_by_pk?: Maybe<Posts>;
   /** update multiples rows of table: "posts" */
   update_posts_many?: Maybe<Array<Maybe<Posts_Mutation_Response>>>;
-  /** update data of the table: "upvoted_posts" */
-  update_upvoted_posts?: Maybe<Upvoted_Posts_Mutation_Response>;
-  /** update single row of the table: "upvoted_posts" */
-  update_upvoted_posts_by_pk?: Maybe<Upvoted_Posts>;
-  /** update multiples rows of table: "upvoted_posts" */
-  update_upvoted_posts_many?: Maybe<
-    Array<Maybe<Upvoted_Posts_Mutation_Response>>
-  >;
   /** update data of the table: "users" */
   update_users?: Maybe<Users_Mutation_Response>;
   /** update single row of the table: "users" */
@@ -2296,16 +2045,6 @@ export type Mutation_RootDelete_Communities_Users_By_PkArgs = {
 };
 
 /** mutation root */
-export type Mutation_RootDelete_Donwvoted_PostsArgs = {
-  where: Donwvoted_Posts_Bool_Exp;
-};
-
-/** mutation root */
-export type Mutation_RootDelete_Donwvoted_Posts_By_PkArgs = {
-  id: Scalars["uuid"]["input"];
-};
-
-/** mutation root */
 export type Mutation_RootDelete_Draft_PostsArgs = {
   where: Draft_Posts_Bool_Exp;
 };
@@ -2332,16 +2071,6 @@ export type Mutation_RootDelete_PostsArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_Posts_By_PkArgs = {
-  id: Scalars["uuid"]["input"];
-};
-
-/** mutation root */
-export type Mutation_RootDelete_Upvoted_PostsArgs = {
-  where: Upvoted_Posts_Bool_Exp;
-};
-
-/** mutation root */
-export type Mutation_RootDelete_Upvoted_Posts_By_PkArgs = {
   id: Scalars["uuid"]["input"];
 };
 
@@ -2402,18 +2131,6 @@ export type Mutation_RootInsert_Communities_Users_OneArgs = {
 };
 
 /** mutation root */
-export type Mutation_RootInsert_Donwvoted_PostsArgs = {
-  objects: Array<Donwvoted_Posts_Insert_Input>;
-  on_conflict?: InputMaybe<Donwvoted_Posts_On_Conflict>;
-};
-
-/** mutation root */
-export type Mutation_RootInsert_Donwvoted_Posts_OneArgs = {
-  object: Donwvoted_Posts_Insert_Input;
-  on_conflict?: InputMaybe<Donwvoted_Posts_On_Conflict>;
-};
-
-/** mutation root */
 export type Mutation_RootInsert_Draft_PostsArgs = {
   objects: Array<Draft_Posts_Insert_Input>;
   on_conflict?: InputMaybe<Draft_Posts_On_Conflict>;
@@ -2447,18 +2164,6 @@ export type Mutation_RootInsert_PostsArgs = {
 export type Mutation_RootInsert_Posts_OneArgs = {
   object: Posts_Insert_Input;
   on_conflict?: InputMaybe<Posts_On_Conflict>;
-};
-
-/** mutation root */
-export type Mutation_RootInsert_Upvoted_PostsArgs = {
-  objects: Array<Upvoted_Posts_Insert_Input>;
-  on_conflict?: InputMaybe<Upvoted_Posts_On_Conflict>;
-};
-
-/** mutation root */
-export type Mutation_RootInsert_Upvoted_Posts_OneArgs = {
-  object: Upvoted_Posts_Insert_Input;
-  on_conflict?: InputMaybe<Upvoted_Posts_On_Conflict>;
 };
 
 /** mutation root */
@@ -2549,23 +2254,6 @@ export type Mutation_RootUpdate_Communities_Users_ManyArgs = {
 };
 
 /** mutation root */
-export type Mutation_RootUpdate_Donwvoted_PostsArgs = {
-  _set?: InputMaybe<Donwvoted_Posts_Set_Input>;
-  where: Donwvoted_Posts_Bool_Exp;
-};
-
-/** mutation root */
-export type Mutation_RootUpdate_Donwvoted_Posts_By_PkArgs = {
-  _set?: InputMaybe<Donwvoted_Posts_Set_Input>;
-  pk_columns: Donwvoted_Posts_Pk_Columns_Input;
-};
-
-/** mutation root */
-export type Mutation_RootUpdate_Donwvoted_Posts_ManyArgs = {
-  updates: Array<Donwvoted_Posts_Updates>;
-};
-
-/** mutation root */
 export type Mutation_RootUpdate_Draft_PostsArgs = {
   _inc?: InputMaybe<Draft_Posts_Inc_Input>;
   _set?: InputMaybe<Draft_Posts_Set_Input>;
@@ -2621,23 +2309,6 @@ export type Mutation_RootUpdate_Posts_ManyArgs = {
 };
 
 /** mutation root */
-export type Mutation_RootUpdate_Upvoted_PostsArgs = {
-  _set?: InputMaybe<Upvoted_Posts_Set_Input>;
-  where: Upvoted_Posts_Bool_Exp;
-};
-
-/** mutation root */
-export type Mutation_RootUpdate_Upvoted_Posts_By_PkArgs = {
-  _set?: InputMaybe<Upvoted_Posts_Set_Input>;
-  pk_columns: Upvoted_Posts_Pk_Columns_Input;
-};
-
-/** mutation root */
-export type Mutation_RootUpdate_Upvoted_Posts_ManyArgs = {
-  updates: Array<Upvoted_Posts_Updates>;
-};
-
-/** mutation root */
 export type Mutation_RootUpdate_UsersArgs = {
   _set?: InputMaybe<Users_Set_Input>;
   where: Users_Bool_Exp;
@@ -2656,12 +2327,14 @@ export type Mutation_RootUpdate_Users_ManyArgs = {
 
 /** mutation root */
 export type Mutation_RootUpdate_Voted_PostsArgs = {
+  _inc?: InputMaybe<Voted_Posts_Inc_Input>;
   _set?: InputMaybe<Voted_Posts_Set_Input>;
   where: Voted_Posts_Bool_Exp;
 };
 
 /** mutation root */
 export type Mutation_RootUpdate_Voted_Posts_By_PkArgs = {
+  _inc?: InputMaybe<Voted_Posts_Inc_Input>;
   _set?: InputMaybe<Voted_Posts_Set_Input>;
   pk_columns: Voted_Posts_Pk_Columns_Input;
 };
@@ -2700,10 +2373,6 @@ export type Posts = {
   content?: Maybe<Scalars["String"]["output"]>;
   created_at: Scalars["timestamptz"]["output"];
   creator_id: Scalars["uuid"]["output"];
-  /** An array relationship */
-  donwvoted_posts: Array<Donwvoted_Posts>;
-  /** An aggregate relationship */
-  donwvoted_posts_aggregate: Donwvoted_Posts_Aggregate;
   downvotes: Scalars["Int"]["output"];
   flair?: Maybe<Scalars["String"]["output"]>;
   id: Scalars["uuid"]["output"];
@@ -2714,10 +2383,6 @@ export type Posts = {
   link?: Maybe<Scalars["String"]["output"]>;
   title: Scalars["String"]["output"];
   updated_at: Scalars["timestamptz"]["output"];
-  /** An array relationship */
-  upvoted_posts: Array<Upvoted_Posts>;
-  /** An aggregate relationship */
-  upvoted_posts_aggregate: Upvoted_Posts_Aggregate;
   upvotes: Scalars["Int"]["output"];
   /** An object relationship */
   user: Users;
@@ -2743,42 +2408,6 @@ export type PostsComments_AggregateArgs = {
   offset?: InputMaybe<Scalars["Int"]["input"]>;
   order_by?: InputMaybe<Array<Comments_Order_By>>;
   where?: InputMaybe<Comments_Bool_Exp>;
-};
-
-/** columns and relationships of "posts" */
-export type PostsDonwvoted_PostsArgs = {
-  distinct_on?: InputMaybe<Array<Donwvoted_Posts_Select_Column>>;
-  limit?: InputMaybe<Scalars["Int"]["input"]>;
-  offset?: InputMaybe<Scalars["Int"]["input"]>;
-  order_by?: InputMaybe<Array<Donwvoted_Posts_Order_By>>;
-  where?: InputMaybe<Donwvoted_Posts_Bool_Exp>;
-};
-
-/** columns and relationships of "posts" */
-export type PostsDonwvoted_Posts_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Donwvoted_Posts_Select_Column>>;
-  limit?: InputMaybe<Scalars["Int"]["input"]>;
-  offset?: InputMaybe<Scalars["Int"]["input"]>;
-  order_by?: InputMaybe<Array<Donwvoted_Posts_Order_By>>;
-  where?: InputMaybe<Donwvoted_Posts_Bool_Exp>;
-};
-
-/** columns and relationships of "posts" */
-export type PostsUpvoted_PostsArgs = {
-  distinct_on?: InputMaybe<Array<Upvoted_Posts_Select_Column>>;
-  limit?: InputMaybe<Scalars["Int"]["input"]>;
-  offset?: InputMaybe<Scalars["Int"]["input"]>;
-  order_by?: InputMaybe<Array<Upvoted_Posts_Order_By>>;
-  where?: InputMaybe<Upvoted_Posts_Bool_Exp>;
-};
-
-/** columns and relationships of "posts" */
-export type PostsUpvoted_Posts_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Upvoted_Posts_Select_Column>>;
-  limit?: InputMaybe<Scalars["Int"]["input"]>;
-  offset?: InputMaybe<Scalars["Int"]["input"]>;
-  order_by?: InputMaybe<Array<Upvoted_Posts_Order_By>>;
-  where?: InputMaybe<Upvoted_Posts_Bool_Exp>;
 };
 
 /** columns and relationships of "posts" */
@@ -2902,8 +2531,6 @@ export type Posts_Bool_Exp = {
   content?: InputMaybe<String_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   creator_id?: InputMaybe<Uuid_Comparison_Exp>;
-  donwvoted_posts?: InputMaybe<Donwvoted_Posts_Bool_Exp>;
-  donwvoted_posts_aggregate?: InputMaybe<Donwvoted_Posts_Aggregate_Bool_Exp>;
   downvotes?: InputMaybe<Int_Comparison_Exp>;
   flair?: InputMaybe<String_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
@@ -2914,8 +2541,6 @@ export type Posts_Bool_Exp = {
   link?: InputMaybe<String_Comparison_Exp>;
   title?: InputMaybe<String_Comparison_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
-  upvoted_posts?: InputMaybe<Upvoted_Posts_Bool_Exp>;
-  upvoted_posts_aggregate?: InputMaybe<Upvoted_Posts_Aggregate_Bool_Exp>;
   upvotes?: InputMaybe<Int_Comparison_Exp>;
   user?: InputMaybe<Users_Bool_Exp>;
   voted_posts?: InputMaybe<Voted_Posts_Bool_Exp>;
@@ -2942,7 +2567,6 @@ export type Posts_Insert_Input = {
   content?: InputMaybe<Scalars["String"]["input"]>;
   created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
   creator_id?: InputMaybe<Scalars["uuid"]["input"]>;
-  donwvoted_posts?: InputMaybe<Donwvoted_Posts_Arr_Rel_Insert_Input>;
   downvotes?: InputMaybe<Scalars["Int"]["input"]>;
   flair?: InputMaybe<Scalars["String"]["input"]>;
   id?: InputMaybe<Scalars["uuid"]["input"]>;
@@ -2953,7 +2577,6 @@ export type Posts_Insert_Input = {
   link?: InputMaybe<Scalars["String"]["input"]>;
   title?: InputMaybe<Scalars["String"]["input"]>;
   updated_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  upvoted_posts?: InputMaybe<Upvoted_Posts_Arr_Rel_Insert_Input>;
   upvotes?: InputMaybe<Scalars["Int"]["input"]>;
   user?: InputMaybe<Users_Obj_Rel_Insert_Input>;
   voted_posts?: InputMaybe<Voted_Posts_Arr_Rel_Insert_Input>;
@@ -3056,7 +2679,6 @@ export type Posts_Order_By = {
   content?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   creator_id?: InputMaybe<Order_By>;
-  donwvoted_posts_aggregate?: InputMaybe<Donwvoted_Posts_Aggregate_Order_By>;
   downvotes?: InputMaybe<Order_By>;
   flair?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
@@ -3067,7 +2689,6 @@ export type Posts_Order_By = {
   link?: InputMaybe<Order_By>;
   title?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
-  upvoted_posts_aggregate?: InputMaybe<Upvoted_Posts_Aggregate_Order_By>;
   upvotes?: InputMaybe<Order_By>;
   user?: InputMaybe<Users_Order_By>;
   voted_posts_aggregate?: InputMaybe<Voted_Posts_Aggregate_Order_By>;
@@ -3332,12 +2953,6 @@ export type Query_Root = {
   /** fetch data from the table: "communities_users" using primary key columns */
   communities_users_by_pk?: Maybe<Communities_Users>;
   /** An array relationship */
-  donwvoted_posts: Array<Donwvoted_Posts>;
-  /** An aggregate relationship */
-  donwvoted_posts_aggregate: Donwvoted_Posts_Aggregate;
-  /** fetch data from the table: "donwvoted_posts" using primary key columns */
-  donwvoted_posts_by_pk?: Maybe<Donwvoted_Posts>;
-  /** An array relationship */
   draft_posts: Array<Draft_Posts>;
   /** An aggregate relationship */
   draft_posts_aggregate: Draft_Posts_Aggregate;
@@ -3355,12 +2970,6 @@ export type Query_Root = {
   posts_aggregate: Posts_Aggregate;
   /** fetch data from the table: "posts" using primary key columns */
   posts_by_pk?: Maybe<Posts>;
-  /** An array relationship */
-  upvoted_posts: Array<Upvoted_Posts>;
-  /** An aggregate relationship */
-  upvoted_posts_aggregate: Upvoted_Posts_Aggregate;
-  /** fetch data from the table: "upvoted_posts" using primary key columns */
-  upvoted_posts_by_pk?: Maybe<Upvoted_Posts>;
   /** An array relationship */
   users: Array<Users>;
   /** An aggregate relationship */
@@ -3435,26 +3044,6 @@ export type Query_RootCommunities_Users_By_PkArgs = {
   id: Scalars["uuid"]["input"];
 };
 
-export type Query_RootDonwvoted_PostsArgs = {
-  distinct_on?: InputMaybe<Array<Donwvoted_Posts_Select_Column>>;
-  limit?: InputMaybe<Scalars["Int"]["input"]>;
-  offset?: InputMaybe<Scalars["Int"]["input"]>;
-  order_by?: InputMaybe<Array<Donwvoted_Posts_Order_By>>;
-  where?: InputMaybe<Donwvoted_Posts_Bool_Exp>;
-};
-
-export type Query_RootDonwvoted_Posts_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Donwvoted_Posts_Select_Column>>;
-  limit?: InputMaybe<Scalars["Int"]["input"]>;
-  offset?: InputMaybe<Scalars["Int"]["input"]>;
-  order_by?: InputMaybe<Array<Donwvoted_Posts_Order_By>>;
-  where?: InputMaybe<Donwvoted_Posts_Bool_Exp>;
-};
-
-export type Query_RootDonwvoted_Posts_By_PkArgs = {
-  id: Scalars["uuid"]["input"];
-};
-
 export type Query_RootDraft_PostsArgs = {
   distinct_on?: InputMaybe<Array<Draft_Posts_Select_Column>>;
   limit?: InputMaybe<Scalars["Int"]["input"]>;
@@ -3512,26 +3101,6 @@ export type Query_RootPosts_AggregateArgs = {
 };
 
 export type Query_RootPosts_By_PkArgs = {
-  id: Scalars["uuid"]["input"];
-};
-
-export type Query_RootUpvoted_PostsArgs = {
-  distinct_on?: InputMaybe<Array<Upvoted_Posts_Select_Column>>;
-  limit?: InputMaybe<Scalars["Int"]["input"]>;
-  offset?: InputMaybe<Scalars["Int"]["input"]>;
-  order_by?: InputMaybe<Array<Upvoted_Posts_Order_By>>;
-  where?: InputMaybe<Upvoted_Posts_Bool_Exp>;
-};
-
-export type Query_RootUpvoted_Posts_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Upvoted_Posts_Select_Column>>;
-  limit?: InputMaybe<Scalars["Int"]["input"]>;
-  offset?: InputMaybe<Scalars["Int"]["input"]>;
-  order_by?: InputMaybe<Array<Upvoted_Posts_Order_By>>;
-  where?: InputMaybe<Upvoted_Posts_Bool_Exp>;
-};
-
-export type Query_RootUpvoted_Posts_By_PkArgs = {
   id: Scalars["uuid"]["input"];
 };
 
@@ -3602,14 +3171,6 @@ export type Subscription_Root = {
   /** fetch data from the table in a streaming manner: "communities_users" */
   communities_users_stream: Array<Communities_Users>;
   /** An array relationship */
-  donwvoted_posts: Array<Donwvoted_Posts>;
-  /** An aggregate relationship */
-  donwvoted_posts_aggregate: Donwvoted_Posts_Aggregate;
-  /** fetch data from the table: "donwvoted_posts" using primary key columns */
-  donwvoted_posts_by_pk?: Maybe<Donwvoted_Posts>;
-  /** fetch data from the table in a streaming manner: "donwvoted_posts" */
-  donwvoted_posts_stream: Array<Donwvoted_Posts>;
-  /** An array relationship */
   draft_posts: Array<Draft_Posts>;
   /** An aggregate relationship */
   draft_posts_aggregate: Draft_Posts_Aggregate;
@@ -3633,14 +3194,6 @@ export type Subscription_Root = {
   posts_by_pk?: Maybe<Posts>;
   /** fetch data from the table in a streaming manner: "posts" */
   posts_stream: Array<Posts>;
-  /** An array relationship */
-  upvoted_posts: Array<Upvoted_Posts>;
-  /** An aggregate relationship */
-  upvoted_posts_aggregate: Upvoted_Posts_Aggregate;
-  /** fetch data from the table: "upvoted_posts" using primary key columns */
-  upvoted_posts_by_pk?: Maybe<Upvoted_Posts>;
-  /** fetch data from the table in a streaming manner: "upvoted_posts" */
-  upvoted_posts_stream: Array<Upvoted_Posts>;
   /** An array relationship */
   users: Array<Users>;
   /** An aggregate relationship */
@@ -3737,32 +3290,6 @@ export type Subscription_RootCommunities_Users_StreamArgs = {
   where?: InputMaybe<Communities_Users_Bool_Exp>;
 };
 
-export type Subscription_RootDonwvoted_PostsArgs = {
-  distinct_on?: InputMaybe<Array<Donwvoted_Posts_Select_Column>>;
-  limit?: InputMaybe<Scalars["Int"]["input"]>;
-  offset?: InputMaybe<Scalars["Int"]["input"]>;
-  order_by?: InputMaybe<Array<Donwvoted_Posts_Order_By>>;
-  where?: InputMaybe<Donwvoted_Posts_Bool_Exp>;
-};
-
-export type Subscription_RootDonwvoted_Posts_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Donwvoted_Posts_Select_Column>>;
-  limit?: InputMaybe<Scalars["Int"]["input"]>;
-  offset?: InputMaybe<Scalars["Int"]["input"]>;
-  order_by?: InputMaybe<Array<Donwvoted_Posts_Order_By>>;
-  where?: InputMaybe<Donwvoted_Posts_Bool_Exp>;
-};
-
-export type Subscription_RootDonwvoted_Posts_By_PkArgs = {
-  id: Scalars["uuid"]["input"];
-};
-
-export type Subscription_RootDonwvoted_Posts_StreamArgs = {
-  batch_size: Scalars["Int"]["input"];
-  cursor: Array<InputMaybe<Donwvoted_Posts_Stream_Cursor_Input>>;
-  where?: InputMaybe<Donwvoted_Posts_Bool_Exp>;
-};
-
 export type Subscription_RootDraft_PostsArgs = {
   distinct_on?: InputMaybe<Array<Draft_Posts_Select_Column>>;
   limit?: InputMaybe<Scalars["Int"]["input"]>;
@@ -3841,32 +3368,6 @@ export type Subscription_RootPosts_StreamArgs = {
   where?: InputMaybe<Posts_Bool_Exp>;
 };
 
-export type Subscription_RootUpvoted_PostsArgs = {
-  distinct_on?: InputMaybe<Array<Upvoted_Posts_Select_Column>>;
-  limit?: InputMaybe<Scalars["Int"]["input"]>;
-  offset?: InputMaybe<Scalars["Int"]["input"]>;
-  order_by?: InputMaybe<Array<Upvoted_Posts_Order_By>>;
-  where?: InputMaybe<Upvoted_Posts_Bool_Exp>;
-};
-
-export type Subscription_RootUpvoted_Posts_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Upvoted_Posts_Select_Column>>;
-  limit?: InputMaybe<Scalars["Int"]["input"]>;
-  offset?: InputMaybe<Scalars["Int"]["input"]>;
-  order_by?: InputMaybe<Array<Upvoted_Posts_Order_By>>;
-  where?: InputMaybe<Upvoted_Posts_Bool_Exp>;
-};
-
-export type Subscription_RootUpvoted_Posts_By_PkArgs = {
-  id: Scalars["uuid"]["input"];
-};
-
-export type Subscription_RootUpvoted_Posts_StreamArgs = {
-  batch_size: Scalars["Int"]["input"];
-  cursor: Array<InputMaybe<Upvoted_Posts_Stream_Cursor_Input>>;
-  where?: InputMaybe<Upvoted_Posts_Bool_Exp>;
-};
-
 export type Subscription_RootUsersArgs = {
   distinct_on?: InputMaybe<Array<Users_Select_Column>>;
   limit?: InputMaybe<Scalars["Int"]["input"]>;
@@ -3932,227 +3433,6 @@ export type Timestamptz_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars["timestamptz"]["input"]>>;
 };
 
-/** columns and relationships of "upvoted_posts" */
-export type Upvoted_Posts = {
-  __typename?: "upvoted_posts";
-  created_at: Scalars["timestamptz"]["output"];
-  id: Scalars["uuid"]["output"];
-  /** An object relationship */
-  post: Posts;
-  post_id: Scalars["uuid"]["output"];
-  updated_at: Scalars["timestamptz"]["output"];
-  /** An object relationship */
-  user: Users;
-  user_id: Scalars["uuid"]["output"];
-};
-
-/** aggregated selection of "upvoted_posts" */
-export type Upvoted_Posts_Aggregate = {
-  __typename?: "upvoted_posts_aggregate";
-  aggregate?: Maybe<Upvoted_Posts_Aggregate_Fields>;
-  nodes: Array<Upvoted_Posts>;
-};
-
-export type Upvoted_Posts_Aggregate_Bool_Exp = {
-  count?: InputMaybe<Upvoted_Posts_Aggregate_Bool_Exp_Count>;
-};
-
-export type Upvoted_Posts_Aggregate_Bool_Exp_Count = {
-  arguments?: InputMaybe<Array<Upvoted_Posts_Select_Column>>;
-  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
-  filter?: InputMaybe<Upvoted_Posts_Bool_Exp>;
-  predicate: Int_Comparison_Exp;
-};
-
-/** aggregate fields of "upvoted_posts" */
-export type Upvoted_Posts_Aggregate_Fields = {
-  __typename?: "upvoted_posts_aggregate_fields";
-  count: Scalars["Int"]["output"];
-  max?: Maybe<Upvoted_Posts_Max_Fields>;
-  min?: Maybe<Upvoted_Posts_Min_Fields>;
-};
-
-/** aggregate fields of "upvoted_posts" */
-export type Upvoted_Posts_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<Upvoted_Posts_Select_Column>>;
-  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
-};
-
-/** order by aggregate values of table "upvoted_posts" */
-export type Upvoted_Posts_Aggregate_Order_By = {
-  count?: InputMaybe<Order_By>;
-  max?: InputMaybe<Upvoted_Posts_Max_Order_By>;
-  min?: InputMaybe<Upvoted_Posts_Min_Order_By>;
-};
-
-/** input type for inserting array relation for remote table "upvoted_posts" */
-export type Upvoted_Posts_Arr_Rel_Insert_Input = {
-  data: Array<Upvoted_Posts_Insert_Input>;
-  /** upsert condition */
-  on_conflict?: InputMaybe<Upvoted_Posts_On_Conflict>;
-};
-
-/** Boolean expression to filter rows from the table "upvoted_posts". All fields are combined with a logical 'AND'. */
-export type Upvoted_Posts_Bool_Exp = {
-  _and?: InputMaybe<Array<Upvoted_Posts_Bool_Exp>>;
-  _not?: InputMaybe<Upvoted_Posts_Bool_Exp>;
-  _or?: InputMaybe<Array<Upvoted_Posts_Bool_Exp>>;
-  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
-  id?: InputMaybe<Uuid_Comparison_Exp>;
-  post?: InputMaybe<Posts_Bool_Exp>;
-  post_id?: InputMaybe<Uuid_Comparison_Exp>;
-  updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
-  user?: InputMaybe<Users_Bool_Exp>;
-  user_id?: InputMaybe<Uuid_Comparison_Exp>;
-};
-
-/** unique or primary key constraints on table "upvoted_posts" */
-export enum Upvoted_Posts_Constraint {
-  /** unique or primary key constraint on columns "id" */
-  UpvotedPostsPkey = "upvoted_posts_pkey",
-}
-
-/** input type for inserting data into table "upvoted_posts" */
-export type Upvoted_Posts_Insert_Input = {
-  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  id?: InputMaybe<Scalars["uuid"]["input"]>;
-  post?: InputMaybe<Posts_Obj_Rel_Insert_Input>;
-  post_id?: InputMaybe<Scalars["uuid"]["input"]>;
-  updated_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  user?: InputMaybe<Users_Obj_Rel_Insert_Input>;
-  user_id?: InputMaybe<Scalars["uuid"]["input"]>;
-};
-
-/** aggregate max on columns */
-export type Upvoted_Posts_Max_Fields = {
-  __typename?: "upvoted_posts_max_fields";
-  created_at?: Maybe<Scalars["timestamptz"]["output"]>;
-  id?: Maybe<Scalars["uuid"]["output"]>;
-  post_id?: Maybe<Scalars["uuid"]["output"]>;
-  updated_at?: Maybe<Scalars["timestamptz"]["output"]>;
-  user_id?: Maybe<Scalars["uuid"]["output"]>;
-};
-
-/** order by max() on columns of table "upvoted_posts" */
-export type Upvoted_Posts_Max_Order_By = {
-  created_at?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  post_id?: InputMaybe<Order_By>;
-  updated_at?: InputMaybe<Order_By>;
-  user_id?: InputMaybe<Order_By>;
-};
-
-/** aggregate min on columns */
-export type Upvoted_Posts_Min_Fields = {
-  __typename?: "upvoted_posts_min_fields";
-  created_at?: Maybe<Scalars["timestamptz"]["output"]>;
-  id?: Maybe<Scalars["uuid"]["output"]>;
-  post_id?: Maybe<Scalars["uuid"]["output"]>;
-  updated_at?: Maybe<Scalars["timestamptz"]["output"]>;
-  user_id?: Maybe<Scalars["uuid"]["output"]>;
-};
-
-/** order by min() on columns of table "upvoted_posts" */
-export type Upvoted_Posts_Min_Order_By = {
-  created_at?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  post_id?: InputMaybe<Order_By>;
-  updated_at?: InputMaybe<Order_By>;
-  user_id?: InputMaybe<Order_By>;
-};
-
-/** response of any mutation on the table "upvoted_posts" */
-export type Upvoted_Posts_Mutation_Response = {
-  __typename?: "upvoted_posts_mutation_response";
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars["Int"]["output"];
-  /** data from the rows affected by the mutation */
-  returning: Array<Upvoted_Posts>;
-};
-
-/** on_conflict condition type for table "upvoted_posts" */
-export type Upvoted_Posts_On_Conflict = {
-  constraint: Upvoted_Posts_Constraint;
-  update_columns?: Array<Upvoted_Posts_Update_Column>;
-  where?: InputMaybe<Upvoted_Posts_Bool_Exp>;
-};
-
-/** Ordering options when selecting data from "upvoted_posts". */
-export type Upvoted_Posts_Order_By = {
-  created_at?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  post?: InputMaybe<Posts_Order_By>;
-  post_id?: InputMaybe<Order_By>;
-  updated_at?: InputMaybe<Order_By>;
-  user?: InputMaybe<Users_Order_By>;
-  user_id?: InputMaybe<Order_By>;
-};
-
-/** primary key columns input for table: upvoted_posts */
-export type Upvoted_Posts_Pk_Columns_Input = {
-  id: Scalars["uuid"]["input"];
-};
-
-/** select columns of table "upvoted_posts" */
-export enum Upvoted_Posts_Select_Column {
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  Id = "id",
-  /** column name */
-  PostId = "post_id",
-  /** column name */
-  UpdatedAt = "updated_at",
-  /** column name */
-  UserId = "user_id",
-}
-
-/** input type for updating data in table "upvoted_posts" */
-export type Upvoted_Posts_Set_Input = {
-  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  id?: InputMaybe<Scalars["uuid"]["input"]>;
-  post_id?: InputMaybe<Scalars["uuid"]["input"]>;
-  updated_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  user_id?: InputMaybe<Scalars["uuid"]["input"]>;
-};
-
-/** Streaming cursor of the table "upvoted_posts" */
-export type Upvoted_Posts_Stream_Cursor_Input = {
-  /** Stream column input with initial value */
-  initial_value: Upvoted_Posts_Stream_Cursor_Value_Input;
-  /** cursor ordering */
-  ordering?: InputMaybe<Cursor_Ordering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type Upvoted_Posts_Stream_Cursor_Value_Input = {
-  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  id?: InputMaybe<Scalars["uuid"]["input"]>;
-  post_id?: InputMaybe<Scalars["uuid"]["input"]>;
-  updated_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  user_id?: InputMaybe<Scalars["uuid"]["input"]>;
-};
-
-/** update columns of table "upvoted_posts" */
-export enum Upvoted_Posts_Update_Column {
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  Id = "id",
-  /** column name */
-  PostId = "post_id",
-  /** column name */
-  UpdatedAt = "updated_at",
-  /** column name */
-  UserId = "user_id",
-}
-
-export type Upvoted_Posts_Updates = {
-  /** sets the columns of the filtered rows to the given values */
-  _set?: InputMaybe<Upvoted_Posts_Set_Input>;
-  where: Upvoted_Posts_Bool_Exp;
-};
-
 /** columns and relationships of "users" */
 export type Users = {
   __typename?: "users";
@@ -4174,10 +3454,6 @@ export type Users = {
   created_at: Scalars["timestamptz"]["output"];
   date_of_birth?: Maybe<Scalars["date"]["output"]>;
   /** An array relationship */
-  donwvoted_posts: Array<Donwvoted_Posts>;
-  /** An aggregate relationship */
-  donwvoted_posts_aggregate: Donwvoted_Posts_Aggregate;
-  /** An array relationship */
   draft_posts: Array<Draft_Posts>;
   /** An aggregate relationship */
   draft_posts_aggregate: Draft_Posts_Aggregate;
@@ -4194,10 +3470,6 @@ export type Users = {
   posts_aggregate: Posts_Aggregate;
   role: Scalars["String"]["output"];
   updated_at: Scalars["timestamptz"]["output"];
-  /** An array relationship */
-  upvoted_posts: Array<Upvoted_Posts>;
-  /** An aggregate relationship */
-  upvoted_posts_aggregate: Upvoted_Posts_Aggregate;
   username: Scalars["String"]["output"];
   /** An array relationship */
   voted_posts: Array<Voted_Posts>;
@@ -4260,24 +3532,6 @@ export type UsersCommunities_Users_AggregateArgs = {
 };
 
 /** columns and relationships of "users" */
-export type UsersDonwvoted_PostsArgs = {
-  distinct_on?: InputMaybe<Array<Donwvoted_Posts_Select_Column>>;
-  limit?: InputMaybe<Scalars["Int"]["input"]>;
-  offset?: InputMaybe<Scalars["Int"]["input"]>;
-  order_by?: InputMaybe<Array<Donwvoted_Posts_Order_By>>;
-  where?: InputMaybe<Donwvoted_Posts_Bool_Exp>;
-};
-
-/** columns and relationships of "users" */
-export type UsersDonwvoted_Posts_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Donwvoted_Posts_Select_Column>>;
-  limit?: InputMaybe<Scalars["Int"]["input"]>;
-  offset?: InputMaybe<Scalars["Int"]["input"]>;
-  order_by?: InputMaybe<Array<Donwvoted_Posts_Order_By>>;
-  where?: InputMaybe<Donwvoted_Posts_Bool_Exp>;
-};
-
-/** columns and relationships of "users" */
 export type UsersDraft_PostsArgs = {
   distinct_on?: InputMaybe<Array<Draft_Posts_Select_Column>>;
   limit?: InputMaybe<Scalars["Int"]["input"]>;
@@ -4329,24 +3583,6 @@ export type UsersPosts_AggregateArgs = {
   offset?: InputMaybe<Scalars["Int"]["input"]>;
   order_by?: InputMaybe<Array<Posts_Order_By>>;
   where?: InputMaybe<Posts_Bool_Exp>;
-};
-
-/** columns and relationships of "users" */
-export type UsersUpvoted_PostsArgs = {
-  distinct_on?: InputMaybe<Array<Upvoted_Posts_Select_Column>>;
-  limit?: InputMaybe<Scalars["Int"]["input"]>;
-  offset?: InputMaybe<Scalars["Int"]["input"]>;
-  order_by?: InputMaybe<Array<Upvoted_Posts_Order_By>>;
-  where?: InputMaybe<Upvoted_Posts_Bool_Exp>;
-};
-
-/** columns and relationships of "users" */
-export type UsersUpvoted_Posts_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Upvoted_Posts_Select_Column>>;
-  limit?: InputMaybe<Scalars["Int"]["input"]>;
-  offset?: InputMaybe<Scalars["Int"]["input"]>;
-  order_by?: InputMaybe<Array<Upvoted_Posts_Order_By>>;
-  where?: InputMaybe<Upvoted_Posts_Bool_Exp>;
 };
 
 /** columns and relationships of "users" */
@@ -4428,8 +3664,6 @@ export type Users_Bool_Exp = {
   community_id?: InputMaybe<Uuid_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   date_of_birth?: InputMaybe<Date_Comparison_Exp>;
-  donwvoted_posts?: InputMaybe<Donwvoted_Posts_Bool_Exp>;
-  donwvoted_posts_aggregate?: InputMaybe<Donwvoted_Posts_Aggregate_Bool_Exp>;
   draft_posts?: InputMaybe<Draft_Posts_Bool_Exp>;
   draft_posts_aggregate?: InputMaybe<Draft_Posts_Aggregate_Bool_Exp>;
   email?: InputMaybe<String_Comparison_Exp>;
@@ -4441,8 +3675,6 @@ export type Users_Bool_Exp = {
   posts_aggregate?: InputMaybe<Posts_Aggregate_Bool_Exp>;
   role?: InputMaybe<String_Comparison_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
-  upvoted_posts?: InputMaybe<Upvoted_Posts_Bool_Exp>;
-  upvoted_posts_aggregate?: InputMaybe<Upvoted_Posts_Aggregate_Bool_Exp>;
   username?: InputMaybe<String_Comparison_Exp>;
   voted_posts?: InputMaybe<Voted_Posts_Bool_Exp>;
   voted_posts_aggregate?: InputMaybe<Voted_Posts_Aggregate_Bool_Exp>;
@@ -4463,7 +3695,6 @@ export type Users_Insert_Input = {
   community_id?: InputMaybe<Scalars["uuid"]["input"]>;
   created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
   date_of_birth?: InputMaybe<Scalars["date"]["input"]>;
-  donwvoted_posts?: InputMaybe<Donwvoted_Posts_Arr_Rel_Insert_Input>;
   draft_posts?: InputMaybe<Draft_Posts_Arr_Rel_Insert_Input>;
   email?: InputMaybe<Scalars["String"]["input"]>;
   flares?: InputMaybe<Flares_Arr_Rel_Insert_Input>;
@@ -4472,7 +3703,6 @@ export type Users_Insert_Input = {
   posts?: InputMaybe<Posts_Arr_Rel_Insert_Input>;
   role?: InputMaybe<Scalars["String"]["input"]>;
   updated_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  upvoted_posts?: InputMaybe<Upvoted_Posts_Arr_Rel_Insert_Input>;
   username?: InputMaybe<Scalars["String"]["input"]>;
   voted_posts?: InputMaybe<Voted_Posts_Arr_Rel_Insert_Input>;
 };
@@ -4563,7 +3793,6 @@ export type Users_Order_By = {
   community_id?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   date_of_birth?: InputMaybe<Order_By>;
-  donwvoted_posts_aggregate?: InputMaybe<Donwvoted_Posts_Aggregate_Order_By>;
   draft_posts_aggregate?: InputMaybe<Draft_Posts_Aggregate_Order_By>;
   email?: InputMaybe<Order_By>;
   flares_aggregate?: InputMaybe<Flares_Aggregate_Order_By>;
@@ -4572,7 +3801,6 @@ export type Users_Order_By = {
   posts_aggregate?: InputMaybe<Posts_Aggregate_Order_By>;
   role?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
-  upvoted_posts_aggregate?: InputMaybe<Upvoted_Posts_Aggregate_Order_By>;
   username?: InputMaybe<Order_By>;
   voted_posts_aggregate?: InputMaybe<Voted_Posts_Aggregate_Order_By>;
 };
@@ -4691,6 +3919,7 @@ export type Voted_Posts = {
   /** An object relationship */
   user: Users;
   user_id: Scalars["uuid"]["output"];
+  vote?: Maybe<Scalars["Int"]["output"]>;
 };
 
 /** aggregated selection of "voted_posts" */
@@ -4714,9 +3943,17 @@ export type Voted_Posts_Aggregate_Bool_Exp_Count = {
 /** aggregate fields of "voted_posts" */
 export type Voted_Posts_Aggregate_Fields = {
   __typename?: "voted_posts_aggregate_fields";
+  avg?: Maybe<Voted_Posts_Avg_Fields>;
   count: Scalars["Int"]["output"];
   max?: Maybe<Voted_Posts_Max_Fields>;
   min?: Maybe<Voted_Posts_Min_Fields>;
+  stddev?: Maybe<Voted_Posts_Stddev_Fields>;
+  stddev_pop?: Maybe<Voted_Posts_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Voted_Posts_Stddev_Samp_Fields>;
+  sum?: Maybe<Voted_Posts_Sum_Fields>;
+  var_pop?: Maybe<Voted_Posts_Var_Pop_Fields>;
+  var_samp?: Maybe<Voted_Posts_Var_Samp_Fields>;
+  variance?: Maybe<Voted_Posts_Variance_Fields>;
 };
 
 /** aggregate fields of "voted_posts" */
@@ -4727,9 +3964,17 @@ export type Voted_Posts_Aggregate_FieldsCountArgs = {
 
 /** order by aggregate values of table "voted_posts" */
 export type Voted_Posts_Aggregate_Order_By = {
+  avg?: InputMaybe<Voted_Posts_Avg_Order_By>;
   count?: InputMaybe<Order_By>;
   max?: InputMaybe<Voted_Posts_Max_Order_By>;
   min?: InputMaybe<Voted_Posts_Min_Order_By>;
+  stddev?: InputMaybe<Voted_Posts_Stddev_Order_By>;
+  stddev_pop?: InputMaybe<Voted_Posts_Stddev_Pop_Order_By>;
+  stddev_samp?: InputMaybe<Voted_Posts_Stddev_Samp_Order_By>;
+  sum?: InputMaybe<Voted_Posts_Sum_Order_By>;
+  var_pop?: InputMaybe<Voted_Posts_Var_Pop_Order_By>;
+  var_samp?: InputMaybe<Voted_Posts_Var_Samp_Order_By>;
+  variance?: InputMaybe<Voted_Posts_Variance_Order_By>;
 };
 
 /** input type for inserting array relation for remote table "voted_posts" */
@@ -4737,6 +3982,17 @@ export type Voted_Posts_Arr_Rel_Insert_Input = {
   data: Array<Voted_Posts_Insert_Input>;
   /** upsert condition */
   on_conflict?: InputMaybe<Voted_Posts_On_Conflict>;
+};
+
+/** aggregate avg on columns */
+export type Voted_Posts_Avg_Fields = {
+  __typename?: "voted_posts_avg_fields";
+  vote?: Maybe<Scalars["Float"]["output"]>;
+};
+
+/** order by avg() on columns of table "voted_posts" */
+export type Voted_Posts_Avg_Order_By = {
+  vote?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "voted_posts". All fields are combined with a logical 'AND'. */
@@ -4751,13 +4007,21 @@ export type Voted_Posts_Bool_Exp = {
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   user?: InputMaybe<Users_Bool_Exp>;
   user_id?: InputMaybe<Uuid_Comparison_Exp>;
+  vote?: InputMaybe<Int_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "voted_posts" */
 export enum Voted_Posts_Constraint {
   /** unique or primary key constraint on columns "id" */
   VotedPostsPkey = "voted_posts_pkey",
+  /** unique or primary key constraint on columns "post_id" */
+  VotedPostsPostIdKey = "voted_posts_post_id_key",
 }
+
+/** input type for incrementing numeric columns in table "voted_posts" */
+export type Voted_Posts_Inc_Input = {
+  vote?: InputMaybe<Scalars["Int"]["input"]>;
+};
 
 /** input type for inserting data into table "voted_posts" */
 export type Voted_Posts_Insert_Input = {
@@ -4768,6 +4032,7 @@ export type Voted_Posts_Insert_Input = {
   updated_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
   user?: InputMaybe<Users_Obj_Rel_Insert_Input>;
   user_id?: InputMaybe<Scalars["uuid"]["input"]>;
+  vote?: InputMaybe<Scalars["Int"]["input"]>;
 };
 
 /** aggregate max on columns */
@@ -4778,6 +4043,7 @@ export type Voted_Posts_Max_Fields = {
   post_id?: Maybe<Scalars["uuid"]["output"]>;
   updated_at?: Maybe<Scalars["timestamptz"]["output"]>;
   user_id?: Maybe<Scalars["uuid"]["output"]>;
+  vote?: Maybe<Scalars["Int"]["output"]>;
 };
 
 /** order by max() on columns of table "voted_posts" */
@@ -4787,6 +4053,7 @@ export type Voted_Posts_Max_Order_By = {
   post_id?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
   user_id?: InputMaybe<Order_By>;
+  vote?: InputMaybe<Order_By>;
 };
 
 /** aggregate min on columns */
@@ -4797,6 +4064,7 @@ export type Voted_Posts_Min_Fields = {
   post_id?: Maybe<Scalars["uuid"]["output"]>;
   updated_at?: Maybe<Scalars["timestamptz"]["output"]>;
   user_id?: Maybe<Scalars["uuid"]["output"]>;
+  vote?: Maybe<Scalars["Int"]["output"]>;
 };
 
 /** order by min() on columns of table "voted_posts" */
@@ -4806,6 +4074,7 @@ export type Voted_Posts_Min_Order_By = {
   post_id?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
   user_id?: InputMaybe<Order_By>;
+  vote?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "voted_posts" */
@@ -4833,6 +4102,7 @@ export type Voted_Posts_Order_By = {
   updated_at?: InputMaybe<Order_By>;
   user?: InputMaybe<Users_Order_By>;
   user_id?: InputMaybe<Order_By>;
+  vote?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: voted_posts */
@@ -4852,6 +4122,8 @@ export enum Voted_Posts_Select_Column {
   UpdatedAt = "updated_at",
   /** column name */
   UserId = "user_id",
+  /** column name */
+  Vote = "vote",
 }
 
 /** input type for updating data in table "voted_posts" */
@@ -4861,6 +4133,40 @@ export type Voted_Posts_Set_Input = {
   post_id?: InputMaybe<Scalars["uuid"]["input"]>;
   updated_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
   user_id?: InputMaybe<Scalars["uuid"]["input"]>;
+  vote?: InputMaybe<Scalars["Int"]["input"]>;
+};
+
+/** aggregate stddev on columns */
+export type Voted_Posts_Stddev_Fields = {
+  __typename?: "voted_posts_stddev_fields";
+  vote?: Maybe<Scalars["Float"]["output"]>;
+};
+
+/** order by stddev() on columns of table "voted_posts" */
+export type Voted_Posts_Stddev_Order_By = {
+  vote?: InputMaybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Voted_Posts_Stddev_Pop_Fields = {
+  __typename?: "voted_posts_stddev_pop_fields";
+  vote?: Maybe<Scalars["Float"]["output"]>;
+};
+
+/** order by stddev_pop() on columns of table "voted_posts" */
+export type Voted_Posts_Stddev_Pop_Order_By = {
+  vote?: InputMaybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Voted_Posts_Stddev_Samp_Fields = {
+  __typename?: "voted_posts_stddev_samp_fields";
+  vote?: Maybe<Scalars["Float"]["output"]>;
+};
+
+/** order by stddev_samp() on columns of table "voted_posts" */
+export type Voted_Posts_Stddev_Samp_Order_By = {
+  vote?: InputMaybe<Order_By>;
 };
 
 /** Streaming cursor of the table "voted_posts" */
@@ -4878,6 +4184,18 @@ export type Voted_Posts_Stream_Cursor_Value_Input = {
   post_id?: InputMaybe<Scalars["uuid"]["input"]>;
   updated_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
   user_id?: InputMaybe<Scalars["uuid"]["input"]>;
+  vote?: InputMaybe<Scalars["Int"]["input"]>;
+};
+
+/** aggregate sum on columns */
+export type Voted_Posts_Sum_Fields = {
+  __typename?: "voted_posts_sum_fields";
+  vote?: Maybe<Scalars["Int"]["output"]>;
+};
+
+/** order by sum() on columns of table "voted_posts" */
+export type Voted_Posts_Sum_Order_By = {
+  vote?: InputMaybe<Order_By>;
 };
 
 /** update columns of table "voted_posts" */
@@ -4892,12 +4210,49 @@ export enum Voted_Posts_Update_Column {
   UpdatedAt = "updated_at",
   /** column name */
   UserId = "user_id",
+  /** column name */
+  Vote = "vote",
 }
 
 export type Voted_Posts_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Voted_Posts_Inc_Input>;
   /** sets the columns of the filtered rows to the given values */
   _set?: InputMaybe<Voted_Posts_Set_Input>;
   where: Voted_Posts_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Voted_Posts_Var_Pop_Fields = {
+  __typename?: "voted_posts_var_pop_fields";
+  vote?: Maybe<Scalars["Float"]["output"]>;
+};
+
+/** order by var_pop() on columns of table "voted_posts" */
+export type Voted_Posts_Var_Pop_Order_By = {
+  vote?: InputMaybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type Voted_Posts_Var_Samp_Fields = {
+  __typename?: "voted_posts_var_samp_fields";
+  vote?: Maybe<Scalars["Float"]["output"]>;
+};
+
+/** order by var_samp() on columns of table "voted_posts" */
+export type Voted_Posts_Var_Samp_Order_By = {
+  vote?: InputMaybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Voted_Posts_Variance_Fields = {
+  __typename?: "voted_posts_variance_fields";
+  vote?: Maybe<Scalars["Float"]["output"]>;
+};
+
+/** order by variance() on columns of table "voted_posts" */
+export type Voted_Posts_Variance_Order_By = {
+  vote?: InputMaybe<Order_By>;
 };
 
 export type CommentFragment = {
@@ -4985,6 +4340,55 @@ export type PostFragment = {
   flair?: string | null;
   created_at: any;
   updated_at: any;
+  user: {
+    __typename?: "users";
+    id: any;
+    username: string;
+    email: string;
+    date_of_birth?: any | null;
+    role: string;
+    created_at: any;
+    updated_at: any;
+    communities: Array<{
+      __typename?: "communities";
+      id: any;
+      category?: string | null;
+      name: string;
+      user_id?: any | null;
+      type: number;
+      isNSFW: boolean;
+      created_at: any;
+      updated_at: any;
+      flares: Array<{
+        __typename?: "flares";
+        id: any;
+        name: string;
+        created_at: any;
+        updated_at: any;
+      }>;
+      communities_users_aggregate: {
+        __typename?: "communities_users_aggregate";
+        aggregate?: {
+          __typename?: "communities_users_aggregate_fields";
+          count: number;
+        } | null;
+      };
+    }>;
+    comments: Array<{
+      __typename?: "comments";
+      id: any;
+      content: string;
+      created_at: any;
+      updated_at: any;
+    }>;
+  };
+  voted_posts: Array<{
+    __typename?: "voted_posts";
+    id: any;
+    user_id: any;
+    post_id: any;
+    vote?: number | null;
+  }>;
 };
 
 export type UserFragment = {
@@ -5156,43 +4560,6 @@ export type InsertFlairMutation = {
   } | null;
 };
 
-export type UpvotePostMutationVariables = Exact<{
-  postId: Scalars["uuid"]["input"];
-  userId: Scalars["uuid"]["input"];
-}>;
-
-export type UpvotePostMutation = {
-  __typename?: "mutation_root";
-  insert_upvoted_posts_one?: {
-    __typename?: "upvoted_posts";
-    id: any;
-    post_id: any;
-    user_id: any;
-  } | null;
-};
-
-export type DownvotePostMutationVariables = Exact<{
-  postId: Scalars["uuid"]["input"];
-}>;
-
-export type DownvotePostMutation = {
-  __typename?: "mutation_root";
-  update_posts_by_pk?: { __typename?: "posts"; id: any } | null;
-};
-
-export type DeleteUpvotedPostMutationVariables = Exact<{
-  postId: Scalars["uuid"]["input"];
-}>;
-
-export type DeleteUpvotedPostMutation = {
-  __typename?: "mutation_root";
-  delete_upvoted_posts?: {
-    __typename?: "upvoted_posts_mutation_response";
-    affected_rows: number;
-    returning: Array<{ __typename?: "upvoted_posts"; id: any }>;
-  } | null;
-};
-
 export type CreatePostMutationVariables = Exact<{
   object: Posts_Insert_Input;
 }>;
@@ -5214,7 +4581,65 @@ export type CreatePostMutation = {
     flair?: string | null;
     created_at: any;
     updated_at: any;
+    user: {
+      __typename?: "users";
+      id: any;
+      username: string;
+      email: string;
+      date_of_birth?: any | null;
+      role: string;
+      created_at: any;
+      updated_at: any;
+      communities: Array<{
+        __typename?: "communities";
+        id: any;
+        category?: string | null;
+        name: string;
+        user_id?: any | null;
+        type: number;
+        isNSFW: boolean;
+        created_at: any;
+        updated_at: any;
+        flares: Array<{
+          __typename?: "flares";
+          id: any;
+          name: string;
+          created_at: any;
+          updated_at: any;
+        }>;
+        communities_users_aggregate: {
+          __typename?: "communities_users_aggregate";
+          aggregate?: {
+            __typename?: "communities_users_aggregate_fields";
+            count: number;
+          } | null;
+        };
+      }>;
+      comments: Array<{
+        __typename?: "comments";
+        id: any;
+        content: string;
+        created_at: any;
+        updated_at: any;
+      }>;
+    };
+    voted_posts: Array<{
+      __typename?: "voted_posts";
+      id: any;
+      user_id: any;
+      post_id: any;
+      vote?: number | null;
+    }>;
   } | null;
+};
+
+export type DeletePostMutationVariables = Exact<{
+  postId: Scalars["uuid"]["input"];
+}>;
+
+export type DeletePostMutation = {
+  __typename?: "mutation_root";
+  delete_posts_by_pk?: { __typename?: "posts"; id: any } | null;
 };
 
 export type InsertUserMutationVariables = Exact<{
@@ -5224,6 +4649,24 @@ export type InsertUserMutationVariables = Exact<{
 export type InsertUserMutation = {
   __typename?: "mutation_root";
   insert_users_one?: { __typename?: "users"; id: any } | null;
+};
+
+export type VotePostMutationVariables = Exact<{
+  postId: Scalars["uuid"]["input"];
+  userId: Scalars["uuid"]["input"];
+  vote: Scalars["Int"]["input"];
+}>;
+
+export type VotePostMutation = {
+  __typename?: "mutation_root";
+  insert_voted_posts_one?: {
+    __typename?: "voted_posts";
+    id: any;
+    post_id: any;
+    user_id: any;
+    created_at: any;
+    updated_at: any;
+  } | null;
 };
 
 export type GetUserByIdQueryVariables = Exact<{
@@ -5383,6 +4826,55 @@ export type GetAllPostsQuery = {
         count: number;
       } | null;
     };
+    user: {
+      __typename?: "users";
+      id: any;
+      username: string;
+      email: string;
+      date_of_birth?: any | null;
+      role: string;
+      created_at: any;
+      updated_at: any;
+      communities: Array<{
+        __typename?: "communities";
+        id: any;
+        category?: string | null;
+        name: string;
+        user_id?: any | null;
+        type: number;
+        isNSFW: boolean;
+        created_at: any;
+        updated_at: any;
+        flares: Array<{
+          __typename?: "flares";
+          id: any;
+          name: string;
+          created_at: any;
+          updated_at: any;
+        }>;
+        communities_users_aggregate: {
+          __typename?: "communities_users_aggregate";
+          aggregate?: {
+            __typename?: "communities_users_aggregate_fields";
+            count: number;
+          } | null;
+        };
+      }>;
+      comments: Array<{
+        __typename?: "comments";
+        id: any;
+        content: string;
+        created_at: any;
+        updated_at: any;
+      }>;
+    };
+    voted_posts: Array<{
+      __typename?: "voted_posts";
+      id: any;
+      user_id: any;
+      post_id: any;
+      vote?: number | null;
+    }>;
   }>;
   users: Array<{
     __typename?: "users";
@@ -5453,15 +4945,6 @@ export type GetAllPostsQuery = {
   }>;
 };
 
-export type GetUpvotedPostsQueryVariables = Exact<{
-  userId: Scalars["uuid"]["input"];
-}>;
-
-export type GetUpvotedPostsQuery = {
-  __typename?: "query_root";
-  upvoted_posts: Array<{ __typename?: "upvoted_posts"; user_id: any }>;
-};
-
 export type GetDraftPostsQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetDraftPostsQuery = {
@@ -5491,7 +4974,38 @@ export type GetDraftPostsQuery = {
   };
 };
 
-export type GetPostsSubscriptionVariables = Exact<{ [key: string]: never }>;
+export type GetPostWithVotesQueryVariables = Exact<{
+  postId: Scalars["uuid"]["input"];
+}>;
+
+export type GetPostWithVotesQuery = {
+  __typename?: "query_root";
+  voted_posts: Array<{
+    __typename?: "voted_posts";
+    id: any;
+    post_id: any;
+    user_id: any;
+    vote?: number | null;
+  }>;
+};
+
+export type UpdatePostVoteMutationVariables = Exact<{
+  postId: Scalars["uuid"]["input"];
+  vote: Scalars["Int"]["input"];
+}>;
+
+export type UpdatePostVoteMutation = {
+  __typename?: "mutation_root";
+  update_voted_posts?: {
+    __typename?: "voted_posts_mutation_response";
+    affected_rows: number;
+    returning: Array<{ __typename?: "voted_posts"; id: any }>;
+  } | null;
+};
+
+export type GetPostsSubscriptionVariables = Exact<{
+  orderBy?: InputMaybe<Array<Posts_Order_By> | Posts_Order_By>;
+}>;
 
 export type GetPostsSubscription = {
   __typename?: "subscription_root";
@@ -5542,6 +5056,55 @@ export type GetPostsSubscription = {
         count: number;
       } | null;
     };
+    user: {
+      __typename?: "users";
+      id: any;
+      username: string;
+      email: string;
+      date_of_birth?: any | null;
+      role: string;
+      created_at: any;
+      updated_at: any;
+      communities: Array<{
+        __typename?: "communities";
+        id: any;
+        category?: string | null;
+        name: string;
+        user_id?: any | null;
+        type: number;
+        isNSFW: boolean;
+        created_at: any;
+        updated_at: any;
+        flares: Array<{
+          __typename?: "flares";
+          id: any;
+          name: string;
+          created_at: any;
+          updated_at: any;
+        }>;
+        communities_users_aggregate: {
+          __typename?: "communities_users_aggregate";
+          aggregate?: {
+            __typename?: "communities_users_aggregate_fields";
+            count: number;
+          } | null;
+        };
+      }>;
+      comments: Array<{
+        __typename?: "comments";
+        id: any;
+        content: string;
+        created_at: any;
+        updated_at: any;
+      }>;
+    };
+    voted_posts: Array<{
+      __typename?: "voted_posts";
+      id: any;
+      user_id: any;
+      post_id: any;
+      vote?: number | null;
+    }>;
   }>;
 };
 
@@ -5577,23 +5140,6 @@ export const FlairFragmentDoc = gql`
     name
     user_id
     community_id
-    created_at
-    updated_at
-  }
-`;
-export const PostFragmentDoc = gql`
-  fragment Post on posts {
-    id
-    content
-    title
-    downvotes
-    upvotes
-    link
-    image
-    isNSFW
-    isOriginalContent
-    isSpoiler
-    flair
     created_at
     updated_at
   }
@@ -5647,6 +5193,33 @@ export const UserFragmentDoc = gql`
   }
   ${CommunityFragmentDoc}
   ${CommentFragmentDoc}
+`;
+export const PostFragmentDoc = gql`
+  fragment Post on posts {
+    id
+    content
+    title
+    downvotes
+    upvotes
+    link
+    image
+    isNSFW
+    isOriginalContent
+    isSpoiler
+    flair
+    user {
+      ...User
+    }
+    voted_posts {
+      id
+      user_id
+      post_id
+      vote
+    }
+    created_at
+    updated_at
+  }
+  ${UserFragmentDoc}
 `;
 export const RegisterDocument = gql`
   mutation register($payload: RegisterInput!) {
@@ -5956,162 +5529,6 @@ export type InsertFlairMutationOptions = Apollo.BaseMutationOptions<
   InsertFlairMutation,
   InsertFlairMutationVariables
 >;
-export const UpvotePostDocument = gql`
-  mutation upvotePost($postId: uuid!, $userId: uuid!) {
-    insert_upvoted_posts_one(object: { post_id: $postId, user_id: $userId }) {
-      id
-      post_id
-      user_id
-    }
-  }
-`;
-export type UpvotePostMutationFn = Apollo.MutationFunction<
-  UpvotePostMutation,
-  UpvotePostMutationVariables
->;
-
-/**
- * __useUpvotePostMutation__
- *
- * To run a mutation, you first call `useUpvotePostMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useUpvotePostMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [upvotePostMutation, { data, loading, error }] = useUpvotePostMutation({
- *   variables: {
- *      postId: // value for 'postId'
- *      userId: // value for 'userId'
- *   },
- * });
- */
-export function useUpvotePostMutation(
-  baseOptions?: Apollo.MutationHookOptions<
-    UpvotePostMutation,
-    UpvotePostMutationVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<UpvotePostMutation, UpvotePostMutationVariables>(
-    UpvotePostDocument,
-    options,
-  );
-}
-export type UpvotePostMutationHookResult = ReturnType<
-  typeof useUpvotePostMutation
->;
-export type UpvotePostMutationResult =
-  Apollo.MutationResult<UpvotePostMutation>;
-export type UpvotePostMutationOptions = Apollo.BaseMutationOptions<
-  UpvotePostMutation,
-  UpvotePostMutationVariables
->;
-export const DownvotePostDocument = gql`
-  mutation downvotePost($postId: uuid!) {
-    update_posts_by_pk(pk_columns: { id: $postId }, _inc: { upvotes: -1 }) {
-      id
-    }
-  }
-`;
-export type DownvotePostMutationFn = Apollo.MutationFunction<
-  DownvotePostMutation,
-  DownvotePostMutationVariables
->;
-
-/**
- * __useDownvotePostMutation__
- *
- * To run a mutation, you first call `useDownvotePostMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useDownvotePostMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [downvotePostMutation, { data, loading, error }] = useDownvotePostMutation({
- *   variables: {
- *      postId: // value for 'postId'
- *   },
- * });
- */
-export function useDownvotePostMutation(
-  baseOptions?: Apollo.MutationHookOptions<
-    DownvotePostMutation,
-    DownvotePostMutationVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<
-    DownvotePostMutation,
-    DownvotePostMutationVariables
-  >(DownvotePostDocument, options);
-}
-export type DownvotePostMutationHookResult = ReturnType<
-  typeof useDownvotePostMutation
->;
-export type DownvotePostMutationResult =
-  Apollo.MutationResult<DownvotePostMutation>;
-export type DownvotePostMutationOptions = Apollo.BaseMutationOptions<
-  DownvotePostMutation,
-  DownvotePostMutationVariables
->;
-export const DeleteUpvotedPostDocument = gql`
-  mutation deleteUpvotedPost($postId: uuid!) {
-    delete_upvoted_posts(where: { post_id: { _eq: $postId } }) {
-      affected_rows
-      returning {
-        id
-      }
-    }
-  }
-`;
-export type DeleteUpvotedPostMutationFn = Apollo.MutationFunction<
-  DeleteUpvotedPostMutation,
-  DeleteUpvotedPostMutationVariables
->;
-
-/**
- * __useDeleteUpvotedPostMutation__
- *
- * To run a mutation, you first call `useDeleteUpvotedPostMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useDeleteUpvotedPostMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [deleteUpvotedPostMutation, { data, loading, error }] = useDeleteUpvotedPostMutation({
- *   variables: {
- *      postId: // value for 'postId'
- *   },
- * });
- */
-export function useDeleteUpvotedPostMutation(
-  baseOptions?: Apollo.MutationHookOptions<
-    DeleteUpvotedPostMutation,
-    DeleteUpvotedPostMutationVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<
-    DeleteUpvotedPostMutation,
-    DeleteUpvotedPostMutationVariables
-  >(DeleteUpvotedPostDocument, options);
-}
-export type DeleteUpvotedPostMutationHookResult = ReturnType<
-  typeof useDeleteUpvotedPostMutation
->;
-export type DeleteUpvotedPostMutationResult =
-  Apollo.MutationResult<DeleteUpvotedPostMutation>;
-export type DeleteUpvotedPostMutationOptions = Apollo.BaseMutationOptions<
-  DeleteUpvotedPostMutation,
-  DeleteUpvotedPostMutationVariables
->;
 export const CreatePostDocument = gql`
   mutation createPost($object: posts_insert_input!) {
     insert_posts_one(object: $object) {
@@ -6163,6 +5580,56 @@ export type CreatePostMutationOptions = Apollo.BaseMutationOptions<
   CreatePostMutation,
   CreatePostMutationVariables
 >;
+export const DeletePostDocument = gql`
+  mutation deletePost($postId: uuid!) {
+    delete_posts_by_pk(id: $postId) {
+      id
+    }
+  }
+`;
+export type DeletePostMutationFn = Apollo.MutationFunction<
+  DeletePostMutation,
+  DeletePostMutationVariables
+>;
+
+/**
+ * __useDeletePostMutation__
+ *
+ * To run a mutation, you first call `useDeletePostMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeletePostMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deletePostMutation, { data, loading, error }] = useDeletePostMutation({
+ *   variables: {
+ *      postId: // value for 'postId'
+ *   },
+ * });
+ */
+export function useDeletePostMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    DeletePostMutation,
+    DeletePostMutationVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<DeletePostMutation, DeletePostMutationVariables>(
+    DeletePostDocument,
+    options,
+  );
+}
+export type DeletePostMutationHookResult = ReturnType<
+  typeof useDeletePostMutation
+>;
+export type DeletePostMutationResult =
+  Apollo.MutationResult<DeletePostMutation>;
+export type DeletePostMutationOptions = Apollo.BaseMutationOptions<
+  DeletePostMutation,
+  DeletePostMutationVariables
+>;
 export const InsertUserDocument = gql`
   mutation insertUser($payload: users_insert_input!) {
     insert_users_one(object: $payload) {
@@ -6212,6 +5679,61 @@ export type InsertUserMutationResult =
 export type InsertUserMutationOptions = Apollo.BaseMutationOptions<
   InsertUserMutation,
   InsertUserMutationVariables
+>;
+export const VotePostDocument = gql`
+  mutation votePost($postId: uuid!, $userId: uuid!, $vote: Int!) {
+    insert_voted_posts_one(
+      object: { post_id: $postId, user_id: $userId, vote: $vote }
+    ) {
+      id
+      post_id
+      user_id
+      created_at
+      updated_at
+    }
+  }
+`;
+export type VotePostMutationFn = Apollo.MutationFunction<
+  VotePostMutation,
+  VotePostMutationVariables
+>;
+
+/**
+ * __useVotePostMutation__
+ *
+ * To run a mutation, you first call `useVotePostMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useVotePostMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [votePostMutation, { data, loading, error }] = useVotePostMutation({
+ *   variables: {
+ *      postId: // value for 'postId'
+ *      userId: // value for 'userId'
+ *      vote: // value for 'vote'
+ *   },
+ * });
+ */
+export function useVotePostMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    VotePostMutation,
+    VotePostMutationVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<VotePostMutation, VotePostMutationVariables>(
+    VotePostDocument,
+    options,
+  );
+}
+export type VotePostMutationHookResult = ReturnType<typeof useVotePostMutation>;
+export type VotePostMutationResult = Apollo.MutationResult<VotePostMutation>;
+export type VotePostMutationOptions = Apollo.BaseMutationOptions<
+  VotePostMutation,
+  VotePostMutationVariables
 >;
 export const GetUserByIdDocument = gql`
   query getUserById($id: uuid!) {
@@ -6590,64 +6112,6 @@ export type GetAllPostsQueryResult = Apollo.QueryResult<
   GetAllPostsQuery,
   GetAllPostsQueryVariables
 >;
-export const GetUpvotedPostsDocument = gql`
-  query getUpvotedPosts($userId: uuid!) {
-    upvoted_posts(where: { user_id: { _eq: $userId } }) {
-      user_id
-    }
-  }
-`;
-
-/**
- * __useGetUpvotedPostsQuery__
- *
- * To run a query within a React component, call `useGetUpvotedPostsQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetUpvotedPostsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetUpvotedPostsQuery({
- *   variables: {
- *      userId: // value for 'userId'
- *   },
- * });
- */
-export function useGetUpvotedPostsQuery(
-  baseOptions: Apollo.QueryHookOptions<
-    GetUpvotedPostsQuery,
-    GetUpvotedPostsQueryVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<GetUpvotedPostsQuery, GetUpvotedPostsQueryVariables>(
-    GetUpvotedPostsDocument,
-    options,
-  );
-}
-export function useGetUpvotedPostsLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    GetUpvotedPostsQuery,
-    GetUpvotedPostsQueryVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<
-    GetUpvotedPostsQuery,
-    GetUpvotedPostsQueryVariables
-  >(GetUpvotedPostsDocument, options);
-}
-export type GetUpvotedPostsQueryHookResult = ReturnType<
-  typeof useGetUpvotedPostsQuery
->;
-export type GetUpvotedPostsLazyQueryHookResult = ReturnType<
-  typeof useGetUpvotedPostsLazyQuery
->;
-export type GetUpvotedPostsQueryResult = Apollo.QueryResult<
-  GetUpvotedPostsQuery,
-  GetUpvotedPostsQueryVariables
->;
 export const GetDraftPostsDocument = gql`
   query getDraftPosts {
     draft_posts {
@@ -6711,9 +6175,127 @@ export type GetDraftPostsQueryResult = Apollo.QueryResult<
   GetDraftPostsQuery,
   GetDraftPostsQueryVariables
 >;
+export const GetPostWithVotesDocument = gql`
+  query getPostWithVotes($postId: uuid!) {
+    voted_posts(where: { post_id: { _eq: $postId } }) {
+      id
+      post_id
+      user_id
+      vote
+    }
+  }
+`;
+
+/**
+ * __useGetPostWithVotesQuery__
+ *
+ * To run a query within a React component, call `useGetPostWithVotesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetPostWithVotesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetPostWithVotesQuery({
+ *   variables: {
+ *      postId: // value for 'postId'
+ *   },
+ * });
+ */
+export function useGetPostWithVotesQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    GetPostWithVotesQuery,
+    GetPostWithVotesQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetPostWithVotesQuery, GetPostWithVotesQueryVariables>(
+    GetPostWithVotesDocument,
+    options,
+  );
+}
+export function useGetPostWithVotesLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetPostWithVotesQuery,
+    GetPostWithVotesQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    GetPostWithVotesQuery,
+    GetPostWithVotesQueryVariables
+  >(GetPostWithVotesDocument, options);
+}
+export type GetPostWithVotesQueryHookResult = ReturnType<
+  typeof useGetPostWithVotesQuery
+>;
+export type GetPostWithVotesLazyQueryHookResult = ReturnType<
+  typeof useGetPostWithVotesLazyQuery
+>;
+export type GetPostWithVotesQueryResult = Apollo.QueryResult<
+  GetPostWithVotesQuery,
+  GetPostWithVotesQueryVariables
+>;
+export const UpdatePostVoteDocument = gql`
+  mutation updatePostVote($postId: uuid!, $vote: Int!) {
+    update_voted_posts(
+      where: { post_id: { _eq: $postId } }
+      _set: { vote: $vote }
+    ) {
+      affected_rows
+      returning {
+        id
+      }
+    }
+  }
+`;
+export type UpdatePostVoteMutationFn = Apollo.MutationFunction<
+  UpdatePostVoteMutation,
+  UpdatePostVoteMutationVariables
+>;
+
+/**
+ * __useUpdatePostVoteMutation__
+ *
+ * To run a mutation, you first call `useUpdatePostVoteMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdatePostVoteMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updatePostVoteMutation, { data, loading, error }] = useUpdatePostVoteMutation({
+ *   variables: {
+ *      postId: // value for 'postId'
+ *      vote: // value for 'vote'
+ *   },
+ * });
+ */
+export function useUpdatePostVoteMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    UpdatePostVoteMutation,
+    UpdatePostVoteMutationVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    UpdatePostVoteMutation,
+    UpdatePostVoteMutationVariables
+  >(UpdatePostVoteDocument, options);
+}
+export type UpdatePostVoteMutationHookResult = ReturnType<
+  typeof useUpdatePostVoteMutation
+>;
+export type UpdatePostVoteMutationResult =
+  Apollo.MutationResult<UpdatePostVoteMutation>;
+export type UpdatePostVoteMutationOptions = Apollo.BaseMutationOptions<
+  UpdatePostVoteMutation,
+  UpdatePostVoteMutationVariables
+>;
 export const GetPostsDocument = gql`
-  subscription getPosts {
-    posts {
+  subscription getPosts($orderBy: [posts_order_by!]) {
+    posts(order_by: $orderBy) {
       ...Post
       community {
         ...Community
@@ -6741,6 +6323,7 @@ export const GetPostsDocument = gql`
  * @example
  * const { data, loading, error } = useGetPostsSubscription({
  *   variables: {
+ *      orderBy: // value for 'orderBy'
  *   },
  * });
  */

@@ -28,6 +28,8 @@ export * from "./base/Checkbox";
 export * from "./base/Tabs";
 export * from "./base/Textarea";
 export * from "./base/DropdownTest";
+export * from "./base/Typography";
+export * from "./common/PreLoader";
 
 // icons
 export * from "./base/Icons/UpvoteIcon";

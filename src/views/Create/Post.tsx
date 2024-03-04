@@ -1,15 +1,11 @@
 import { ReactElement, useEffect, useRef, useState } from "react";
-import { MotionProps, Variants, motion } from "framer-motion";
+import { useWatch } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import {
   Badge,
-  Bold,
   Button,
-  Checkbox,
   Container,
-  CustomTextarea,
   Divider,
-  Dropdown,
-  DropdownItem,
   Form,
   Icon,
   Input,
@@ -18,28 +14,23 @@ import {
   MenuItem,
   Paragraph,
   Span,
-  Textarea,
 } from "@components";
-import { useForm, useWatch } from "react-hook-form";
-import { joiResolver } from "@hookform/resolvers/joi";
-import { PostValidatorSchema } from "@validators";
-import { ChevronDownIcon, LinkIcon, PlusIcon } from "@heroicons/react/24/solid";
-import CIcon from "@coreui/icons-react";
 import * as icon from "@coreui/icons";
-import classNames from "classnames";
-import { TagIcon } from "@heroicons/react/24/outline";
+import CIcon from "@coreui/icons-react";
+import { ToastrTypes } from "@enums";
 import {
   useCreatePostMutation,
   useGetFlaresByCommunityIdQuery,
   useSaveDraftMutation,
 } from "@graphql/gen/graphql";
+import { TagIcon } from "@heroicons/react/24/outline";
+import { LinkIcon, PlusIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import { useAuth, useToast } from "@hooks";
-import { ToastrTypes } from "@enums";
-import { compressImageUrl, getGraphQLErrorMessage } from "@utils";
-import { useNavigate } from "react-router-dom";
-import { PostProps } from "./Communities.props";
 import { PostInputs } from "@interfaces";
-import axios, { AxiosError } from "axios";
+import { getGraphQLErrorMessage } from "@utils";
+import axios from "axios";
+import classNames from "classnames";
+import { PostProps } from "./Communities.props";
 
 export const Post = ({
   communityId,
@@ -102,7 +93,7 @@ export const Post = ({
           content: "Post created successfully.",
         });
         navigate("/r/home");
-      } catch (error) {
+      } catch (err) {
         addToast({
           type: ToastrTypes.ERROR,
           title: "Image File",
@@ -145,8 +136,6 @@ export const Post = ({
     },
   });
 
-  console.log(errors);
-
   const handleSaveDraftPost = () => {
     if (!title) {
       trigger("title");
@@ -167,7 +156,6 @@ export const Post = ({
   };
 
   const onSubmit = async (data: PostInputs) => {
-    console.log(data, errors);
     if (!communityId) {
       addToast({
         type: ToastrTypes.ERROR,
@@ -195,9 +183,10 @@ export const Post = ({
   useEffect(() => {
     if (image) {
       const reader = new FileReader();
-      reader.readAsText(image[0]);
+      reader.readAsDataURL(image[0]);
       reader.onload = () => {
         setBase64Image(reader.result);
+        console.log(base64Image);
       };
     }
   }, [image]);
@@ -238,7 +227,7 @@ export const Post = ({
               whileHover={{
                 background: "#1a1a1b",
               }}
-              onClick={(e) => {
+              onClick={() => {
                 handleSetMarkup("font-bold");
               }}
             >
@@ -314,7 +303,15 @@ export const Post = ({
                 />
               </>
             ) : (
-              <img src={URL.createObjectURL(image[0])} />
+              <>
+                <img alt="Uploaded" src={URL.createObjectURL(image[0])} />
+                <Container
+                  className="absolute right-4 top-20"
+                  onClick={() => setImage(null)}
+                >
+                  <XMarkIcon className="h-8 w-8 text-[#6e868d]" />
+                </Container>
+              </>
             )}
           </Container>
         </Container>

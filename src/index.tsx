@@ -1,13 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./styles/main.scss";
-import App from "./App";
-import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { ApolloProvider } from "@apollo/client";
-import { client } from "./graphql/client/client";
-import { ToastrProvider } from "./context/ToastrContext";
 import { AuthProvider } from "./context/AuthContext";
+import { ToastrProvider } from "./context/ToastrContext";
+import { client } from "./graphql/client/client";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import "./styles/main.scss";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,

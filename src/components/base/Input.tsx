@@ -1,8 +1,8 @@
 import { ReactElement, useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { InputProps } from "./BaseComponent.props";
 import { Path } from "react-hook-form";
 import classNames from "classnames";
+import { AnimatePresence, motion } from "framer-motion";
+import { InputProps } from "./BaseComponent.props";
 import { Container } from "./Container";
 
 export const Input = <T extends object>({
@@ -58,10 +58,10 @@ export const Input = <T extends object>({
   useEffect(() => {
     const inputWidth = inputElement?.clientWidth;
     const animatedPlaceholderWidth = animatedPlaceholder?.clientWidth;
-    const calculatedDistance = Math.round(
+    const finalDistance = Math.round(
       (inputWidth || 0) - (animatedPlaceholderWidth || 0) - 32,
     );
-    setCalculatedDistance(calculatedDistance);
+    setCalculatedDistance(finalDistance);
   }, [animatedPlaceholder?.clientWidth, inputElement?.clientWidth]);
 
   return (
@@ -84,26 +84,29 @@ export const Input = <T extends object>({
             {placeholder}
           </motion.span>
         )}
-        <motion.input
-          id={`input-${placeholder}`}
-          className={classNames(
-            "w-full rounded-2xl bg-[#272729] px-4 py-3 text-sm text-[#6e868d] ring-gray-400 transition-all duration-200 hover:ring-2 focus:outline-none focus:ring-inset",
-            inputVariant ? `input-${inputVariant}` : "",
-            icon ? "pl-10" : "",
-            className,
-          )}
-          placeholder={replacePlaceholder}
-          onFocus={() => setIsFocused(true)}
-          ref={(r) => {
-            ref(r);
-            inputRef.current = r;
-            if (prefix && r) {
-              r.value = prefix;
-            }
-          }}
-          {...registerProps}
-          {...rest}
-        />
+        <motion.div className="flex w-full items-center">
+          <motion.span className="absolute left-9 text-[#6e868d]">
+            {prefix}
+          </motion.span>
+          <motion.input
+            id={`input-${placeholder}`}
+            className={classNames(
+              "w-full rounded-2xl bg-[#272729] px-4 py-3 text-sm text-[#6e868d] ring-gray-400 transition-all duration-200 hover:ring-2 focus:outline-none focus:ring-inset",
+              inputVariant ? `input-${inputVariant}` : "",
+              icon ? "pl-10" : "",
+              prefix ? "pl-[30px]" : "",
+              className,
+            )}
+            ref={(r) => {
+              ref(r);
+              inputRef.current = r;
+            }}
+            placeholder={replacePlaceholder}
+            onFocus={() => setIsFocused(true)}
+            {...registerProps}
+            {...rest}
+          />
+        </motion.div>
       </AnimatePresence>
     </Container>
   );

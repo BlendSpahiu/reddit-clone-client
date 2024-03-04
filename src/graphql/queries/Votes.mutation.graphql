@@ -1,0 +1,16 @@
+query getPostWithVotes($postId: uuid!) {
+  voted_posts(where: {post_id: {_eq: $postId}}) {
+    id
+    post_id
+    user_id
+    vote
+  }
+}
+mutation updatePostVote($postId: uuid!, $vote: Int!) {
+ update_voted_posts(where: {post_id: {_eq: $postId}}, _set: {vote: $vote}) {
+  affected_rows
+  returning {
+    id
+		}
+  }
+}

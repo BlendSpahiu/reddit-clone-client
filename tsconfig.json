@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "ES2016",
     "lib": [
       "dom",
       "dom.iterable",
@@ -21,7 +21,11 @@
     "jsx": "react-jsx"
   },
   "include": [
-    "src", 
+    "./src",
+    "tailwind.config.js",
+    "postcss.config.js",
+    "vite.config.ts" 
   ],
-  "extends": ["./tsconfig.paths.json"]
+  "extends": "./tsconfig.paths.json",
+  "exclude": ["node_modules", "**/node_modules/*"]
 }

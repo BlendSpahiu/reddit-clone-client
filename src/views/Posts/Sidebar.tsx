@@ -1,10 +1,10 @@
-import { Container, Icon, Paragraph } from "@components";
-import { homeButtons, topics } from "@static";
-import classNames from "classnames";
 import { ReactElement, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { Container, Icon, Paragraph } from "@components";
+import { ChevronDownIcon } from "@heroicons/react/24/outline";
+import { homeButtons, topics } from "@static";
+import classNames from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
-import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/outline";
 
 export const Sidebar = (): ReactElement => {
   const [isSubmenuOpen, setIsSubmenuOpen] = useState<boolean>(false);
@@ -13,14 +13,13 @@ export const Sidebar = (): ReactElement => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
-  console.log(depthLevel);
-
   return (
     <Container className="sticky flex h-screen w-[350px] justify-end border-r border-gray-700 bg-base pr-3 pt-6 text-white">
       <motion.div className="space-y-2 pl-14">
         <motion.div className="space-y-2">
           {homeButtons.map((item) => (
             <motion.div
+              key={item.label}
               className={classNames(
                 "flex w-[250px] cursor-pointer items-center justify-start space-x-4 rounded-xl px-4 py-2",
                 pathname === item.link ? "bg-[#000]" : "",
@@ -64,7 +63,6 @@ export const Sidebar = (): ReactElement => {
                   } else {
                     setDepthLevel(index + 1);
                   }
-                  console.log(depthLevel);
                 }}
               >
                 <Container className="flex items-center space-x-4">
@@ -96,6 +94,7 @@ export const Sidebar = (): ReactElement => {
                   >
                     {topic.items.map((item) => (
                       <Container
+                        key={item.label}
                         className="rounded-r-xl py-3"
                         initial={{
                           background: "#1a1a1b",

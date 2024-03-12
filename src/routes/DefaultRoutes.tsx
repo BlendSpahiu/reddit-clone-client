@@ -18,16 +18,24 @@ export const DefaultRoutes = (): ReactElement => {
       />
       <Route path="/logout" element={<AuthRedirect />} />
       <Route path="*" element={<NotFound />} />
-      <Route element={<AuthRoute />}>
-        <Route
-          path="/create"
-          element={
-            <MainLayout isCreate>
-              <Create />
-            </MainLayout>
-          }
-        />
-      </Route>
+      {/* <Route element={<AuthRoute />}> */}
+      <Route
+        path="/create"
+        element={
+          <MainLayout isCreate>
+            <Create />
+          </MainLayout>
+        }
+      />
+      {/* </Route> */}
+      <Route
+        path="/edit/:postId"
+        element={
+          <MainLayout isCreate>
+            <Create />
+          </MainLayout>
+        }
+      />
     </Routes>
   );
 };

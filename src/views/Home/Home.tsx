@@ -47,6 +47,7 @@ export const Home = (): ReactElement => {
       post_id: string;
     }[]
   >([]);
+  const [vote, setVote] = useState<number>(0);
 
   const ref = useRef<HTMLDivElement | null>(null);
 
@@ -75,6 +76,7 @@ export const Home = (): ReactElement => {
     vote: number,
   ) => {
     if (!voteExists) {
+      setVote(1);
       votePostMutation({
         variables: {
           postId,
@@ -83,6 +85,7 @@ export const Home = (): ReactElement => {
         },
       });
     } else {
+      setVote(-1);
       updateVotePostMutation({
         variables: {
           postId,
@@ -124,6 +127,12 @@ export const Home = (): ReactElement => {
             const voteExists = post.voted_posts.find(
               (vote) => vote.post_id === post.id,
             );
+            const upvoteColor = voteExists
+              ? voteExists.user_id === user?.id && voteExists.vote === 1
+              : vote === 1;
+            const downvoteColor = voteExists
+              ? voteExists.user_id === user?.id && voteExists.vote === -1
+              : vote === -1;
 
             console.log(voteExists);
 
@@ -213,17 +222,14 @@ export const Home = (): ReactElement => {
                       <ArrowUpIcon
                         className={classNames(
                           "h-5 w-5 hover:stroke-orange-500",
-                          voteExists?.user_id === user?.id &&
-                            voteExists?.vote === 1
-                            ? "stroke-orange-500"
-                            : "stroke-current",
+                          upvoteColor ? "stroke-orange-500" : "stroke-current",
                         )}
                       />
                     </Container>
                     <Paragraph>
-                      {post.voted_posts.reduce(
-                        (a, b) => (a.vote || 0) - (b.vote || 0),
-                      ).vote || 0}
+                      {post.voted_posts
+                        .filter((post) => post.vote)
+                        .reduce((a, b) => a + (b.vote || 0), 0)}
                     </Paragraph>
                     <Container
                       layout
@@ -243,8 +249,7 @@ export const Home = (): ReactElement => {
                         }}
                         className={classNames(
                           "h-5 w-5 hover:stroke-indigo-400",
-                          voteExists?.user_id === user?.id &&
-                            voteExists?.vote === -1
+                          downvoteColor
                             ? "stroke-indigo-500"
                             : "stroke-current",
                         )}

@@ -20,7 +20,6 @@ import {
 import { useAuth, useOnClickOutside } from "@hooks";
 import { ReactElement, useEffect, useRef, useState } from "react";
 import { CreateCommunity } from "./CreateCommunity";
-import { gqlVar } from "@utils";
 import { CreatePost } from "./CreatePost";
 import { DraftsModal } from "./DraftsModal";
 

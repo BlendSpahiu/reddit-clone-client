@@ -360,6 +360,7 @@ export type Comments_Updates = {
 /** columns and relationships of "communities" */
 export type Communities = {
   __typename?: "communities";
+  areFlaresEnabled: Scalars["Boolean"]["output"];
   category?: Maybe<Scalars["String"]["output"]>;
   /** An array relationship */
   communities_users: Array<Communities_Users>;
@@ -577,6 +578,7 @@ export type Communities_Bool_Exp = {
   _and?: InputMaybe<Array<Communities_Bool_Exp>>;
   _not?: InputMaybe<Communities_Bool_Exp>;
   _or?: InputMaybe<Array<Communities_Bool_Exp>>;
+  areFlaresEnabled?: InputMaybe<Boolean_Comparison_Exp>;
   category?: InputMaybe<String_Comparison_Exp>;
   communities_users?: InputMaybe<Communities_Users_Bool_Exp>;
   communities_users_aggregate?: InputMaybe<Communities_Users_Aggregate_Bool_Exp>;
@@ -614,6 +616,7 @@ export type Communities_Inc_Input = {
 
 /** input type for inserting data into table "communities" */
 export type Communities_Insert_Input = {
+  areFlaresEnabled?: InputMaybe<Scalars["Boolean"]["input"]>;
   category?: InputMaybe<Scalars["String"]["input"]>;
   communities_users?: InputMaybe<Communities_Users_Arr_Rel_Insert_Input>;
   created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
@@ -706,6 +709,7 @@ export type Communities_On_Conflict = {
 
 /** Ordering options when selecting data from "communities". */
 export type Communities_Order_By = {
+  areFlaresEnabled?: InputMaybe<Order_By>;
   category?: InputMaybe<Order_By>;
   communities_users_aggregate?: InputMaybe<Communities_Users_Aggregate_Order_By>;
   created_at?: InputMaybe<Order_By>;
@@ -731,6 +735,8 @@ export type Communities_Pk_Columns_Input = {
 /** select columns of table "communities" */
 export enum Communities_Select_Column {
   /** column name */
+  AreFlaresEnabled = "areFlaresEnabled",
+  /** column name */
   Category = "category",
   /** column name */
   CreatedAt = "created_at",
@@ -753,17 +759,22 @@ export enum Communities_Select_Column {
 /** select "communities_aggregate_bool_exp_bool_and_arguments_columns" columns of table "communities" */
 export enum Communities_Select_Column_Communities_Aggregate_Bool_Exp_Bool_And_Arguments_Columns {
   /** column name */
+  AreFlaresEnabled = "areFlaresEnabled",
+  /** column name */
   IsNsfw = "isNSFW",
 }
 
 /** select "communities_aggregate_bool_exp_bool_or_arguments_columns" columns of table "communities" */
 export enum Communities_Select_Column_Communities_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns {
   /** column name */
+  AreFlaresEnabled = "areFlaresEnabled",
+  /** column name */
   IsNsfw = "isNSFW",
 }
 
 /** input type for updating data in table "communities" */
 export type Communities_Set_Input = {
+  areFlaresEnabled?: InputMaybe<Scalars["Boolean"]["input"]>;
   category?: InputMaybe<Scalars["String"]["input"]>;
   created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
   id?: InputMaybe<Scalars["uuid"]["input"]>;
@@ -818,6 +829,7 @@ export type Communities_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Communities_Stream_Cursor_Value_Input = {
+  areFlaresEnabled?: InputMaybe<Scalars["Boolean"]["input"]>;
   category?: InputMaybe<Scalars["String"]["input"]>;
   created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
   id?: InputMaybe<Scalars["uuid"]["input"]>;
@@ -842,6 +854,8 @@ export type Communities_Sum_Order_By = {
 
 /** update columns of table "communities" */
 export enum Communities_Update_Column {
+  /** column name */
+  AreFlaresEnabled = "areFlaresEnabled",
   /** column name */
   Category = "category",
   /** column name */
@@ -882,6 +896,7 @@ export type Communities_Users = {
   /** An object relationship */
   user: Users;
   user_id: Scalars["uuid"]["output"];
+  user_role: Scalars["String"]["output"];
 };
 
 /** aggregated selection of "communities_users" */
@@ -942,6 +957,7 @@ export type Communities_Users_Bool_Exp = {
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   user?: InputMaybe<Users_Bool_Exp>;
   user_id?: InputMaybe<Uuid_Comparison_Exp>;
+  user_role?: InputMaybe<String_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "communities_users" */
@@ -959,6 +975,7 @@ export type Communities_Users_Insert_Input = {
   updated_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
   user?: InputMaybe<Users_Obj_Rel_Insert_Input>;
   user_id?: InputMaybe<Scalars["uuid"]["input"]>;
+  user_role?: InputMaybe<Scalars["String"]["input"]>;
 };
 
 /** aggregate max on columns */
@@ -969,6 +986,7 @@ export type Communities_Users_Max_Fields = {
   id?: Maybe<Scalars["uuid"]["output"]>;
   updated_at?: Maybe<Scalars["timestamptz"]["output"]>;
   user_id?: Maybe<Scalars["uuid"]["output"]>;
+  user_role?: Maybe<Scalars["String"]["output"]>;
 };
 
 /** order by max() on columns of table "communities_users" */
@@ -978,6 +996,7 @@ export type Communities_Users_Max_Order_By = {
   id?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
   user_id?: InputMaybe<Order_By>;
+  user_role?: InputMaybe<Order_By>;
 };
 
 /** aggregate min on columns */
@@ -988,6 +1007,7 @@ export type Communities_Users_Min_Fields = {
   id?: Maybe<Scalars["uuid"]["output"]>;
   updated_at?: Maybe<Scalars["timestamptz"]["output"]>;
   user_id?: Maybe<Scalars["uuid"]["output"]>;
+  user_role?: Maybe<Scalars["String"]["output"]>;
 };
 
 /** order by min() on columns of table "communities_users" */
@@ -997,6 +1017,7 @@ export type Communities_Users_Min_Order_By = {
   id?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
   user_id?: InputMaybe<Order_By>;
+  user_role?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "communities_users" */
@@ -1024,6 +1045,7 @@ export type Communities_Users_Order_By = {
   updated_at?: InputMaybe<Order_By>;
   user?: InputMaybe<Users_Order_By>;
   user_id?: InputMaybe<Order_By>;
+  user_role?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: communities_users */
@@ -1043,6 +1065,8 @@ export enum Communities_Users_Select_Column {
   UpdatedAt = "updated_at",
   /** column name */
   UserId = "user_id",
+  /** column name */
+  UserRole = "user_role",
 }
 
 /** input type for updating data in table "communities_users" */
@@ -1052,6 +1076,7 @@ export type Communities_Users_Set_Input = {
   id?: InputMaybe<Scalars["uuid"]["input"]>;
   updated_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
   user_id?: InputMaybe<Scalars["uuid"]["input"]>;
+  user_role?: InputMaybe<Scalars["String"]["input"]>;
 };
 
 /** Streaming cursor of the table "communities_users" */
@@ -1069,6 +1094,7 @@ export type Communities_Users_Stream_Cursor_Value_Input = {
   id?: InputMaybe<Scalars["uuid"]["input"]>;
   updated_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
   user_id?: InputMaybe<Scalars["uuid"]["input"]>;
+  user_role?: InputMaybe<Scalars["String"]["input"]>;
 };
 
 /** update columns of table "communities_users" */
@@ -1083,6 +1109,8 @@ export enum Communities_Users_Update_Column {
   UpdatedAt = "updated_at",
   /** column name */
   UserId = "user_id",
+  /** column name */
+  UserRole = "user_role",
 }
 
 export type Communities_Users_Updates = {
@@ -1666,6 +1694,7 @@ export type Flares = {
   community_id: Scalars["uuid"]["output"];
   created_at: Scalars["timestamptz"]["output"];
   id: Scalars["uuid"]["output"];
+  isEnabled?: Maybe<Scalars["Boolean"]["output"]>;
   name: Scalars["String"]["output"];
   updated_at: Scalars["timestamptz"]["output"];
   /** An object relationship */
@@ -1681,7 +1710,23 @@ export type Flares_Aggregate = {
 };
 
 export type Flares_Aggregate_Bool_Exp = {
+  bool_and?: InputMaybe<Flares_Aggregate_Bool_Exp_Bool_And>;
+  bool_or?: InputMaybe<Flares_Aggregate_Bool_Exp_Bool_Or>;
   count?: InputMaybe<Flares_Aggregate_Bool_Exp_Count>;
+};
+
+export type Flares_Aggregate_Bool_Exp_Bool_And = {
+  arguments: Flares_Select_Column_Flares_Aggregate_Bool_Exp_Bool_And_Arguments_Columns;
+  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
+  filter?: InputMaybe<Flares_Bool_Exp>;
+  predicate: Boolean_Comparison_Exp;
+};
+
+export type Flares_Aggregate_Bool_Exp_Bool_Or = {
+  arguments: Flares_Select_Column_Flares_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns;
+  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
+  filter?: InputMaybe<Flares_Bool_Exp>;
+  predicate: Boolean_Comparison_Exp;
 };
 
 export type Flares_Aggregate_Bool_Exp_Count = {
@@ -1728,6 +1773,7 @@ export type Flares_Bool_Exp = {
   community_id?: InputMaybe<Uuid_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
+  isEnabled?: InputMaybe<Boolean_Comparison_Exp>;
   name?: InputMaybe<String_Comparison_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   user?: InputMaybe<Users_Bool_Exp>;
@@ -1746,6 +1792,7 @@ export type Flares_Insert_Input = {
   community_id?: InputMaybe<Scalars["uuid"]["input"]>;
   created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
   id?: InputMaybe<Scalars["uuid"]["input"]>;
+  isEnabled?: InputMaybe<Scalars["Boolean"]["input"]>;
   name?: InputMaybe<Scalars["String"]["input"]>;
   updated_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
   user?: InputMaybe<Users_Obj_Rel_Insert_Input>;
@@ -1816,6 +1863,7 @@ export type Flares_Order_By = {
   community_id?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  isEnabled?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
   user?: InputMaybe<Users_Order_By>;
@@ -1836,6 +1884,8 @@ export enum Flares_Select_Column {
   /** column name */
   Id = "id",
   /** column name */
+  IsEnabled = "isEnabled",
+  /** column name */
   Name = "name",
   /** column name */
   UpdatedAt = "updated_at",
@@ -1843,11 +1893,24 @@ export enum Flares_Select_Column {
   UserId = "user_id",
 }
 
+/** select "flares_aggregate_bool_exp_bool_and_arguments_columns" columns of table "flares" */
+export enum Flares_Select_Column_Flares_Aggregate_Bool_Exp_Bool_And_Arguments_Columns {
+  /** column name */
+  IsEnabled = "isEnabled",
+}
+
+/** select "flares_aggregate_bool_exp_bool_or_arguments_columns" columns of table "flares" */
+export enum Flares_Select_Column_Flares_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns {
+  /** column name */
+  IsEnabled = "isEnabled",
+}
+
 /** input type for updating data in table "flares" */
 export type Flares_Set_Input = {
   community_id?: InputMaybe<Scalars["uuid"]["input"]>;
   created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
   id?: InputMaybe<Scalars["uuid"]["input"]>;
+  isEnabled?: InputMaybe<Scalars["Boolean"]["input"]>;
   name?: InputMaybe<Scalars["String"]["input"]>;
   updated_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
   user_id?: InputMaybe<Scalars["uuid"]["input"]>;
@@ -1866,6 +1929,7 @@ export type Flares_Stream_Cursor_Value_Input = {
   community_id?: InputMaybe<Scalars["uuid"]["input"]>;
   created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
   id?: InputMaybe<Scalars["uuid"]["input"]>;
+  isEnabled?: InputMaybe<Scalars["Boolean"]["input"]>;
   name?: InputMaybe<Scalars["String"]["input"]>;
   updated_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
   user_id?: InputMaybe<Scalars["uuid"]["input"]>;
@@ -1879,6 +1943,8 @@ export enum Flares_Update_Column {
   CreatedAt = "created_at",
   /** column name */
   Id = "id",
+  /** column name */
+  IsEnabled = "isEnabled",
   /** column name */
   Name = "name",
   /** column name */
@@ -4321,6 +4387,7 @@ export type FlairFragment = {
   name: string;
   user_id: any;
   community_id: any;
+  isEnabled?: boolean | null;
   created_at: any;
   updated_at: any;
 };
@@ -4554,6 +4621,7 @@ export type InsertFlairMutation = {
       name: string;
       user_id: any;
       community_id: any;
+      isEnabled?: boolean | null;
       created_at: any;
       updated_at: any;
     }>;
@@ -4640,6 +4708,80 @@ export type DeletePostMutationVariables = Exact<{
 export type DeletePostMutation = {
   __typename?: "mutation_root";
   delete_posts_by_pk?: { __typename?: "posts"; id: any } | null;
+};
+
+export type UpdatePostMutationVariables = Exact<{
+  postId: Scalars["uuid"]["input"];
+  set: Posts_Set_Input;
+}>;
+
+export type UpdatePostMutation = {
+  __typename?: "mutation_root";
+  update_posts_by_pk?: {
+    __typename?: "posts";
+    id: any;
+    content?: string | null;
+    title: string;
+    downvotes: number;
+    upvotes: number;
+    link?: string | null;
+    image?: string | null;
+    isNSFW: boolean;
+    isOriginalContent: boolean;
+    isSpoiler: boolean;
+    flair?: string | null;
+    created_at: any;
+    updated_at: any;
+    user: {
+      __typename?: "users";
+      id: any;
+      username: string;
+      email: string;
+      date_of_birth?: any | null;
+      role: string;
+      created_at: any;
+      updated_at: any;
+      communities: Array<{
+        __typename?: "communities";
+        id: any;
+        category?: string | null;
+        name: string;
+        user_id?: any | null;
+        type: number;
+        isNSFW: boolean;
+        created_at: any;
+        updated_at: any;
+        flares: Array<{
+          __typename?: "flares";
+          id: any;
+          name: string;
+          created_at: any;
+          updated_at: any;
+        }>;
+        communities_users_aggregate: {
+          __typename?: "communities_users_aggregate";
+          aggregate?: {
+            __typename?: "communities_users_aggregate_fields";
+            count: number;
+          } | null;
+        };
+      }>;
+      comments: Array<{
+        __typename?: "comments";
+        id: any;
+        content: string;
+        created_at: any;
+        updated_at: any;
+      }>;
+    };
+    voted_posts: Array<{
+      __typename?: "voted_posts";
+      id: any;
+      user_id: any;
+      post_id: any;
+      vote?: number | null;
+    }>;
+  } | null;
 };
 
 export type InsertUserMutationVariables = Exact<{
@@ -4795,6 +4937,7 @@ export type GetFlaresByCommunityIdQuery = {
     name: string;
     user_id: any;
     community_id: any;
+    isEnabled?: boolean | null;
     created_at: any;
     updated_at: any;
   }>;
@@ -4974,6 +5117,79 @@ export type GetDraftPostsQuery = {
   };
 };
 
+export type GetPostByIdQueryVariables = Exact<{
+  postId: Scalars["uuid"]["input"];
+}>;
+
+export type GetPostByIdQuery = {
+  __typename?: "query_root";
+  posts_by_pk?: {
+    __typename?: "posts";
+    id: any;
+    content?: string | null;
+    title: string;
+    downvotes: number;
+    upvotes: number;
+    link?: string | null;
+    image?: string | null;
+    isNSFW: boolean;
+    isOriginalContent: boolean;
+    isSpoiler: boolean;
+    flair?: string | null;
+    created_at: any;
+    updated_at: any;
+    user: {
+      __typename?: "users";
+      id: any;
+      username: string;
+      email: string;
+      date_of_birth?: any | null;
+      role: string;
+      created_at: any;
+      updated_at: any;
+      communities: Array<{
+        __typename?: "communities";
+        id: any;
+        category?: string | null;
+        name: string;
+        user_id?: any | null;
+        type: number;
+        isNSFW: boolean;
+        created_at: any;
+        updated_at: any;
+        flares: Array<{
+          __typename?: "flares";
+          id: any;
+          name: string;
+          created_at: any;
+          updated_at: any;
+        }>;
+        communities_users_aggregate: {
+          __typename?: "communities_users_aggregate";
+          aggregate?: {
+            __typename?: "communities_users_aggregate_fields";
+            count: number;
+          } | null;
+        };
+      }>;
+      comments: Array<{
+        __typename?: "comments";
+        id: any;
+        content: string;
+        created_at: any;
+        updated_at: any;
+      }>;
+    };
+    voted_posts: Array<{
+      __typename?: "voted_posts";
+      id: any;
+      user_id: any;
+      post_id: any;
+      vote?: number | null;
+    }>;
+  } | null;
+};
+
 export type GetPostWithVotesQueryVariables = Exact<{
   postId: Scalars["uuid"]["input"];
 }>;
@@ -5140,6 +5356,7 @@ export const FlairFragmentDoc = gql`
     name
     user_id
     community_id
+    isEnabled
     created_at
     updated_at
   }
@@ -5629,6 +5846,58 @@ export type DeletePostMutationResult =
 export type DeletePostMutationOptions = Apollo.BaseMutationOptions<
   DeletePostMutation,
   DeletePostMutationVariables
+>;
+export const UpdatePostDocument = gql`
+  mutation updatePost($postId: uuid!, $set: posts_set_input!) {
+    update_posts_by_pk(pk_columns: { id: $postId }, _set: $set) {
+      ...Post
+    }
+  }
+  ${PostFragmentDoc}
+`;
+export type UpdatePostMutationFn = Apollo.MutationFunction<
+  UpdatePostMutation,
+  UpdatePostMutationVariables
+>;
+
+/**
+ * __useUpdatePostMutation__
+ *
+ * To run a mutation, you first call `useUpdatePostMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdatePostMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updatePostMutation, { data, loading, error }] = useUpdatePostMutation({
+ *   variables: {
+ *      postId: // value for 'postId'
+ *      set: // value for 'set'
+ *   },
+ * });
+ */
+export function useUpdatePostMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    UpdatePostMutation,
+    UpdatePostMutationVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<UpdatePostMutation, UpdatePostMutationVariables>(
+    UpdatePostDocument,
+    options,
+  );
+}
+export type UpdatePostMutationHookResult = ReturnType<
+  typeof useUpdatePostMutation
+>;
+export type UpdatePostMutationResult =
+  Apollo.MutationResult<UpdatePostMutation>;
+export type UpdatePostMutationOptions = Apollo.BaseMutationOptions<
+  UpdatePostMutation,
+  UpdatePostMutationVariables
 >;
 export const InsertUserDocument = gql`
   mutation insertUser($payload: users_insert_input!) {
@@ -6174,6 +6443,63 @@ export type GetDraftPostsLazyQueryHookResult = ReturnType<
 export type GetDraftPostsQueryResult = Apollo.QueryResult<
   GetDraftPostsQuery,
   GetDraftPostsQueryVariables
+>;
+export const GetPostByIdDocument = gql`
+  query getPostById($postId: uuid!) {
+    posts_by_pk(id: $postId) {
+      ...Post
+    }
+  }
+  ${PostFragmentDoc}
+`;
+
+/**
+ * __useGetPostByIdQuery__
+ *
+ * To run a query within a React component, call `useGetPostByIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetPostByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetPostByIdQuery({
+ *   variables: {
+ *      postId: // value for 'postId'
+ *   },
+ * });
+ */
+export function useGetPostByIdQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    GetPostByIdQuery,
+    GetPostByIdQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetPostByIdQuery, GetPostByIdQueryVariables>(
+    GetPostByIdDocument,
+    options,
+  );
+}
+export function useGetPostByIdLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetPostByIdQuery,
+    GetPostByIdQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetPostByIdQuery, GetPostByIdQueryVariables>(
+    GetPostByIdDocument,
+    options,
+  );
+}
+export type GetPostByIdQueryHookResult = ReturnType<typeof useGetPostByIdQuery>;
+export type GetPostByIdLazyQueryHookResult = ReturnType<
+  typeof useGetPostByIdLazyQuery
+>;
+export type GetPostByIdQueryResult = Apollo.QueryResult<
+  GetPostByIdQuery,
+  GetPostByIdQueryVariables
 >;
 export const GetPostWithVotesDocument = gql`
   query getPostWithVotes($postId: uuid!) {

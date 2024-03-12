@@ -29,3 +29,9 @@ query getDraftPosts {
     }
   }
 }
+
+query getPostById($postId: uuid!) {
+  posts_by_pk(id: $postId) {
+    ...Post
+  }
+}

@@ -1,5 +1,6 @@
 import {
   Container,
+  If,
   Link,
   Paragraph,
   TabContent,
@@ -7,6 +8,7 @@ import {
   TabHeader,
   TabHeaderContaier,
   Tabs,
+  Ternary,
 } from "@components";
 import {
   LinkIcon,
@@ -28,6 +30,8 @@ import { PostValidatorSchema } from "@validators";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { useForm } from "react-hook-form";
 import { PostInputs } from "@interfaces";
+import { useParams } from "react-router-dom";
+import { EditPost } from "./EditPost";
 
 export const CreatePost = ({
   selectedCommunity,
@@ -35,6 +39,9 @@ export const CreatePost = ({
   selectedCommunity: CommunityFragment;
 }): ReactElement => {
   const [activeTab, setActiveTab] = useState<number>(0);
+
+  const params = useParams();
+  console.log(params);
 
   const formProps = useForm<PostInputs>({
     resolver: joiResolver(PostValidatorSchema()),
@@ -78,11 +85,23 @@ export const CreatePost = ({
       </TabHeaderContaier>
       <TabContentContaier>
         <TabContent tabId={activeTab} activeTab={activeTab}>
-          <Post
-            formProps={formProps}
-            activeTab={activeTab}
-            communityId={selectedCommunity.id}
-          />
+          <Ternary
+            condition={!!params.postId?.toString()}
+            fallback={
+              <Post
+                formProps={formProps}
+                activeTab={activeTab}
+                communityId={selectedCommunity.id}
+              />
+            }
+          >
+            <EditPost
+              formProps={formProps}
+              activeTab={activeTab}
+              communityId={selectedCommunity.id}
+              postId={params.postId?.toString() || ""}
+            />
+          </Ternary>
           <Container className="flex flex-col space-y-2 rounded-b-md bg-[#272729] p-3">
             <Container className="flex items-center space-x-2">
               <input type="checkbox" />

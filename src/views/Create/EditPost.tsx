@@ -1,40 +1,47 @@
-import { ReactElement, useEffect, useRef, useState } from "react";
-import { useWatch } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import {
-  Badge,
-  Button,
   Container,
-  Divider,
-  Form,
-  Icon,
   Input,
+  Span,
+  Paragraph,
   Label,
+  Badge,
+  Icon,
+  Divider,
   Menu,
   MenuItem,
-  Paragraph,
-  Span,
+  Button,
+  Form,
 } from "@components";
-import * as icon from "@coreui/icons";
 import CIcon from "@coreui/icons-react";
+import {
+  LinkIcon,
+  XMarkIcon,
+  PlusIcon,
+  TagIcon,
+} from "@heroicons/react/24/outline";
+import * as icon from "@coreui/icons";
+import classNames from "classnames";
+import { ReactElement, useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { EditPostProps, PostProps } from "./Communities.props";
 import { ToastrTypes } from "@enums";
 import {
   useCreatePostMutation,
-  useGetFlaresByCommunityIdQuery,
   useSaveDraftMutation,
+  useGetFlaresByCommunityIdQuery,
+  useUpdatePostMutation,
+  useGetPostByIdQuery,
 } from "@graphql/gen/graphql";
-import { TagIcon } from "@heroicons/react/24/outline";
-import { LinkIcon, PlusIcon, XMarkIcon } from "@heroicons/react/24/solid";
-import { useAuth, useToast } from "@hooks";
+import { useToast, useAuth } from "@hooks";
 import { PostInputs } from "@interfaces";
 import { getGraphQLErrorMessage } from "@utils";
 import axios from "axios";
-import classNames from "classnames";
-import { PostProps } from "./Communities.props";
+import { useWatch } from "react-hook-form";
 
-export const Post = ({
+export const EditPost = ({
   communityId,
   activeTab,
+  postId,
   formProps: {
     control,
     formState: { errors },
@@ -43,8 +50,9 @@ export const Post = ({
     getValues,
     setValue,
     trigger,
+    reset,
   },
-}: PostProps): ReactElement => {
+}: EditPostProps): ReactElement => {
   const [image, setImage] = useState<FileList | null>(null);
   const [base64Image, setBase64Image] = useState<string | ArrayBuffer | null>(
     null,
@@ -55,6 +63,7 @@ export const Post = ({
   const [markup, setMarkup] = useState<string[]>([]);
 
   const textareaRef = useRef<HTMLDivElement | null>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   const navigate = useNavigate();
   const { addToast } = useToast();
@@ -77,14 +86,29 @@ export const Post = ({
     textareaRef.current?.appendChild(newText);
   };
 
-  const [insertPostMutation, { loading }] = useCreatePostMutation({
-    onCompleted: async (data) => {
+  // graphql
+  const {} = useGetPostByIdQuery({
+    variables: { postId },
+    onCompleted: (data) => {
+      const post = data.posts_by_pk;
+      reset({
+        title: post?.title,
+        content: post?.content || "",
+        isNSFW: post?.isNSFW,
+        isOC: post?.isOriginalContent,
+        isSpoiler: post?.isSpoiler,
+        link: post?.link || "",
+      });
+    },
+  });
+  const [updatePostMutation, { loading }] = useUpdatePostMutation({
+    onCompleted: async () => {
       try {
         await axios.post(
           "https://65dfae79ff5e305f32a2f6b1.mockapi.io/api/v1/images",
           {
             base64Image: base64Image as string,
-            post_id: data.insert_posts_one?.id || "",
+            post_id: postId,
           },
         );
         addToast({
@@ -110,24 +134,6 @@ export const Post = ({
     },
   });
 
-  const [insertDraftPostMutation, { loading: draftsLoading }] =
-    useSaveDraftMutation({
-      onCompleted: () => {
-        addToast({
-          type: ToastrTypes.SUCCESS,
-          title: "Drafts",
-          content: "Successfully saved post as draft.",
-        });
-      },
-      onError: (err) => {
-        addToast({
-          type: ToastrTypes.ERROR,
-          title: "Drafts",
-          content: getGraphQLErrorMessage(err),
-        });
-      },
-    });
-
   const { data: flares } = useGetFlaresByCommunityIdQuery({
     variables: {
       userId: user?.id || "",
@@ -140,25 +146,6 @@ export const Post = ({
     },
   });
 
-  const handleSaveDraftPost = () => {
-    if (!title) {
-      trigger("title");
-      return;
-    }
-    insertDraftPostMutation({
-      variables: {
-        obj: {
-          title,
-          content,
-          isNSFW,
-          isSpoiler,
-          isOriginalContent: isOC,
-          user_id: user?.id,
-        },
-      },
-    });
-  };
-
   const onSubmit = async (data: PostInputs) => {
     if (!communityId) {
       addToast({
@@ -169,16 +156,11 @@ export const Post = ({
       return;
     }
 
-    insertPostMutation({
+    updatePostMutation({
       variables: {
-        object: {
-          title: data.title,
-          content: data.content,
-          isNSFW: data.isNSFW,
-          isSpoiler: data.isSpoiler,
-          isOriginalContent: data.isOC,
-          creator_id: user?.id,
-          community_id: communityId,
+        postId,
+        set: {
+          ...data,
         },
       },
     });
@@ -205,6 +187,7 @@ export const Post = ({
             register={register}
             inputVariant="secondary"
             shouldAnimate={false}
+            defaultValue={title}
             maxLength={300}
           />
           <Span className="absolute right-5 text-sm text-description">
@@ -452,17 +435,6 @@ export const Post = ({
       <Divider className="my-3 bg-[#7b7d7e]" />
       <Container className="flex items-center justify-end space-x-2">
         <Button
-          onClick={handleSaveDraftPost}
-          initial={{ background: "#1a1a1b" }}
-          whileHover={{
-            background: "#747474",
-          }}
-          buttonVariant="none"
-          className="rounded-full px-3 py-1 font-semibold ring-1 ring-white"
-        >
-          Save Draft
-        </Button>
-        <Button
           initial={{ background: "#e1e1e1" }}
           whileHover={{
             background: "#fff",
@@ -471,7 +443,7 @@ export const Post = ({
           buttonVariant="none"
           className="rounded-full bg-[#e1e1e1] px-3 py-1 font-semibold text-[#808080] ring-1 ring-white"
         >
-          Post
+          Update
         </Button>
       </Container>
     </Form>

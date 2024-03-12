@@ -20,6 +20,7 @@ import { useToast } from "@hooks";
 import { ToastrTypes } from "@enums";
 import { getGraphQLErrorMessage } from "@utils";
 import { AnimatePresence } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 export const Dropdown = ({
   postId,
@@ -29,6 +30,7 @@ export const Dropdown = ({
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
 
+  const navigate = useNavigate();
   const { addToast } = useToast();
 
   const [deletePostMutation] = useDeletePostMutation({
@@ -76,6 +78,7 @@ export const Dropdown = ({
         {isPostCreator && (
           <>
             <MenuItem
+              onClick={() => navigate(`/edit/${postId}`)}
               initial={{
                 background: "#1a1a1b",
               }}

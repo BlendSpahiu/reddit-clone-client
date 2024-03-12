@@ -3,6 +3,7 @@ fragment Flair on flares {
   name
   user_id
   community_id
+  isEnabled
   created_at
   updated_at
 }
